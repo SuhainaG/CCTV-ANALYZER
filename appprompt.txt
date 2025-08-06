@@ -1,0 +1,208 @@
+import cv2
+import os
+import uuid
+import numpy as np
+from ultralytics import YOLO
+from datetime import datetime
+
+# Set up paths
+video_path = r"D:\ctv_analyze\cctv footage\Dramatic smash-and-grab robbery at west London jewellers is caught on CCTV.mp4"
+
+output_dir = "output_frames"
+os.makedirs(output_dir, exist_ok=True)
+
+# Load YOLOv8 model (change to yolov8n.pt or yolov8m.pt if needed)
+model = YOLO("yolov8s.pt")
+
+# Parameters
+frame_interval = 30  # Every Nth frame
+similarity_threshold = 0.95
+
+# Video reader
+cap = cv2.VideoCapture(video_path)
+
+def are_frames_similar(f1, f2, threshold=similarity_threshold):
+    f1_small = cv2.resize(f1, (64, 64))
+    f2_small = cv2.resize(f2, (64, 64))
+    diff = cv2.absdiff(f1_small, f2_small)
+    gray_diff = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY)
+    non_zero_count = cv2.countNonZero(gray_diff)
+    return non_zero_count < (1 - threshold) * 64 * 64
+
+def generate_description(detections):
+    counts = {}
+    for d in detections:
+        cls = model.model.names[int(d.cls)]
+        counts[cls] = counts.get(cls, 0) + 1
+
+    if not counts:
+        return "No objects detected."
+    else:
+        desc = ", ".join(f"{v} {k}{'s' if v > 1 else ''}" for k, v in counts.items())
+        return f"Detected: {desc}."
+
+# Main loop
+frame_count = 0
+saved_count = 0
+prev_frame = None
+
+while cap.isOpened():
+    ret, frame = cap.read()
+    if not ret:
+        break
+
+    if frame_count % frame_interval == 0:
+        if prev_frame is None or not are_frames_similar(prev_frame, frame):
+            frame_id = str(uuid.uuid4())[:8]
+            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+            # Run YOLO detection
+            results = model(frame)
+            boxes = results[0].boxes
+            detections = boxes if boxes else []
+
+            # Draw bounding boxes
+            annotated = results[0].plot()
+
+            # Generate description
+            description = generate_description(detections)
+
+            # Save image
+            image_name = f"{timestamp}_{frame_id}.jpg"
+            annotated_path = os.path.join(output_dir, image_name)
+            cv2.imwrite(annotated_path, annotated)
+
+            # Save description
+            desc_path = os.path.join(output_dir, f"{timestamp}_{frame_id}.txt")
+            with open(desc_path, "w") as f:
+                f.write(description)
+
+            # Display
+            cv2.imshow("Detection", annotated)
+            print(f"[{saved_count}] {image_name}: {description}")
+
+            saved_count += 1
+            prev_frame = frame
+
+            # Exit on key press
+            if cv2.waitKey(1) & 0xFF == ord("q"):
+                break
+
+    frame_count += 1
+
+cap.release()
+cv2.destroyAllWindows()
+print("Processing complete.")
+
+
+
+
+
+
+##########################################################
+
+
+
+
+import cv2
+import os
+import uuid
+import numpy as np
+from ultralytics import YOLO
+from datetime import datetime
+
+# ======= Path Setup =======
+video_path = r"D:\ctv_analyze\cctv footage\Dramatic smash-and-grab robbery at west London jewellers is caught on CCTV.mp4"
+output_dir = "output_frames"
+os.makedirs(output_dir, exist_ok=True)
+
+# ======= Model Setup =======
+model = YOLO("yolov8s.pt")  # You can use yolov8n.pt or yolov8m.pt for different speed/accuracy tradeoffs
+
+# ======= Parameters =======
+frame_interval = 30  # process every 30th frame
+similarity_threshold = 0.95
+
+# ======= Frame Similarity Function =======
+def are_frames_similar(f1, f2, threshold=similarity_threshold):
+    f1_small = cv2.resize(f1, (64, 64))
+    f2_small = cv2.resize(f2, (64, 64))
+    diff = cv2.absdiff(f1_small, f2_small)
+    gray_diff = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY)
+    non_zero_count = cv2.countNonZero(gray_diff)
+    return non_zero_count < (1 - threshold) * 64 * 64
+
+# ======= Description Generator =======
+def generate_description(detections):
+    counts = {}
+    for d in detections:
+        class_id = int(d.cls)
+        class_name = model.model.names[class_id]
+        counts[class_name] = counts.get(class_name, 0) + 1
+
+    if not counts:
+        return "No objects detected in this frame."
+
+    parts = []
+    for cls, count in sorted(counts.items(), key=lambda x: -x[1]):
+        if count == 1:
+            parts.append(f"1 {cls}")
+        else:
+            parts.append(f"{count} {cls}s")
+
+    return "Detected: " + ", ".join(parts) + "."
+
+# ======= Video Processing Loop =======
+cap = cv2.VideoCapture(video_path)
+frame_count = 0
+saved_count = 0
+prev_frame = None
+
+while cap.isOpened():
+    ret, frame = cap.read()
+    if not ret:
+        break
+
+    if frame_count % frame_interval == 0:
+        if prev_frame is None or not are_frames_similar(prev_frame, frame):
+            frame_id = str(uuid.uuid4())[:8]
+            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+            # Run YOLO object detection
+            results = model(frame)
+            boxes = results[0].boxes
+            detections = boxes if boxes else []
+
+            # Draw annotated boxes on frame
+            annotated_frame = results[0].plot()
+
+            # Generate natural-language description
+            description = generate_description(detections)
+
+            # Save annotated frame image
+            image_name = f"{timestamp}_{frame_id}.jpg"
+            annotated_path = os.path.join(output_dir, image_name)
+            cv2.imwrite(annotated_path, annotated_frame)
+
+            # Save description to .txt file
+            desc_name = f"{timestamp}_{frame_id}.txt"
+            desc_path = os.path.join(output_dir, desc_name)
+            with open(desc_path, "w") as f:
+                f.write(description)
+
+            # Display in window
+            print(f"[{saved_count}] {image_name} --> {description}")
+            cv2.imshow("Detection", annotated_frame)
+
+            saved_count += 1
+            prev_frame = frame
+
+            # Press 'q' to quit early
+            if cv2.waitKey(1) & 0xFF == ord("q"):
+                break
+
+    frame_count += 1
+
+cap.release()
+cv2.destroyAllWindows()
+print(f"✅ Processing complete. {saved_count} unique frames saved to '{output_dir}'")

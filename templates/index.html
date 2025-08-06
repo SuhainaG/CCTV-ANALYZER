@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CCTV Footage Analyzer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e0e0e0;
+            border-radius: 8px;
+        }
+        .frame-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .frame-card {
+            background: #fff;
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+            width: 300px;
+            border-radius: 6px;
+            box-shadow: 0 0 6px rgba(0,0,0,0.1);
+        }
+        .frame-card img {
+            max-width: 100%;
+        }
+        .form-section {
+            background: #fff;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 0 6px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>🚨 CCTV Footage Analyzer with GPT-4o</h1>
+
+    <div class="form-section">
+        <form id="uploadForm" enctype="multipart/form-data">
+            <label>Select a CCTV video file (MP4, AVI, MKV, etc.):</label><br>
+            <input type="file" name="video_file" required><br><br>
+            <button type="submit">Upload & Analyze</button>
+        </form>
+
+        <br>
+        <form id="localPathForm">
+            <label>Or provide a local path to a video file:</label><br>
+            <input type="text" name="local_path" placeholder="e.g. D:/videos/sample.mp4">
+            <button type="submit">Analyze Local Video</button>
+        </form>
+    </div>
+
+    <div class="status" id="statusBox">
+        <strong>Status:</strong> Waiting for upload...
+    </div>
+
+    <div class="frame-container" id="frameContainer"></div>
+
+    <script>
+        let sessionId = null;
+
+        document.getElementById("uploadForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            uploadVideo(formData);
+        });
+
+        document.getElementById("localPathForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            uploadVideo(formData);
+        });
+
+        function uploadVideo(formData) {
+            document.getElementById("statusBox").innerText = "Uploading and starting analysis...";
+            fetch("/upload", {
+                method: "POST",
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.session_id) {
+                    sessionId = data.session_id;
+                    checkStatus();
+                } else {
+                    document.getElementById("statusBox").innerText = data.error || "Failed to start analysis.";
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById("statusBox").innerText = "Error uploading video.";
+            });
+        }
+
+        function checkStatus() {
+            fetch("/status")
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("statusBox").innerText = `${data.current_step} - ${data.progress}%\n${data.message}`;
+                    if (data.is_processing) {
+                        setTimeout(checkStatus, 3000);
+                    } else if (data.results) {
+                        loadAnnotatedFrames();
+                    } else if (data.error) {
+                        document.getElementById("statusBox").innerText = "❌ Error: " + data.error;
+                    }
+                });
+        }
+
+        function loadAnnotatedFrames() {
+            if (!sessionId) return;
+
+            document.getElementById("statusBox").innerText = "✅ Processing complete. Displaying results...";
+            fetch(`/annotated_frames/${sessionId}`)
+                .then(res => res.json())
+                .then(data => {
+                    const container = document.getElementById("frameContainer");
+                    container.innerHTML = "";
+
+                    if (data.images.length === 0) {
+                        container.innerText = "No annotated frames available.";
+                        return;
+                    }
+
+                    data.images.forEach(image => {
+                        const card = document.createElement("div");
+                        card.className = "frame-card";
+
+                        const img = document.createElement("img");
+                        img.src = image.url;
+
+                        const summary = document.createElement("p");
+                        summary.innerHTML = `<strong>Scene:</strong> ${image.gpt4o_analysis.scene_summary}`;
+
+                        const actions = document.createElement("p");
+                        actions.innerHTML = `<strong>Likely Actions:</strong> ${image.gpt4o_analysis.likely_actions}`;
+
+                        card.appendChild(img);
+                        card.appendChild(summary);
+                        card.appendChild(actions);
+                        container.appendChild(card);
+                    });
+                });
+        }
+    </script>
+</body>
+</html>
