@@ -30,7 +30,7 @@ for folder in [UPLOAD_FOLDER, FRAMES_FOLDER, ANNOTATED_FOLDER, RESULTS_FOLDER]:
     os.makedirs(folder, exist_ok=True)
 
 # GPT-4o Configuration - Replace with your actual OpenAI API key
-OPENAI_API_KEY = "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" # Replace with your actual API key
+OPENAI_API_KEY = "" # Replace with your actual API key
 OPENAI_API_URL = "https://api.openai.com/v1/chat/completions"
 
 # Global variables for processing status
