@@ -1,4 +1,5 @@
 # utils/audio_processor.py
+
 import os
 import subprocess
 import requests
@@ -14,100 +15,183 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class AudioProcessor:
-    def __init__(self, assemblyai_api_key: str):
+    def __init__(self, assemblyai_api_key: str, elevenlabs_api_key: str = None):
         """
         Initialize AudioProcessor with AssemblyAI integration
-        
-        Args:
-            assemblyai_api_key: AssemblyAI API key for transcription services
+        ElevenLabs integration is optional and will use REST API if provided
         """
         self.assemblyai_api_key = assemblyai_api_key
         self.assemblyai_base_url = "https://api.assemblyai.com/v2"
         
-        # Suspicious keywords to monitor
+        # ElevenLabs setup (using REST API instead of SDK)
+        self.elevenlabs_api_key = elevenlabs_api_key
+        self.elevenlabs_base_url = "https://api.elevenlabs.io/v1"
+        
+        if elevenlabs_api_key:
+            logger.info("ElevenLabs API initialized (REST API)")
+        
+        # Enhanced suspicious keywords for security analysis
         self.suspicious_keywords = [
             'bomb', 'kill', 'murder', 'fight', 'attack', 'weapon', 'gun', 'knife',
             'hurt', 'violence', 'threat', 'steal', 'rob', 'drugs', 'illegal',
             'hide', 'secret', 'plan', 'escape', 'emergency', 'help', 'danger',
-            'police', 'security', 'alarm', 'break', 'destroy', 'vandalism'
+            'police', 'security', 'alarm', 'break', 'destroy', 'vandalism',
+            'kidnap', 'ransom', 'explosive', 'poison', 'terror', 'assault',
+            'blackmail', 'fraud', 'hack', 'breach', 'infiltrate', 'sabotage'
         ]
         
-        # Language detection patterns
-        self.language_codes = {
-            'en': 'English',
-            'es': 'Spanish',
-            'fr': 'French',
-            'de': 'German',
-            'it': 'Italian',
-            'pt': 'Portuguese',
-            'ru': 'Russian',
-            'zh': 'Chinese',
-            'ja': 'Japanese',
-            'ko': 'Korean',
-            'ar': 'Arabic',
-            'hi': 'Hindi'
+        # Enhanced emotion keywords for detailed sentiment analysis
+        self.emotion_keywords = {
+            'extreme_anger': ['furious', 'enraged', 'livid', 'irate', 'seething'],
+            'anger': ['angry', 'mad', 'annoyed', 'irritated', 'upset'],
+            'extreme_fear': ['terrified', 'horrified', 'petrified', 'panic', 'dread'],
+            'fear': ['scared', 'afraid', 'worried', 'nervous', 'anxious'],
+            'extreme_sadness': ['devastated', 'heartbroken', 'despairing', 'anguished'],
+            'sadness': ['sad', 'depressed', 'unhappy', 'melancholy', 'gloomy'],
+            'extreme_joy': ['ecstatic', 'euphoric', 'elated', 'overjoyed', 'thrilled'],
+            'joy': ['happy', 'glad', 'cheerful', 'content', 'pleased'],
+            'disgust': ['disgusted', 'revolted', 'appalled', 'sickened'],
+            'surprise': ['shocked', 'amazed', 'astonished', 'stunned', 'bewildered'],
+            'confusion': ['confused', 'puzzled', 'perplexed', 'baffled'],
+            'excitement': ['excited', 'enthusiastic', 'eager', 'pumped'],
+            'calm': ['calm', 'peaceful', 'serene', 'relaxed', 'tranquil'],
+            'stress': ['stressed', 'overwhelmed', 'pressured', 'tense']
         }
-    
-    def extract_audio_from_video(self, video_path: str, output_audio_path: str) -> bool:
+
+    def generate_elevenlabs_speech(self, text: str, voice_id: str = "21m00Tcm4TlvDq8ikWAM") -> Optional[bytes]:
         """
-        Extract audio from video using FFmpeg
+        Generate speech using ElevenLabs REST API
+        """
+        if not self.elevenlabs_api_key:
+            logger.warning("ElevenLabs API key not configured")
+            return None
         
-        Args:
-            video_path: Path to input video file
-            output_audio_path: Path for output audio file
+        try:
+            url = f"{self.elevenlabs_base_url}/text-to-speech/{voice_id}"
             
-        Returns:
-            True if successful, False otherwise
+            headers = {
+                "Accept": "audio/mpeg",
+                "Content-Type": "application/json",
+                "xi-api-key": self.elevenlabs_api_key
+            }
+            
+            data = {
+                "text": text,
+                "model_id": "eleven_monolingual_v1",
+                "voice_settings": {
+                    "stability": 0.5,
+                    "similarity_boost": 0.5
+                }
+            }
+            
+            response = requests.post(url, json=data, headers=headers, timeout=30)
+            
+            if response.status_code == 200:
+                logger.info("ElevenLabs speech generated successfully")
+                return response.content
+            else:
+                logger.error(f"ElevenLabs API error: {response.status_code} - {response.text}")
+                return None
+                
+        except Exception as e:
+            logger.error(f"Error generating ElevenLabs speech: {e}")
+            return None
+
+    def speed_up_video_for_audio(self, video_path: str, output_path: str, speed_factor: float = 1.25) -> bool:
+        """
+        Speed up video for faster audio processing while maintaining intelligibility
         """
         try:
-            # Ensure output directory exists
-            os.makedirs(os.path.dirname(output_audio_path), exist_ok=True)
-            
-            # FFmpeg command to extract audio
             cmd = [
                 'ffmpeg',
                 '-i', video_path,
+                '-filter:a', f'atempo={speed_factor}',
                 '-vn',  # No video
-                '-acodec', 'libmp3lame',  # MP3 codec
-                '-ab', '192k',  # Audio bitrate
-                '-ar', '44100',  # Sample rate
-                '-y',  # Overwrite output file
-                output_audio_path
+                '-y',  # Overwrite
+                output_path
             ]
             
-            logger.info(f"Extracting audio: {' '.join(cmd)}")
-            
+            logger.info(f"Speeding up audio by {speed_factor}x for faster processing...")
             result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
             
             if result.returncode == 0:
-                logger.info(f"Audio extracted successfully to: {output_audio_path}")
+                logger.info(f"Audio speed increased successfully: {output_path}")
+                return True
+            else:
+                logger.error(f"FFmpeg speed-up error: {result.stderr}")
+                return False
+                
+        except Exception as e:
+            logger.error(f"Error speeding up audio: {e}")
+            return False
+
+    def extract_audio_from_video(self, video_path: str, output_audio_path: str, speed_up: bool = True) -> bool:
+        """
+        Extract and optionally speed up audio from video
+        """
+        try:
+            os.makedirs(os.path.dirname(output_audio_path), exist_ok=True)
+            
+            if speed_up:
+                # Create temporary speeded up version
+                temp_path = output_audio_path.replace('.mp3', '_temp.mp3')
+                if self.speed_up_video_for_audio(video_path, temp_path, 1.25):
+                    # Convert to final format
+                    cmd = [
+                        'ffmpeg',
+                        '-i', temp_path,
+                        '-acodec', 'libmp3lame',
+                        '-ab', '128k',  # Lower bitrate for faster processing
+                        '-ar', '22050',  # Lower sample rate for faster processing
+                        '-y',
+                        output_audio_path
+                    ]
+                    
+                    result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
+                    
+                    # Clean up temp file
+                    if os.path.exists(temp_path):
+                        os.remove(temp_path)
+                    
+                    if result.returncode == 0:
+                        logger.info(f"Optimized audio extracted: {output_audio_path}")
+                        return True
+            
+            # Fallback to normal extraction
+            cmd = [
+                'ffmpeg',
+                '-i', video_path,
+                '-vn',
+                '-acodec', 'libmp3lame',
+                '-ab', '128k',
+                '-ar', '22050',
+                '-y',
+                output_audio_path
+            ]
+            
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=600)
+            
+            if result.returncode == 0:
+                logger.info(f"Audio extracted successfully: {output_audio_path}")
                 return True
             else:
                 logger.error(f"FFmpeg error: {result.stderr}")
                 return False
                 
-        except subprocess.TimeoutExpired:
-            logger.error("Audio extraction timed out")
-            return False
         except Exception as e:
             logger.error(f"Error extracting audio: {e}")
             return False
-    
+
     def upload_audio_to_assemblyai(self, audio_path: str) -> Optional[str]:
-        """
-        Upload audio file to AssemblyAI for processing
-        
-        Args:
-            audio_path: Path to audio file
-            
-        Returns:
-            Upload URL if successful, None otherwise
-        """
+        """Upload audio with progress tracking"""
         try:
             headers = {
                 'authorization': self.assemblyai_api_key,
                 'content-type': 'application/octet-stream'
             }
+            
+            file_size = os.path.getsize(audio_path)
+            logger.info(f"Uploading audio file ({file_size / (1024*1024):.1f} MB)...")
             
             with open(audio_path, 'rb') as audio_file:
                 response = requests.post(
@@ -119,7 +203,7 @@ class AudioProcessor:
             
             if response.status_code == 200:
                 upload_url = response.json()['upload_url']
-                logger.info(f"Audio uploaded successfully: {upload_url}")
+                logger.info("Audio uploaded successfully")
                 return upload_url
             else:
                 logger.error(f"Upload failed: {response.status_code} - {response.text}")
@@ -128,38 +212,32 @@ class AudioProcessor:
         except Exception as e:
             logger.error(f"Error uploading audio: {e}")
             return None
-    
+
     def transcribe_audio_with_assemblyai(self, upload_url: str) -> Optional[Dict]:
-        """
-        Transcribe audio using AssemblyAI with advanced features
-        
-        Args:
-            upload_url: URL of uploaded audio file
-            
-        Returns:
-            Transcription results if successful, None otherwise
-        """
+        """Enhanced transcription with all advanced features"""
         try:
             headers = {
                 'authorization': self.assemblyai_api_key,
                 'content-type': 'application/json'
             }
             
-            # Advanced transcription configuration
+            # Enhanced configuration for maximum accuracy and features
             transcription_config = {
                 'audio_url': upload_url,
-                'speaker_labels': True,  # Speaker diarization
-                'auto_chapters': True,   # Automatic chapter detection
-                'sentiment_analysis': True,  # Sentiment analysis
-                'entity_detection': True,   # Named entity recognition
-                'iab_categories': True,     # Content categorization
-                'language_detection': True, # Automatic language detection
+                'speaker_labels': True,
+                'auto_chapters': True,
+                'sentiment_analysis': True,
+                'entity_detection': True,
+                'iab_categories': True,
+                'language_detection': True,
                 'punctuate': True,
                 'format_text': True,
                 'dual_channel': False,
-                'webhook_url': None,
                 'auto_highlights': True,
-                'boost_param': 'high'  # Enhanced accuracy
+                'boost_param': 'high',
+                'filter_profanity': False,  # We want to detect everything for security
+                'redact_pii': False,  # Keep all information for analysis
+                'speed_boost': True  # Use speed boost for faster processing
             }
             
             # Submit transcription job
@@ -175,11 +253,11 @@ class AudioProcessor:
                 return None
             
             transcript_id = response.json()['id']
-            logger.info(f"Transcription job submitted: {transcript_id}")
+            logger.info(f"Enhanced transcription job submitted: {transcript_id}")
             
-            # Poll for completion
+            # Poll for completion with shorter intervals for speed
             max_wait_time = 1800  # 30 minutes
-            poll_interval = 10    # 10 seconds
+            poll_interval = 5  # 5 seconds for faster feedback
             elapsed_time = 0
             
             while elapsed_time < max_wait_time:
@@ -196,10 +274,10 @@ class AudioProcessor:
                 status_data = status_response.json()
                 status = status_data['status']
                 
-                logger.info(f"Transcription status: {status}")
+                logger.info(f"Transcription status: {status} ({elapsed_time}s elapsed)")
                 
                 if status == 'completed':
-                    logger.info("Transcription completed successfully")
+                    logger.info("Enhanced transcription completed successfully")
                     return status_data
                 elif status == 'error':
                     logger.error(f"Transcription failed: {status_data.get('error', 'Unknown error')}")
@@ -212,202 +290,205 @@ class AudioProcessor:
             return None
             
         except Exception as e:
-            logger.error(f"Error during transcription: {e}")
+            logger.error(f"Error during enhanced transcription: {e}")
             return None
-    
-    def analyze_transcript_for_suspicious_content(self, transcript_data: Dict) -> Dict:
-        """
-        Analyze transcript for suspicious keywords and content
-        
-        Args:
-            transcript_data: AssemblyAI transcript response
-            
-        Returns:
-            Dictionary with suspicious content analysis
-        """
+
+    def analyze_frame_audio_correlation(self, frame_timestamp: float, audio_segments: List[Dict]) -> Dict:
+        """Analyze audio context for a specific frame timestamp"""
         try:
-            suspicious_analysis = {
-                'suspicious_keywords_found': [],
-                'suspicious_segments': [],
-                'risk_score': 0,
-                'sentiment_concerns': [],
-                'speaker_analysis': {}
+            frame_audio_context = {
+                'timestamp': frame_timestamp,
+                'relevant_segments': [],
+                'dominant_emotion': 'neutral',
+                'sentiment_score': 0,
+                'suspicious_content': False,
+                'speaker_info': {},
+                'transcription': ''
             }
             
-            # Get transcript text and utterances
-            full_text = transcript_data.get('text', '').lower()
-            utterances = transcript_data.get('utterances', [])
+            # Find audio segments within ±2 seconds of frame
+            time_window = 2.0
+            relevant_segments = []
             
-            # Check for suspicious keywords in full text
-            found_keywords = []
-            for keyword in self.suspicious_keywords:
-                if keyword.lower() in full_text:
-                    found_keywords.append(keyword)
-            
-            suspicious_analysis['suspicious_keywords_found'] = found_keywords
-            
-            # Analyze each utterance for suspicious content
-            suspicious_segments = []
-            sentiment_concerns = []
-            speaker_stats = {}
-            
-            for utterance in utterances:
-                speaker = utterance.get('speaker', 'Unknown')
-                text = utterance.get('text', '').lower()
-                confidence = utterance.get('confidence', 0)
-                start_time = utterance.get('start', 0) / 1000  # Convert to seconds
-                end_time = utterance.get('end', 0) / 1000
+            for segment in audio_segments:
+                segment_start = segment.get('start_time', 0)
+                segment_end = segment.get('end_time', 0)
                 
-                # Track speaker statistics
-                if speaker not in speaker_stats:
-                    speaker_stats[speaker] = {
-                        'total_utterances': 0,
-                        'suspicious_utterances': 0,
-                        'negative_sentiment_count': 0,
-                        'total_words': 0
-                    }
+                if (segment_start <= frame_timestamp + time_window and 
+                    segment_end >= frame_timestamp - time_window):
+                    relevant_segments.append(segment)
+            
+            if relevant_segments:
+                # Combine transcriptions
+                transcriptions = [seg.get('text', '') for seg in relevant_segments]
+                combined_text = ' '.join(transcriptions)
+                frame_audio_context['transcription'] = combined_text
                 
-                speaker_stats[speaker]['total_utterances'] += 1
-                speaker_stats[speaker]['total_words'] += len(text.split())
+                # Analyze emotions and sentiment
+                emotions = []
+                sentiment_scores = []
+                suspicious_flags = []
                 
-                # Check for suspicious keywords in this utterance
-                utterance_keywords = []
-                for keyword in self.suspicious_keywords:
-                    if keyword.lower() in text:
-                        utterance_keywords.append(keyword)
+                for segment in relevant_segments:
+                    emotion = segment.get('emotion', 'neutral')
+                    sentiment = segment.get('sentiment', 'neutral')
+                    suspicious_keywords = segment.get('suspicious_keywords', [])
+                    
+                    emotions.append(emotion)
+                    
+                    # Convert sentiment to score
+                    if sentiment == 'positive':
+                        sentiment_scores.append(1)
+                    elif sentiment == 'negative':
+                        sentiment_scores.append(-1)
+                    else:
+                        sentiment_scores.append(0)
+                    
+                    if suspicious_keywords:
+                        suspicious_flags.append(True)
+                        frame_audio_context['suspicious_content'] = True
                 
-                if utterance_keywords:
-                    speaker_stats[speaker]['suspicious_utterances'] += 1
-                    suspicious_segments.append({
-                        'start_time': start_time,
-                        'end_time': end_time,
-                        'speaker': speaker,
-                        'text': utterance.get('text', ''),
-                        'keywords': utterance_keywords,
-                        'confidence': confidence
-                    })
+                # Determine dominant emotion
+                if emotions:
+                    emotion_counts = {}
+                    for emotion in emotions:
+                        emotion_counts[emotion] = emotion_counts.get(emotion, 0) + 1
+                    frame_audio_context['dominant_emotion'] = max(emotion_counts, key=emotion_counts.get)
+                
+                # Calculate average sentiment
+                if sentiment_scores:
+                    frame_audio_context['sentiment_score'] = sum(sentiment_scores) / len(sentiment_scores)
+                
+                # Speaker information
+                speakers = set(seg.get('speaker', 'Unknown') for seg in relevant_segments)
+                frame_audio_context['speaker_info'] = {
+                    'speakers': list(speakers),
+                    'speaker_count': len(speakers)
+                }
+                
+                frame_audio_context['relevant_segments'] = relevant_segments
             
-            suspicious_analysis['suspicious_segments'] = suspicious_segments
-            suspicious_analysis['speaker_analysis'] = speaker_stats
-            
-            # Process sentiment analysis if available
-            if 'sentiment_analysis_results' in transcript_data:
-                for sentiment in transcript_data['sentiment_analysis_results']:
-                    if sentiment.get('sentiment') in ['NEGATIVE']:
-                        start_time = sentiment.get('start', 0) / 1000
-                        end_time = sentiment.get('end', 0) / 1000
-                        
-                        sentiment_concerns.append({
-                            'start_time': start_time,
-                            'end_time': end_time,
-                            'sentiment': sentiment.get('sentiment'),
-                            'confidence': sentiment.get('confidence', 0),
-                            'text': sentiment.get('text', '')
-                        })
-                        
-                        # Find corresponding speaker
-                        for utterance in utterances:
-                            utt_start = utterance.get('start', 0) / 1000
-                            utt_end = utterance.get('end', 0) / 1000
-                            if (utt_start <= start_time <= utt_end or 
-                                utt_start <= end_time <= utt_end):
-                                speaker = utterance.get('speaker', 'Unknown')
-                                if speaker in speaker_stats:
-                                    speaker_stats[speaker]['negative_sentiment_count'] += 1
-                                break
-            
-            suspicious_analysis['sentiment_concerns'] = sentiment_concerns
-            
-            # Calculate overall risk score
-            risk_score = 0
-            risk_score += len(found_keywords) * 10  # 10 points per suspicious keyword
-            risk_score += len(suspicious_segments) * 5  # 5 points per suspicious segment
-            risk_score += len(sentiment_concerns) * 3   # 3 points per negative sentiment
-            
-            suspicious_analysis['risk_score'] = risk_score
-            
-            return suspicious_analysis
+            return frame_audio_context
             
         except Exception as e:
-            logger.error(f"Error analyzing suspicious content: {e}")
+            logger.error(f"Error analyzing frame-audio correlation: {e}")
             return {
+                'timestamp': frame_timestamp,
                 'error': str(e),
-                'suspicious_keywords_found': [],
-                'suspicious_segments': [],
-                'risk_score': 0
+                'relevant_segments': [],
+                'dominant_emotion': 'neutral',
+                'sentiment_score': 0,
+                'suspicious_content': False
             }
-    
-    def process_transcript_segments(self, transcript_data: Dict) -> List[Dict]:
-        """
-        Process transcript into structured segments with metadata
-        
-        Args:
-            transcript_data: Complete AssemblyAI transcript response
+
+    def detailed_emotion_analysis(self, text: str) -> Dict:
+        """Perform detailed emotion analysis with intensity levels"""
+        try:
+            text_lower = text.lower()
+            emotion_scores = {}
             
-        Returns:
-            List of processed transcript segments
-        """
+            # Analyze each emotion category
+            for emotion_category, keywords in self.emotion_keywords.items():
+                score = 0
+                detected_keywords = []
+                
+                for keyword in keywords:
+                    if keyword in text_lower:
+                        score += 1
+                        detected_keywords.append(keyword)
+                
+                if score > 0:
+                    emotion_scores[emotion_category] = {
+                        'score': score,
+                        'keywords': detected_keywords,
+                        'intensity': 'high' if 'extreme_' in emotion_category else 'medium'
+                    }
+            
+            # Determine primary emotion
+            primary_emotion = 'neutral'
+            max_score = 0
+            
+            if emotion_scores:
+                for emotion, data in emotion_scores.items():
+                    if data['score'] > max_score:
+                        max_score = data['score']
+                        primary_emotion = emotion
+            
+            return {
+                'primary_emotion': primary_emotion,
+                'emotion_scores': emotion_scores,
+                'emotional_intensity': self._calculate_emotional_intensity(emotion_scores),
+                'is_distressed': any('extreme_' in emotion for emotion in emotion_scores.keys())
+            }
+            
+        except Exception as e:
+            logger.error(f"Error in detailed emotion analysis: {e}")
+            return {
+                'primary_emotion': 'neutral',
+                'emotion_scores': {},
+                'emotional_intensity': 'low',
+                'is_distressed': False
+            }
+
+    def _calculate_emotional_intensity(self, emotion_scores: Dict) -> str:
+        """Calculate overall emotional intensity"""
+        if not emotion_scores:
+            return 'low'
+        
+        total_score = sum(data['score'] for data in emotion_scores.values())
+        extreme_emotions = sum(1 for emotion in emotion_scores.keys() if 'extreme_' in emotion)
+        
+        if extreme_emotions > 0 or total_score > 5:
+            return 'high'
+        elif total_score > 2:
+            return 'medium'
+        else:
+            return 'low'
+
+    def process_transcript_segments_enhanced(self, transcript_data: Dict) -> List[Dict]:
+        """Enhanced transcript processing with detailed emotion analysis"""
         try:
             processed_segments = []
             utterances = transcript_data.get('utterances', [])
-            sentiment_results = transcript_data.get('sentiment_analysis_results', [])
-            
-            # Create sentiment lookup for quick access
-            sentiment_lookup = {}
-            for sentiment in sentiment_results:
-                start_ms = sentiment.get('start', 0)
-                end_ms = sentiment.get('end', 0)
-                sentiment_lookup[(start_ms, end_ms)] = {
-                    'sentiment': sentiment.get('sentiment', 'NEUTRAL').lower(),
-                    'confidence': sentiment.get('confidence', 0)
-                }
             
             for utterance in utterances:
-                start_time = utterance.get('start', 0) / 1000  # Convert to seconds
+                start_time = utterance.get('start', 0) / 1000
                 end_time = utterance.get('end', 0) / 1000
-                speaker = utterance.get('speaker', 'Unknown')
                 text = utterance.get('text', '')
-                confidence = utterance.get('confidence', 0)
                 
-                # Find matching sentiment
-                segment_sentiment = 'neutral'
-                sentiment_confidence = 0
+                # Enhanced emotion analysis
+                emotion_analysis = self.detailed_emotion_analysis(text)
                 
-                for (sent_start, sent_end), sent_data in sentiment_lookup.items():
-                    sent_start_sec = sent_start / 1000
-                    sent_end_sec = sent_end / 1000
-                    
-                    # Check for overlap
-                    if (sent_start_sec <= start_time <= sent_end_sec or 
-                        sent_start_sec <= end_time <= sent_end_sec or
-                        start_time <= sent_start_sec <= end_time):
-                        segment_sentiment = sent_data['sentiment']
-                        sentiment_confidence = sent_data['confidence']
-                        break
-                
-                # Check for suspicious keywords in this segment
+                # Suspicious keyword detection
                 suspicious_keywords = []
                 text_lower = text.lower()
                 for keyword in self.suspicious_keywords:
                     if keyword.lower() in text_lower:
                         suspicious_keywords.append(keyword)
                 
-                # Determine emotion based on text analysis
-                emotion = self.detect_emotion_from_text(text)
-                
                 segment = {
                     'start_time': start_time,
                     'end_time': end_time,
                     'duration': end_time - start_time,
-                    'speaker': speaker,
+                    'speaker': utterance.get('speaker', 'Unknown'),
                     'text': text,
-                    'confidence': confidence,
-                    'sentiment': segment_sentiment,
-                    'sentiment_confidence': sentiment_confidence,
-                    'suspicious_keywords': suspicious_keywords,
-                    'emotion': emotion,
+                    'confidence': utterance.get('confidence', 0),
                     'word_count': len(text.split()),
-                    'timestamp_formatted': f"{int(start_time // 60):02d}:{int(start_time % 60):02d}"
+                    'timestamp_formatted': f"{int(start_time // 60):02d}:{int(start_time % 60):02d}",
+                    
+                    # Enhanced emotion data
+                    'emotion': emotion_analysis['primary_emotion'],
+                    'emotional_intensity': emotion_analysis['emotional_intensity'],
+                    'is_distressed': emotion_analysis['is_distressed'],
+                    'emotion_scores': emotion_analysis['emotion_scores'],
+                    
+                    # Security data
+                    'suspicious_keywords': suspicious_keywords,
+                    'is_suspicious': len(suspicious_keywords) > 0,
+                    
+                    # Additional metadata
+                    'segment_type': self._classify_segment_type(text, emotion_analysis),
+                    'attention_required': len(suspicious_keywords) > 0 or emotion_analysis['is_distressed']
                 }
                 
                 processed_segments.append(segment)
@@ -415,210 +496,365 @@ class AudioProcessor:
             return processed_segments
             
         except Exception as e:
-            logger.error(f"Error processing transcript segments: {e}")
+            logger.error(f"Error in enhanced segment processing: {e}")
             return []
-    
-    def detect_emotion_from_text(self, text: str) -> str:
-        """
-        Simple emotion detection based on keywords and patterns
-        
-        Args:
-            text: Text to analyze
-            
-        Returns:
-            Detected emotion as string
-        """
+
+    def _classify_segment_type(self, text: str, emotion_analysis: Dict) -> str:
+        """Classify the type of audio segment"""
         text_lower = text.lower()
         
-        # Emotion keyword mappings
-        emotion_keywords = {
-            'anger': ['angry', 'mad', 'furious', 'rage', 'hate', 'damn', 'hell', 'stupid'],
-            'fear': ['scared', 'afraid', 'terrified', 'worried', 'nervous', 'panic', 'danger'],
-            'sadness': ['sad', 'depressed', 'cry', 'tears', 'hurt', 'pain', 'sorry'],
-            'joy': ['happy', 'glad', 'excited', 'great', 'awesome', 'wonderful', 'love'],
-            'disgust': ['disgusting', 'gross', 'sick', 'terrible', 'awful', 'horrible'],
-            'surprise': ['wow', 'amazing', 'incredible', 'unbelievable', 'shocked']
-        }
-        
-        # Count emotion indicators
-        emotion_scores = {}
-        for emotion, keywords in emotion_keywords.items():
-            score = sum(1 for keyword in keywords if keyword in text_lower)
-            if score > 0:
-                emotion_scores[emotion] = score
-        
-        # Return dominant emotion or neutral
-        if emotion_scores:
-            return max(emotion_scores, key=emotion_scores.get)
-        return 'neutral'
-    
-    def generate_audio_summary(self, transcript_data: Dict, suspicious_analysis: Dict) -> str:
-        """
-        Generate comprehensive audio analysis summary
-        
-        Args:
-            transcript_data: Complete transcript data
-            suspicious_analysis: Suspicious content analysis
-            
-        Returns:
-            Formatted summary string
-        """
+        if emotion_analysis['is_distressed']:
+            return 'distress'
+        elif any(word in text_lower for word in ['help', 'emergency', 'call', 'police']):
+            return 'emergency'
+        elif any(word in text_lower for word in self.suspicious_keywords):
+            return 'suspicious'
+        elif emotion_analysis['primary_emotion'] in ['extreme_anger', 'anger']:
+            return 'aggressive'
+        elif emotion_analysis['primary_emotion'] in ['extreme_fear', 'fear']:
+            return 'fearful'
+        elif len(text.split()) < 3:
+            return 'brief'
+        else:
+            return 'normal'
+
+    def analyze_transcript_for_suspicious_content(self, transcript_data: Dict) -> Dict:
+        """Enhanced suspicious content analysis"""
         try:
-            summary_parts = []
+            suspicious_analysis = {
+                'suspicious_keywords_found': [],
+                'suspicious_segments': [],
+                'risk_score': 0,
+                'sentiment_concerns': [],
+                'speaker_analysis': {},
+                'threat_level': 'LOW',
+                'security_flags': []
+            }
             
-            # Basic information
-            duration = transcript_data.get('audio_duration', 0) / 1000  # Convert to seconds
-            language = transcript_data.get('language_code', 'unknown')
-            language_name = self.language_codes.get(language, language.upper())
-            
-            summary_parts.append(f"Audio Duration: {int(duration // 60):02d}:{int(duration % 60):02d}")
-            summary_parts.append(f"Language: {language_name}")
-            summary_parts.append(f"Transcription Confidence: {transcript_data.get('confidence', 0):.2f}")
-            
-            # Speaker analysis
+            # Get transcript and utterances
+            full_text = transcript_data.get('text', '').lower()
             utterances = transcript_data.get('utterances', [])
-            speakers = set(utt.get('speaker', 'Unknown') for utt in utterances)
-            summary_parts.append(f"Speakers Detected: {len(speakers)}")
             
-            # Suspicious content summary
-            risk_score = suspicious_analysis.get('risk_score', 0)
-            keywords_found = suspicious_analysis.get('suspicious_keywords_found', [])
-            suspicious_segments = suspicious_analysis.get('suspicious_segments', [])
+            # Enhanced keyword detection
+            found_keywords = []
+            high_risk_keywords = ['bomb', 'kill', 'murder', 'weapon', 'attack', 'terror']
             
-            summary_parts.append(f"Security Risk Score: {risk_score}")
-            if keywords_found:
-                summary_parts.append(f"Suspicious Keywords: {', '.join(keywords_found)}")
-            summary_parts.append(f"Suspicious Segments: {len(suspicious_segments)}")
+            for keyword in self.suspicious_keywords:
+                if keyword.lower() in full_text:
+                    found_keywords.append(keyword)
+                    if keyword in high_risk_keywords:
+                        suspicious_analysis['security_flags'].append(f"HIGH_RISK_KEYWORD: {keyword}")
             
-            # Sentiment analysis
-            sentiment_results = transcript_data.get('sentiment_analysis_results', [])
-            sentiment_counts = {}
-            for sentiment in sentiment_results:
-                sent_type = sentiment.get('sentiment', 'NEUTRAL')
-                sentiment_counts[sent_type] = sentiment_counts.get(sent_type, 0) + 1
+            suspicious_analysis['suspicious_keywords_found'] = found_keywords
             
-            if sentiment_counts:
-                summary_parts.append("Overall Sentiment Distribution:")
-                for sentiment, count in sentiment_counts.items():
-                    percentage = (count / len(sentiment_results)) * 100 if sentiment_results else 0
-                    summary_parts.append(f"  {sentiment}: {count} segments ({percentage:.1f}%)")
+            # Analyze each utterance
+            suspicious_segments = []
+            speaker_stats = {}
             
-            return "\n".join(summary_parts)
+            for utterance in utterances:
+                speaker = utterance.get('speaker', 'Unknown')
+                text = utterance.get('text', '').lower()
+                start_time = utterance.get('start', 0) / 1000
+                
+                # Track speaker stats
+                if speaker not in speaker_stats:
+                    speaker_stats[speaker] = {
+                        'total_utterances': 0,
+                        'suspicious_utterances': 0,
+                        'high_risk_utterances': 0,
+                        'total_words': 0,
+                        'risk_score': 0
+                    }
+                
+                speaker_stats[speaker]['total_utterances'] += 1
+                speaker_stats[speaker]['total_words'] += len(text.split())
+                
+                # Check for suspicious content
+                utterance_keywords = []
+                high_risk_count = 0
+                
+                for keyword in self.suspicious_keywords:
+                    if keyword.lower() in text:
+                        utterance_keywords.append(keyword)
+                        if keyword in high_risk_keywords:
+                            high_risk_count += 1
+                
+                if utterance_keywords:
+                    speaker_stats[speaker]['suspicious_utterances'] += 1
+                    if high_risk_count > 0:
+                        speaker_stats[speaker]['high_risk_utterances'] += 1
+                    
+                    speaker_stats[speaker]['risk_score'] += len(utterance_keywords) + (high_risk_count * 5)
+                    
+                    suspicious_segments.append({
+                        'start_time': start_time,
+                        'end_time': utterance.get('end', 0) / 1000,
+                        'speaker': speaker,
+                        'text': utterance.get('text', ''),
+                        'keywords': utterance_keywords,
+                        'high_risk_keywords': high_risk_count,
+                        'confidence': utterance.get('confidence', 0)
+                    })
+            
+            suspicious_analysis['suspicious_segments'] = suspicious_segments
+            suspicious_analysis['speaker_analysis'] = speaker_stats
+            
+            # Calculate enhanced risk score
+            risk_score = 0
+            risk_score += len(found_keywords) * 10
+            risk_score += len(suspicious_segments) * 5
+            risk_score += sum(1 for kw in found_keywords if kw in high_risk_keywords) * 20
+            
+            # Determine threat level
+            if risk_score > 80:
+                suspicious_analysis['threat_level'] = 'CRITICAL'
+                suspicious_analysis['security_flags'].append('CRITICAL_THREAT_DETECTED')
+            elif risk_score > 50:
+                suspicious_analysis['threat_level'] = 'HIGH'
+                suspicious_analysis['security_flags'].append('HIGH_THREAT_DETECTED')
+            elif risk_score > 20:
+                suspicious_analysis['threat_level'] = 'MEDIUM'
+            else:
+                suspicious_analysis['threat_level'] = 'LOW'
+            
+            suspicious_analysis['risk_score'] = risk_score
+            
+            return suspicious_analysis
             
         except Exception as e:
-            logger.error(f"Error generating audio summary: {e}")
-            return f"Error generating summary: {str(e)}"
-    
-    def process_video_audio(self, video_path: str, output_dir: str) -> Optional[Dict]:
-        """
-        Complete audio processing pipeline for video file
-        
-        Args:
-            video_path: Path to input video file
-            output_dir: Directory for audio processing outputs
-            
-        Returns:
-            Dictionary with complete audio analysis results
-        """
+            logger.error(f"Error in enhanced suspicious content analysis: {e}")
+            return {
+                'error': str(e),
+                'suspicious_keywords_found': [],
+                'suspicious_segments': [],
+                'risk_score': 0,
+                'threat_level': 'UNKNOWN'
+            }
+
+    def process_video_audio_enhanced(self, video_path: str, output_dir: str, 
+                                   frame_timestamps: List[float] = None) -> Optional[Dict]:
+        """Complete enhanced audio processing pipeline with frame correlation"""
         try:
-            if not self.assemblyai_api_key or self.assemblyai_api_key == "your-assemblyai-api-key-here":
-                logger.warning("AssemblyAI API key not configured, skipping audio processing")
+            if not self.assemblyai_api_key:
+                logger.warning("AssemblyAI API key not configured")
                 return None
             
-            logger.info(f"Starting audio processing for: {video_path}")
+            logger.info(f"Starting enhanced audio processing for: {video_path}")
             
-            # Step 1: Extract audio from video
-            audio_filename = f"extracted_audio_{datetime.now().strftime('%Y%m%d_%H%M%S')}.mp3"
+            # Step 1: Extract optimized audio
+            audio_filename = f"optimized_audio_{datetime.now().strftime('%Y%m%d_%H%M%S')}.mp3"
             audio_path = os.path.join(output_dir, audio_filename)
             
-            if not self.extract_audio_from_video(video_path, audio_path):
-                logger.error("Failed to extract audio from video")
+            if not self.extract_audio_from_video(video_path, audio_path, speed_up=True):
+                logger.error("Failed to extract audio")
                 return None
             
-            # Step 2: Upload audio to AssemblyAI
+            # Step 2: Upload to AssemblyAI
             upload_url = self.upload_audio_to_assemblyai(audio_path)
             if not upload_url:
-                logger.error("Failed to upload audio to AssemblyAI")
+                logger.error("Failed to upload audio")
                 return None
             
-            # Step 3: Transcribe audio with advanced features
+            # Step 3: Enhanced transcription
             transcript_data = self.transcribe_audio_with_assemblyai(upload_url)
             if not transcript_data:
                 logger.error("Failed to transcribe audio")
                 return None
             
-            # Step 4: Analyze for suspicious content
+            # Step 4: Enhanced analysis
             suspicious_analysis = self.analyze_transcript_for_suspicious_content(transcript_data)
+            processed_segments = self.process_transcript_segments_enhanced(transcript_data)
             
-            # Step 5: Process transcript segments
-            processed_segments = self.process_transcript_segments(transcript_data)
+            # Step 5: Frame-audio correlation analysis
+            frame_correlations = []
+            if frame_timestamps:
+                logger.info("Analyzing frame-audio correlations...")
+                for timestamp in frame_timestamps:
+                    correlation = self.analyze_frame_audio_correlation(timestamp, processed_segments)
+                    frame_correlations.append(correlation)
             
-            # Step 6: Generate summary
-            audio_summary = self.generate_audio_summary(transcript_data, suspicious_analysis)
+            # Step 6: Generate enhanced summary
+            enhanced_summary = self.generate_enhanced_audio_summary(
+                transcript_data, suspicious_analysis, frame_correlations
+            )
             
-            # Step 7: Compile results
-            audio_results = {
+            # Step 7: Compile enhanced results
+            enhanced_results = {
                 'processing_timestamp': datetime.now().isoformat(),
                 'source_video': video_path,
                 'extracted_audio_path': audio_path,
-                'language': self.language_codes.get(transcript_data.get('language_code', 'en'), 'English'),
-                'language_code': transcript_data.get('language_code', 'en'),
-                'audio_duration_seconds': transcript_data.get('audio_duration', 0) / 1000,
-                'transcription_confidence': transcript_data.get('confidence', 0),
-                'speaker_count': len(set(seg['speaker'] for seg in processed_segments)),
-                'total_segments': len(processed_segments),
+                'basic_info': enhanced_summary.get('basic_info', {}),
+                'security_analysis': enhanced_summary.get('security_analysis', {}),
+                'emotional_analysis': enhanced_summary.get('emotional_analysis', {}),
+                'frame_correlations': frame_correlations,
                 'transcript_segments': processed_segments,
                 'suspicious_analysis': suspicious_analysis,
-                'suspicious_keywords': suspicious_analysis.get('suspicious_keywords_found', []),
-                'risk_score': suspicious_analysis.get('risk_score', 0),
-                'overall_sentiment': self.determine_overall_sentiment(processed_segments),
-                'summary': audio_summary,
+                'recommendations': enhanced_summary.get('recommendations', []),
                 'full_transcript': transcript_data.get('text', ''),
-                'raw_assemblyai_response': transcript_data
+                'enhanced_summary': enhanced_summary
             }
             
-            # Save audio results to JSON
-            results_path = os.path.join(output_dir, 'audio_analysis_results.json')
+            # Step 8: Generate ElevenLabs summary if available
+            if self.elevenlabs_api_key:
+                try:
+                    summary_text = self.create_audio_summary_text(enhanced_results)
+                    audio_data = self.generate_elevenlabs_speech(summary_text)
+                    if audio_data:
+                        summary_audio_path = os.path.join(output_dir, 'audio_summary.mp3')
+                        with open(summary_audio_path, 'wb') as f:
+                            f.write(audio_data)
+                        enhanced_results['elevenlabs_summary_audio'] = summary_audio_path
+                except Exception as e:
+                    logger.error(f"ElevenLabs summary generation failed: {e}")
+            
+            # Save enhanced results
+            results_path = os.path.join(output_dir, 'enhanced_audio_analysis.json')
             with open(results_path, 'w', encoding='utf-8') as f:
-                # Create a copy without the raw response for cleaner output
-                clean_results = audio_results.copy()
-                clean_results.pop('raw_assemblyai_response', None)
-                json.dump(clean_results, f, indent=2, default=str, ensure_ascii=False)
+                json.dump(enhanced_results, f, indent=2, default=str, ensure_ascii=False)
             
-            logger.info(f"Audio processing complete. Results saved to: {results_path}")
-            logger.info(f"Language: {audio_results['language']}, Risk Score: {audio_results['risk_score']}")
-            logger.info(f"Speakers: {audio_results['speaker_count']}, Segments: {audio_results['total_segments']}")
+            logger.info(f"Enhanced audio processing complete: {results_path}")
+            logger.info(f"Risk Level: {enhanced_summary.get('security_analysis', {}).get('risk_level', 'UNKNOWN')}")
+            logger.info(f"Emotional State: {enhanced_summary.get('emotional_analysis', {}).get('emotional_stability', 'unknown')}")
             
-            return audio_results
+            return enhanced_results
             
         except Exception as e:
-            logger.error(f"Error in audio processing pipeline: {e}")
+            logger.error(f"Error in enhanced audio processing: {e}")
             return None
-    
-    def determine_overall_sentiment(self, segments: List[Dict]) -> str:
-        """
-        Determine overall sentiment from all segments
-        
-        Args:
-            segments: List of processed transcript segments
-            
-        Returns:
-            Overall sentiment as string
-        """
+
+    def generate_enhanced_audio_summary(self, transcript_data: Dict, suspicious_analysis: Dict, 
+                                      frame_correlations: List[Dict] = None) -> Dict:
+        """Generate comprehensive audio analysis summary with frame correlations"""
         try:
-            if not segments:
-                return 'neutral'
+            summary = {
+                'basic_info': {},
+                'security_analysis': {},
+                'emotional_analysis': {},
+                'frame_correlations': {},
+                'recommendations': []
+            }
             
-            sentiment_counts = {}
-            for segment in segments:
-                sentiment = segment.get('sentiment', 'neutral')
-                sentiment_counts[sentiment] = sentiment_counts.get(sentiment, 0) + 1
+            # Basic information
+            duration = transcript_data.get('audio_duration', 0) / 1000
+            language = transcript_data.get('language_code', 'unknown')
             
-            # Return dominant sentiment
-            if sentiment_counts:
-                return max(sentiment_counts, key=sentiment_counts.get)
-            return 'neutral'
+            summary['basic_info'] = {
+                'duration_seconds': duration,
+                'duration_formatted': f"{int(duration // 60):02d}:{int(duration % 60):02d}",
+                'language': language,
+                'confidence': transcript_data.get('confidence', 0),
+                'total_segments': len(transcript_data.get('utterances', [])),
+                'speaker_count': len(set(utt.get('speaker', 'Unknown') 
+                                      for utt in transcript_data.get('utterances', [])))
+            }
+            
+            # Security analysis
+            risk_score = suspicious_analysis.get('risk_score', 0)
+            suspicious_keywords = suspicious_analysis.get('suspicious_keywords_found', [])
+            
+            summary['security_analysis'] = {
+                'risk_level': 'HIGH' if risk_score > 50 else 'MEDIUM' if risk_score > 20 else 'LOW',
+                'risk_score': risk_score,
+                'suspicious_keywords': suspicious_keywords,
+                'suspicious_segments': len(suspicious_analysis.get('suspicious_segments', [])),
+                'threat_indicators': len(suspicious_keywords) > 0
+            }
+            
+            # Emotional analysis
+            utterances = transcript_data.get('utterances', [])
+            all_emotions = []
+            distressed_segments = 0
+            
+            for utterance in utterances:
+                text = utterance.get('text', '')
+                emotion_analysis = self.detailed_emotion_analysis(text)
+                all_emotions.append(emotion_analysis['primary_emotion'])
+                
+                if emotion_analysis['is_distressed']:
+                    distressed_segments += 1
+            
+            emotion_distribution = {}
+            for emotion in all_emotions:
+                emotion_distribution[emotion] = emotion_distribution.get(emotion, 0) + 1
+            
+            summary['emotional_analysis'] = {
+                'dominant_emotion': max(emotion_distribution, key=emotion_distribution.get) if emotion_distribution else 'neutral',
+                'emotion_distribution': emotion_distribution,
+                'distressed_segments': distressed_segments,
+                'emotional_stability': 'unstable' if distressed_segments > len(utterances) * 0.3 else 'stable'
+            }
+            
+            # Frame correlations
+            if frame_correlations:
+                correlation_summary = {
+                    'total_frames_analyzed': len(frame_correlations),
+                    'frames_with_audio': len([f for f in frame_correlations if f.get('transcription')]),
+                    'suspicious_audio_frames': len([f for f in frame_correlations if f.get('suspicious_content')]),
+                    'emotional_peaks': []
+                }
+                
+                # Find emotional peaks
+                for frame_corr in frame_correlations:
+                    if abs(frame_corr.get('sentiment_score', 0)) > 0.5:
+                        correlation_summary['emotional_peaks'].append({
+                            'timestamp': frame_corr.get('timestamp', 0),
+                            'emotion': frame_corr.get('dominant_emotion', 'neutral'),
+                            'sentiment_score': frame_corr.get('sentiment_score', 0)
+                        })
+                
+                summary['frame_correlations'] = correlation_summary
+            
+            # Generate recommendations
+            recommendations = []
+            
+            if risk_score > 30:
+                recommendations.append("🚨 HIGH SECURITY ALERT: Review suspicious segments immediately")
+            
+            if distressed_segments > 3:
+                recommendations.append("⚠️ Multiple distressed audio segments detected - investigate for welfare concerns")
+            
+            if summary['emotional_analysis']['emotional_stability'] == 'unstable':
+                recommendations.append("📊 Emotional instability detected - analyze for behavioral patterns")
+            
+            if len(suspicious_keywords) > 0:
+                recommendations.append(f"🔍 Suspicious keywords detected: {', '.join(suspicious_keywords[:3])}")
+            
+            summary['recommendations'] = recommendations
+            
+            return summary
             
         except Exception as e:
-            logger.error(f"Error determining overall sentiment: {e}")
-            return 'neutral'
+            logger.error(f"Error generating enhanced audio summary: {e}")
+            return {
+                'error': str(e),
+                'basic_info': {},
+                'security_analysis': {},
+                'emotional_analysis': {},
+                'recommendations': []
+            }
+
+    def create_audio_summary_text(self, results: Dict) -> str:
+        """Create a summary text for TTS"""
+        try:
+            basic_info = results.get('basic_info', {})
+            security = results.get('security_analysis', {})
+            emotional = results.get('emotional_analysis', {})
+            
+            summary_parts = [
+                f"Audio Analysis Summary for {basic_info.get('duration_formatted', 'unknown duration')} of content.",
+                f"Security Risk Level: {security.get('risk_level', 'unknown')}",
+                f"Dominant Emotional State: {emotional.get('dominant_emotion', 'neutral')}",
+                f"Speakers Detected: {basic_info.get('speaker_count', 0)}",
+            ]
+            
+            if security.get('suspicious_keywords'):
+                summary_parts.append(f"Suspicious keywords detected: {', '.join(security['suspicious_keywords'][:3])}")
+            
+            if results.get('recommendations'):
+                summary_parts.append("Recommendations: " + "; ".join(results['recommendations'][:2]))
+            
+            return " ".join(summary_parts)
+            
+        except Exception as e:
+            logger.error(f"Error creating summary text: {e}")
+            return "Audio analysis completed with enhanced processing."

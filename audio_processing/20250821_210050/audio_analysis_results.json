@@ -1,0 +1,1553 @@
+{
+  "processing_timestamp": "2025-08-21T21:42:09.726876",
+  "source_video": "uploads\\20250821_210051_Sample1.mp4",
+  "extracted_audio_path": "audio_processing\\20250821_210050\\extracted_audio_20250821_213330.mp3",
+  "language": "English",
+  "language_code": "en",
+  "audio_duration_seconds": 1.751,
+  "transcription_confidence": 0.9664632,
+  "speaker_count": 7,
+  "total_segments": 77,
+  "transcript_segments": [
+    {
+      "start_time": 5.68,
+      "end_time": 85.66,
+      "duration": 79.97999999999999,
+      "speaker": "A",
+      "text": "So does the SEC meaning secure and govern growth and Data science meaning applied ML, MLOPs and anti abuse team meeting. That's a big mouthful. We might get a better name over time. And that's our meeting for September 14th or 15th in APAC and hi Alan, glad you're here. Why are you here? When it's midnight we can talk. Glad you're here. Don't make it happen to come to this meeting since it's really late for you, but I'm glad. Thanks for coming at least once. So, news and events. I've got a lot of things on the agenda today because of some of this, so apologies for that but I think it's going to go down over time based on feedback. I'm going to work to do more summarized communications to improve the signal to noise ratio in my communications to groups of people, including this group of people. This was wrote in for this group adding more items to our staff meeting agenda often as re only rather than posting to our Slack channel. And I am going to be assuming that people leaders on the team will attend this meeting or read the notes and not rely on the Slack channel. So keep that in mind. B is a read only item unless anybody wants to discuss it and see Phil has.",
+      "confidence": 0.9592534,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.6795577,
+      "suspicious_keywords": [],
+      "emotion": "joy",
+      "word_count": 226,
+      "timestamp_formatted": "00:05"
+    },
+    {
+      "start_time": 88.38,
+      "end_time": 160.28,
+      "duration": 71.9,
+      "speaker": "B",
+      "text": "Hi, welcome Alan to the to the meeting. I've asked Alan to step in as acting full stack Manager for Security Policies while I hire an em. Alan has graciously accepted this this wonderful opportunity. So welcome Alan. Thank you. I've got the next item as well. So Anti Abuse is moving product sections from SEC to Data Science. Data Science is effectively a rename of the Model Ops section. So Data Science will include two stages. The existing Model Ops which has three groups in it which Muln can talk more about, and the Anti Abuse stage which only currently has one group which is called Anti Abuse. I think at some point there are plans to split Anti Abuse into two groups, but that's not in the near term and we're working through all the changes around that. There's lots of workday changes, lots of handbook changes. Mon, did you want to say anything more about Data Science or Model Ops?",
+      "confidence": 0.9585033,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.59896916,
+      "suspicious_keywords": [
+        "plan",
+        "security"
+      ],
+      "emotion": "joy",
+      "word_count": 163,
+      "timestamp_formatted": "01:28"
+    },
+    {
+      "start_time": 162.51,
+      "end_time": 175.87,
+      "duration": 13.360000000000014,
+      "speaker": "C",
+      "text": "No, I think for us we just roll up to Data Science. Everything else stays the same. We still have the two main groups applied ML, MLOps and then later data ops as part of it. Yeah.",
+      "confidence": 0.9546403,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.8035046,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 37,
+      "timestamp_formatted": "02:42"
+    },
+    {
+      "start_time": 178.99,
+      "end_time": 193.45,
+      "duration": 14.45999999999998,
+      "speaker": "A",
+      "text": "So thanks Thomas for continuing to compile and report on across all of my teams that I'm responsible for in the engineering allocation meeting on error budgets and reliability and security incidents. So really do appreciate that.",
+      "confidence": 0.93397427,
+      "sentiment": "positive",
+      "sentiment_confidence": 0.73235357,
+      "suspicious_keywords": [
+        "security"
+      ],
+      "emotion": "neutral",
+      "word_count": 37,
+      "timestamp_formatted": "02:58"
+    },
+    {
+      "start_time": 196.17,
+      "end_time": 211.85,
+      "duration": 15.680000000000007,
+      "speaker": "D",
+      "text": "Gotta give Neil a High five too. He does. He does half of these now and. And apologies for the noise if I keep asking for. What's the story behind what's going on with reliability or secure or. Or error. Budget stuff. Just trying to provide air cover and I.",
+      "confidence": 0.96196616,
+      "sentiment": "positive",
+      "sentiment_confidence": 0.5224296,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 50,
+      "timestamp_formatted": "03:16"
+    },
+    {
+      "start_time": 211.93,
+      "end_time": 219.95,
+      "duration": 8.019999999999982,
+      "speaker": "A",
+      "text": "Apologies, Neil. I totally forgot you took half of these since Thomas has been doing it for so long, but appreciate it, Neil. I know you volunteered for it and we discussed and I just forgot.",
+      "confidence": 0.96432155,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.62440884,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 36,
+      "timestamp_formatted": "03:31"
+    },
+    {
+      "start_time": 219.95,
+      "end_time": 252.98,
+      "duration": 33.03,
+      "speaker": "E",
+      "text": "Kind of a thankless role, honestly. And I volunteered because of the exposure I get from it. It's nice to be part of a different collective group of people. I was going to mention I'll type this in here, but Tiago had set up for container security a bot that weekly. I think it's Mondays or like Sunday. We'll ping the team and ask for volunteer to go and resource that data and we just enabled it for threat insights. It's actually pretty sweet and it just. It does all the work for you, Thomas. Right. We don't have to ping people ourselves. So I'll put a note in there for that.",
+      "confidence": 0.96505594,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.6696418,
+      "suspicious_keywords": [
+        "threat",
+        "security"
+      ],
+      "emotion": "neutral",
+      "word_count": 112,
+      "timestamp_formatted": "03:39"
+    },
+    {
+      "start_time": 255.62,
+      "end_time": 259.86,
+      "duration": 4.240000000000009,
+      "speaker": "A",
+      "text": "Pete, F is read only. And Bill, you've got G.",
+      "confidence": 0.9051066,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.77501976,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 10,
+      "timestamp_formatted": "04:15"
+    },
+    {
+      "start_time": 262.42,
+      "end_time": 321.93,
+      "duration": 59.50999999999999,
+      "speaker": "B",
+      "text": "Yeah. Talent assessment. So we had an update from Juliana. The dates haven't been confirmed yet, but it'll be sometime from mid October through till December, I think. Egroup sign off is expected to be mid December before everyone goes on holiday. They've got a draft timeline in there, but the dates. The dates aren't in the handbook yet. The big change is we're moving to do it in workday. That's not available yet. I haven't seen a demo of it. I don't know what questions will be asked, but there's an optional self evaluation which will move into workday and then the work that we do as managers will also happen in workday. At the moment, some people are using the Google Doc, which is listed on the talent assessment page for self evaluations and for the manager work. I'd suggest continuing to use those docs until we get access to Workday and see what the exact differences are.",
+      "confidence": 0.97618306,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.70349807,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 160,
+      "timestamp_formatted": "04:22"
+    },
+    {
+      "start_time": 325.69,
+      "end_time": 333.39,
+      "duration": 7.699999999999989,
+      "speaker": "A",
+      "text": "H, I and J are read only unless anybody wants to discuss them. Thomas, you got item K?",
+      "confidence": 0.8563142,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.78985,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 18,
+      "timestamp_formatted": "05:25"
+    },
+    {
+      "start_time": 333.79,
+      "end_time": 369.91,
+      "duration": 36.120000000000005,
+      "speaker": "D",
+      "text": "Yeah. Apologies for the late like live addition to the agenda on this one. But one more note on a change. We're rolling out within secure, pretty lightweight and that we're establishing a second team within dynamic analysis. And so issue is there for folks want to play that would like to follow along or ask any questions about it for the plan for right now is I'm going to be serving as A teams acting EM and in addition to normally scheduled SEM duties for lack of a better way of putting it and so happy to answer any questions that folks have about that.",
+      "confidence": 0.9688259,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.5491449,
+      "suspicious_keywords": [
+        "plan"
+      ],
+      "emotion": "joy",
+      "word_count": 106,
+      "timestamp_formatted": "05:33"
+    },
+    {
+      "start_time": 373.43,
+      "end_time": 382.78,
+      "duration": 9.349999999999966,
+      "speaker": "B",
+      "text": "I had a quick question. We've done the same thing in Threat Insights with with Neil and. And Thiago each having teams. What are you going to call your new team or how will you differentiate.",
+      "confidence": 0.96131504,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.80208987,
+      "suspicious_keywords": [
+        "threat"
+      ],
+      "emotion": "neutral",
+      "word_count": 36,
+      "timestamp_formatted": "06:13"
+    },
+    {
+      "start_time": 384.46,
+      "end_time": 406.06,
+      "duration": 21.600000000000023,
+      "speaker": "D",
+      "text": "Was not planning to differentiate it. It's just a second team within Dynamic Analysis. We're not creating a new group which I think is the same pattern that's happening within Threat Insights as well. It's just two teams. No. I know that there's Tangerine and there's Navy. I'm not a Tangerine person myself. So we'll have to figure it out.",
+      "confidence": 0.98430365,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.5546938,
+      "suspicious_keywords": [
+        "threat",
+        "plan"
+      ],
+      "emotion": "neutral",
+      "word_count": 60,
+      "timestamp_formatted": "06:24"
+    },
+    {
+      "start_time": 406.06,
+      "end_time": 409.18,
+      "duration": 3.1200000000000045,
+      "speaker": "E",
+      "text": "Yeah I don't know if there's another T collar Thomas. I struggled with that one.",
+      "confidence": 0.9654948,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.77923566,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 15,
+      "timestamp_formatted": "06:46"
+    },
+    {
+      "start_time": 409.8,
+      "end_time": 450.7,
+      "duration": 40.89999999999998,
+      "speaker": "D",
+      "text": "That's the theme Tomato. I don't know. We'll figure it out. We'll figure it out. We'll figure it out. The differentiation I think the difference between what's happening in Threat Insights and within Dynamic Analysis is that this is a split or long feature category. Even though we're keeping that we're not putting a new group. It is there's the distinction is along like who's working on specific feature categories themselves. So the. The where the fracture point is happening is a little different. But the. But the approach and effect are the same. I hope.",
+      "confidence": 0.9474021,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.74283814,
+      "suspicious_keywords": [
+        "threat"
+      ],
+      "emotion": "neutral",
+      "word_count": 96,
+      "timestamp_formatted": "06:49"
+    },
+    {
+      "start_time": 458.22,
+      "end_time": 458.5,
+      "duration": 0.2799999999999727,
+      "speaker": "B",
+      "text": "So.",
+      "confidence": 0.98779297,
+      "sentiment": "positive",
+      "sentiment_confidence": 0.62284154,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 1,
+      "timestamp_formatted": "07:38"
+    },
+    {
+      "start_time": 458.5,
+      "end_time": 536.16,
+      "duration": 77.65999999999997,
+      "speaker": "A",
+      "text": "On to big rocks and hot issues section. I know if it's a big rock but kind of belong here perhaps more places. So did that survey where we got an awesome response rate from the team on how to improve the Mr. Rate for the team and then I took a really long time to go through all the results and summarize and make initial recommendations so lost a little bit of momentum. I got caught up in other things like cross functional prioritization and the customer escalation. So since then this is actually used by John Hope to lead a discussion at the development off site last week on just improving engineering. Velocity is one of the things he used to power it so it add value. There's but I've seen no comments I think from anybody in this group which means either no time forgot about it or it doesn't we looked at it and it doesn't have much value and any of those things are okay. I'm just curious where the group landed and if you haven't taken a look yet to see if there's anything you want to take away from it on things you Might want to consider asking me to do so and to consider not to do, but to consider. Anybody got a chance to read it yet and think about it or not just yet. It's not. My guess is perhaps everybody's really busy and they haven't looked yet.",
+      "confidence": 0.96281236,
+      "sentiment": "positive",
+      "sentiment_confidence": 0.62284154,
+      "suspicious_keywords": [],
+      "emotion": "joy",
+      "word_count": 248,
+      "timestamp_formatted": "07:38"
+    },
+    {
+      "start_time": 540.72,
+      "end_time": 560.05,
+      "duration": 19.329999999999927,
+      "speaker": "B",
+      "text": "I mean at a high level. Jay, Neil, Thiago, we've talked about changes. I think Jay, you've already looked at some changes around refinement. That was an area that you were going to look at for anti abuse and report back by the end of the the quarter. Thiago and Neil, I can't remember what where we ended up with for threat insights.",
+      "confidence": 0.9275458,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.76696223,
+      "suspicious_keywords": [
+        "threat"
+      ],
+      "emotion": "neutral",
+      "word_count": 63,
+      "timestamp_formatted": "09:00"
+    },
+    {
+      "start_time": 560.85,
+      "end_time": 593.86,
+      "duration": 33.00999999999999,
+      "speaker": "E",
+      "text": "Yeah, I'm hoping that Mr. Raid is kind of an artifact or a byproduct of some other actions. The big thing we're doing is more whole type of work like random miscellaneous, not scheduled, not PM necessarily actions or issues. And that actually is creating some more additional work. Like it's just like free time work. I want to change of pace, move to something else momentarily. And these are generally smaller types of issues too, so they're quicker to knock out. Therefore they create more misters, which has been a cool byproduct. So I think that's helping us succeed there.",
+      "confidence": 0.96444005,
+      "sentiment": "positive",
+      "sentiment_confidence": 0.6088353,
+      "suspicious_keywords": [
+        "help"
+      ],
+      "emotion": "neutral",
+      "word_count": 101,
+      "timestamp_formatted": "09:20"
+    },
+    {
+      "start_time": 597.06,
+      "end_time": 633.94,
+      "duration": 36.88000000000011,
+      "speaker": "C",
+      "text": "Yeah, we're also seeing some success with we've implemented like a weekly refinement meeting kind of check in, make sure that stories are broken down to tiny enough. I think with smaller bits of work we're seeing a higher Mr. Rate. It's debatable whether or not that's like just inflated, right? Like you can work on a small piece of code and ship it and you can do that. A lot of times you're going to get a higher Mr. Rate. We're trying to be reasonable with that. I am noticing a nice tick up after implementing the refinement meeting. So let's hope for the best.",
+      "confidence": 0.97319293,
+      "sentiment": "positive",
+      "sentiment_confidence": 0.8735337,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 106,
+      "timestamp_formatted": "09:57"
+    },
+    {
+      "start_time": 639.29,
+      "end_time": 640.01,
+      "duration": 0.7200000000000273,
+      "speaker": "D",
+      "text": "One note on.",
+      "confidence": 0.7597656,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.83561385,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 3,
+      "timestamp_formatted": "10:39"
+    },
+    {
+      "start_time": 640.89,
+      "end_time": 641.25,
+      "duration": 0.36000000000001364,
+      "speaker": "A",
+      "text": "Good.",
+      "confidence": 0.8515625,
+      "sentiment": "positive",
+      "sentiment_confidence": 0.7732182,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 1,
+      "timestamp_formatted": "10:40"
+    },
+    {
+      "start_time": 641.25,
+      "end_time": 642.01,
+      "duration": 0.7599999999999909,
+      "speaker": "B",
+      "text": "Sorry, go ahead.",
+      "confidence": 0.7803277,
+      "sentiment": "positive",
+      "sentiment_confidence": 0.7732182,
+      "suspicious_keywords": [],
+      "emotion": "sadness",
+      "word_count": 3,
+      "timestamp_formatted": "10:41"
+    },
+    {
+      "start_time": 642.09,
+      "end_time": 649.73,
+      "duration": 7.639999999999986,
+      "speaker": "A",
+      "text": "I was going to say one note on refinement. In static analysis, we're experimenting with the new section in our planning feature.",
+      "confidence": 0.9563765,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.8215834,
+      "suspicious_keywords": [
+        "plan"
+      ],
+      "emotion": "neutral",
+      "word_count": 22,
+      "timestamp_formatted": "10:42"
+    },
+    {
+      "start_time": 649.73,
+      "end_time": 650.97,
+      "duration": 1.240000000000009,
+      "speaker": "B",
+      "text": "It's called Looking Forward.",
+      "confidence": 0.92148846,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.77209413,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 4,
+      "timestamp_formatted": "10:49"
+    },
+    {
+      "start_time": 651.53,
+      "end_time": 671.08,
+      "duration": 19.550000000000068,
+      "speaker": "A",
+      "text": "And in there we're using that as like a baseline where we add issues that we think need refinement that will most likely be worked on in the next one to three milestones. So we're using that as kind of a base cover for some engineer to go in and add their issues and.",
+      "confidence": 0.9711206,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.83926547,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 54,
+      "timestamp_formatted": "10:51"
+    },
+    {
+      "start_time": 671.08,
+      "end_time": 673.2,
+      "duration": 2.1200000000000045,
+      "speaker": "B",
+      "text": "Make sure they get refined within this milestone.",
+      "confidence": 0.9986267,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.8322599,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 8,
+      "timestamp_formatted": "11:11"
+    },
+    {
+      "start_time": 673.28,
+      "end_time": 676.88,
+      "duration": 3.6000000000000227,
+      "speaker": "D",
+      "text": "Not necessarily any implementation, but just refinement itself.",
+      "confidence": 0.9856517,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.83759606,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 8,
+      "timestamp_formatted": "11:13"
+    },
+    {
+      "start_time": 683.2,
+      "end_time": 687.08,
+      "duration": 3.8799999999999955,
+      "speaker": "A",
+      "text": "I should stop talking on mute. Thank you. Omar Thomas, you want to verbalize your.",
+      "confidence": 0.94445205,
+      "sentiment": "negative",
+      "sentiment_confidence": 0.76686704,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 15,
+      "timestamp_formatted": "11:23"
+    },
+    {
+      "start_time": 687.08,
+      "end_time": 777.81,
+      "duration": 90.7299999999999,
+      "speaker": "D",
+      "text": "Comment yeah, I'll verbalize and then I'll say more and then I'll finish writing what I was going to put down underneath it in just a moment. The this was an agenda item with the EMS and and I can say it now in the secure stage since that is the analyzer teams now. So this was a topic yesterday. So my I would assume that this is more like it had a chance to read but not digest the content and what I was about to write. And I am cautious in saying this because it almost comes across as smug and that is not my intent in that. Looking at the Mr. Rate within SEC compared to company wide, historically it runs 2 to 3 misses per engineer per month higher and I think a good bit of that has to do with the I mean it, I mean we've taken this to be true or at least asserted it to be true in that it's smaller teams that are working closely together in less busy projects than we see within the Rails platform itself, which does have an impact. It's. That's not to say that we cannot do better, but the comparison, the favorable comparison at least to me, and I will admit this at times, will lessen the urgency on this particular topic. And I have to admit that bias that I have.",
+      "confidence": 0.97564685,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.8778035,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 237,
+      "timestamp_formatted": "11:27"
+    },
+    {
+      "start_time": 780.19,
+      "end_time": 794.19,
+      "duration": 14.0,
+      "speaker": "A",
+      "text": "Thanks Thomas. Thanks everyone. So I didn't see any comments in the issue, but that's totally fine. People found some of it useful, some of the analysis useful, and that's great. So I will close the issue accordingly and just link to these notes. It's good stuff. Thomas, you've got item B.",
+      "confidence": 0.9842983,
+      "sentiment": "positive",
+      "sentiment_confidence": 0.71135527,
+      "suspicious_keywords": [],
+      "emotion": "joy",
+      "word_count": 52,
+      "timestamp_formatted": "13:00"
+    },
+    {
+      "start_time": 795.79,
+      "end_time": 888.73,
+      "duration": 92.94000000000005,
+      "speaker": "D",
+      "text": "Okay. All right, after this then. All right. Fedramp and the can't or won't fix security issues that way. Maybe we may be having there's so we've got them the the for security issues that are subject to FedRamp if we if you have a feature category that is FIPS compliant or certified, you're probably going to be part of the Fedramp evaluation and any security issue that has a CVE associated with it, which means dependency or container scanning specifically, has to have a remediation plan, even if they're false positives. And so that's led to a separate discussion on what do we need to do for do we need to do anything related to security findings on the commercial versions of Analyzers specifically that was the catalyst for this particular conversation because on container scanning we get a lot of findings related to Debian based images that that project has not shipped a fix for or won't fix ship a fix for. So there is a separate thread that is going on here about what to do and can we do deviation requests in bulk for this class, for this class of findings. The TLDR is below and there's a couple of options that are being brainstormed within this particular thread. So I wanted, and I know I've said a lot of words and I didn't say it well, but I wanted to bring it here in case there was any questions or commentary.",
+      "confidence": 0.97469383,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.5843516,
+      "suspicious_keywords": [
+        "rob",
+        "plan",
+        "security"
+      ],
+      "emotion": "neutral",
+      "word_count": 246,
+      "timestamp_formatted": "13:15"
+    },
+    {
+      "start_time": 895.93,
+      "end_time": 914.01,
+      "duration": 18.08000000000004,
+      "speaker": "B",
+      "text": "Nothing directly related to what you've just talked about, but sort of related. For Fedramp, you're looking at any FIPS related security issues that have been raised. How far are you going in terms of auditing to find anything that hasn't already been identified?",
+      "confidence": 0.9828944,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.82822865,
+      "suspicious_keywords": [
+        "security"
+      ],
+      "emotion": "neutral",
+      "word_count": 44,
+      "timestamp_formatted": "14:55"
+    },
+    {
+      "start_time": 916.28,
+      "end_time": 968.93,
+      "duration": 52.64999999999998,
+      "speaker": "D",
+      "text": "There is. I'll, I'll link in another issue, a separate issue that is give that has instructions from AppSec on what they would like us to do as far as setting up container scanning. And they have set up a project with a single configuration that they're asking us to use. There is some debate as to, as to how that project has been configured because it uses a combination of three container scanning tools rather than one. And, and so they've asked us to use that as a baseline for the FIPS images specifically, since they're UBI or the UBI specific images. They're. They're equivalent in my mind, even though they're, they're. They're different meanings.",
+      "confidence": 0.9814099,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.66054803,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 116,
+      "timestamp_formatted": "15:16"
+    },
+    {
+      "start_time": 971.33,
+      "end_time": 973.81,
+      "duration": 2.4799999999999045,
+      "speaker": "B",
+      "text": "So TLDR Talk to AppSec. Got it.",
+      "confidence": 0.9540782,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.88524836,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 7,
+      "timestamp_formatted": "16:11"
+    },
+    {
+      "start_time": 974.29,
+      "end_time": 991.74,
+      "duration": 17.450000000000045,
+      "speaker": "D",
+      "text": "Nikhil. Nikhil George is our stable counterpart of Folks don't know, at least in sec. And so he has been quite responsive and keen and he is also helping chase down answers when, when he doesn't have them. So that's a big. He's been, he's been a big help thus far.",
+      "confidence": 0.9615526,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.70865256,
+      "suspicious_keywords": [
+        "help"
+      ],
+      "emotion": "neutral",
+      "word_count": 51,
+      "timestamp_formatted": "16:14"
+    },
+    {
+      "start_time": 995.02,
+      "end_time": 995.5,
+      "duration": 0.4800000000000182,
+      "speaker": "B",
+      "text": "Yeah.",
+      "confidence": 0.7952474,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.5491449,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 1,
+      "timestamp_formatted": "16:35"
+    },
+    {
+      "start_time": 1003.66,
+      "end_time": 1010.54,
+      "duration": 6.8799999999999955,
+      "speaker": "A",
+      "text": "So in. Thanks for bringing this up, Thomas. So in the hallway. So from the development staff meeting.",
+      "confidence": 0.9460133,
+      "sentiment": "positive",
+      "sentiment_confidence": 0.53667974,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 18,
+      "timestamp_formatted": "16:43"
+    },
+    {
+      "start_time": 1012.46,
+      "end_time": 1012.74,
+      "duration": 0.2799999999999727,
+      "speaker": "B",
+      "text": "I.",
+      "confidence": 0.99853516,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.8416441,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 1,
+      "timestamp_formatted": "16:52"
+    },
+    {
+      "start_time": 1012.74,
+      "end_time": 1042.31,
+      "duration": 29.569999999999936,
+      "speaker": "A",
+      "text": "Copied and pasted the notes in there but Net is the TLDR is can folks. The request to me and my peers was can folks check with their teams to see if the approvals are affecting them. So this is the new approval rules on segregation of duties. So I asked this group, not that everybody's here, but in the group and they shouldn't be because all meetings are optional. But have. Has this had an impact, these new approval rules?",
+      "confidence": 0.968842,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.8416441,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 81,
+      "timestamp_formatted": "16:52"
+    },
+    {
+      "start_time": 1049.39,
+      "end_time": 1059.31,
+      "duration": 9.919999999999845,
+      "speaker": "B",
+      "text": "Anecdotally, I've seen a few cases where team members have realized that they need to get an additional approval, but I'm not aware that it's actually slowing things down.",
+      "confidence": 0.98837835,
+      "sentiment": "negative",
+      "sentiment_confidence": 0.5264519,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 29,
+      "timestamp_formatted": "17:29"
+    },
+    {
+      "start_time": 1065.07,
+      "end_time": 1160.62,
+      "duration": 95.54999999999995,
+      "speaker": "A",
+      "text": "Okay. No news is good news. On this probably unless we're missing unless it's happening and we're not noticing it where it is slowing things down. But just keep an eye on it in case it does everyone please. So good stuff. So with recent changes we've done a couple of different changes with the secure and governed broken out from secure and a data ops team and this net is I just compared the name of my team with my peers. My peers have one word team names Ops, Dev, Create, etc. Mine is Sec Growth and Data Science which is pretty wordy and also makes like when I go into dashboards I have to pull data from multiple places across my teams. So I was thinking about a one word name. I've started to get feedback on it. Naming things is really important at GitLab to name the right kinds of things and give them good names. So I'm going to run it by David Desanto tomorrow as he's a great person to bounce such things off of. I landed on enrichment because what we do makes other things better. We enrich them. It's kind of a very broad term, but it does cover what we do. Not sure we're going to change the name, which I'm not sure it's going to affect anyone but me. That's actually my intent is it only affects my stuff, not everyone else's but. Or at least everyone else's in a small way or others in a small way. But we'll see. Any thoughts on this? Good idea? Bad idea? I'm not wed to this. I'm looking for feedback.",
+      "confidence": 0.9620847,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.5843516,
+      "suspicious_keywords": [
+        "rob"
+      ],
+      "emotion": "joy",
+      "word_count": 277,
+      "timestamp_formatted": "17:45"
+    },
+    {
+      "start_time": 1165.1,
+      "end_time": 1194.79,
+      "duration": 29.690000000000055,
+      "speaker": "B",
+      "text": "Yeah, obviously the other examples relate to either sections or stages, whereas enrichment doesn't. So you'd be introducing something new here. This affects me as well. I have a subset of enrichment so it would be kind of enrichment light. I'm not sure. I'm not sure we'll. I think you and I have spoken about this. I'm not sure we would get approval to introduce a new name or department level. We'd certainly have to talk to people ops about introducing that in workday.",
+      "confidence": 0.9648563,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.72297186,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 84,
+      "timestamp_formatted": "19:25"
+    },
+    {
+      "start_time": 1199.03,
+      "end_time": 1266.5,
+      "duration": 67.47000000000003,
+      "speaker": "A",
+      "text": "Okay, so a couple of things. You know, these kinds of things I would sometimes put in Slack, but I'm trying to avoid a number of distinct Slack messages. So putting it in here, making a lot read only when possible. So I've got C though, which is not read only. So I would like to add announcements of work anniversaries and new hires to the meeting template. PM does this. I attended the PM staff meeting. I was a guest speaker there this week. And like the camaraderie we have good camaraderie. The camaraderie there was pretty good. You know Fern, who's shadowing me today, I think he sat in on the PM meeting as well. It was. It's a pretty good feel of just people really knowing each other well and getting along well. So those are just two things I took away from it is anniversaries and new hires. I'll verbalize Tiago's comment. Yeah, great idea for new hires. Don't care much about work anniversaries. We already have a bot for that. What I'd say is I always seem to miss the bot announcements as they cover the whole company versus a bot just announcing for our team. If no interest in that part, I'm happy to exclude. So Neil, you like the idea of adding. Yeah, you don't.",
+      "confidence": 0.9644594,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.7734712,
+      "suspicious_keywords": [],
+      "emotion": "joy",
+      "word_count": 222,
+      "timestamp_formatted": "19:59"
+    },
+    {
+      "start_time": 1266.74,
+      "end_time": 1288.1,
+      "duration": 21.3599999999999,
+      "speaker": "E",
+      "text": "So I mean just last week I think it was Phil celebrated his third year and I congratulated him. But then I missed another team member in SEC, you know. Cause there's like 20 people on that list. Plus it's team member updates. That's not a channel I look at a lot like weekly. I just happen to see that the day of. So I do like being able to celebrate together in this group.",
+      "confidence": 0.9736176,
+      "sentiment": "positive",
+      "sentiment_confidence": 0.9065287,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 75,
+      "timestamp_formatted": "21:06"
+    },
+    {
+      "start_time": 1288.5,
+      "end_time": 1304.26,
+      "duration": 15.759999999999991,
+      "speaker": "A",
+      "text": "Maybe also thanks or praise section. Like thanks for doing this. Great job on that. To remind ourselves to do that. As engineers, we tend to focus on the problems and challenges and not the celebrating the wins.",
+      "confidence": 0.97665673,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.7721517,
+      "suspicious_keywords": [
+        "rob"
+      ],
+      "emotion": "joy",
+      "word_count": 38,
+      "timestamp_formatted": "21:28"
+    },
+    {
+      "start_time": 1306.42,
+      "end_time": 1314.9,
+      "duration": 8.480000000000018,
+      "speaker": "B",
+      "text": "Are you suggesting that we add new content into this document for that or that we just link to the Slack announcements that we've already made?",
+      "confidence": 0.98512775,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.9030167,
+      "suspicious_keywords": [],
+      "emotion": "anger",
+      "word_count": 26,
+      "timestamp_formatted": "21:46"
+    },
+    {
+      "start_time": 1317.79,
+      "end_time": 1348.75,
+      "duration": 30.960000000000036,
+      "speaker": "A",
+      "text": "I think it's nice to verbalize them. So maybe link to the Slack announcements but also verbalize it. I know it sounds like a bunch of busy work. I don't want to do things twice. Maybe add the sections and people use them as they see fit. Whatever that happens to be. But please don't over. Don't create busy work for yourself either. So. So judgment call by each person. Thomas, looks like you had a Thomas. And Mon, you had some thoughts on this too.",
+      "confidence": 0.96368533,
+      "sentiment": "positive",
+      "sentiment_confidence": 0.85498655,
+      "suspicious_keywords": [],
+      "emotion": "anger",
+      "word_count": 86,
+      "timestamp_formatted": "21:57"
+    },
+    {
+      "start_time": 1349.47,
+      "end_time": 1390.09,
+      "duration": 40.61999999999989,
+      "speaker": "D",
+      "text": "Yeah, I like it. We don't celebrate enough. We don't do enough for team cohesion. Team celebration across the board. And just as a corollary related thing that I haven't communicated well, I was hoping to add this kind of thing to our monthly section. Wide retrospectives, new hires, discretionary bonuses, work anniversaries, big feature releases. I mean anything that we want to announce and celebrate, we ought to make sure that it's. I don't want to say shout to the rooftops but. Or shout to the heavens. But. But we, they're big deals and we don't make and. And we undersell in my opinion.",
+      "confidence": 0.97077125,
+      "sentiment": "positive",
+      "sentiment_confidence": 0.8413728,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 105,
+      "timestamp_formatted": "22:29"
+    },
+    {
+      "start_time": 1390.329,
+      "end_time": 1390.809,
+      "duration": 0.4800000000000182,
+      "speaker": "B",
+      "text": "Yeah.",
+      "confidence": 0.9869792,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.5491449,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 1,
+      "timestamp_formatted": "23:10"
+    },
+    {
+      "start_time": 1390.97,
+      "end_time": 1409.67,
+      "duration": 18.700000000000045,
+      "speaker": "F",
+      "text": "Oh, sorry. And hey Fernando here. So I'm shadowing Wayne now just to introduce myself from the technical marketing team and I'm. I'll send the document right now which is something that we do for our kind of get together team meetings and it kind of shows, you can, you.",
+      "confidence": 0.9693773,
+      "sentiment": "negative",
+      "sentiment_confidence": 0.66955644,
+      "suspicious_keywords": [],
+      "emotion": "sadness",
+      "word_count": 50,
+      "timestamp_formatted": "23:10"
+    },
+    {
+      "start_time": 1409.67,
+      "end_time": 1410.27,
+      "duration": 0.599999999999909,
+      "speaker": "A",
+      "text": "Can look through it.",
+      "confidence": 0.9577637,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.74162906,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 4,
+      "timestamp_formatted": "23:29"
+    },
+    {
+      "start_time": 1410.27,
+      "end_time": 1460.39,
+      "duration": 50.12000000000012,
+      "speaker": "F",
+      "text": "I shared it to everyone on the Zoom chat but you can see that we provide updates, the new team members and small little introductions and you can see sections that we have on gratitude and actual spotlights that we show like who we're actually praising, what they've done. That's good. And how we can highlight that because that will motivate employees, kind of really increase that morale. Because what we're seeing is these employees are actually getting recognized for good work that they've done and they're getting shout outs because a lot of times, at least in our team, the case is we don't really. Although we work with each other, we sometimes are kind of siloed busy working on different things. So it's good to know what everyone's working on and what everyone's doing. So somewhat related to what you were just speaking on but just thought I'd share that.",
+      "confidence": 0.97955716,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.74162906,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 152,
+      "timestamp_formatted": "23:30"
+    },
+    {
+      "start_time": 1463.27,
+      "end_time": 1507.08,
+      "duration": 43.809999999999945,
+      "speaker": "A",
+      "text": "Thanks Fernando. In D. So I'm not going to read all of this from Daniel Croft, but summarizing he is looking for feedback on the development vision and mission and direction. We're brainstorming in the development department on mission and vision in particular. The approach is we want everybody open up a little spreadsheet and follow the instructions. Anybody interested? So if you're interested in doing so should take about 10 to 15 minutes, please do it in the next week. Good stuff. There something we covered also at the development off site that Daniel took as an action item to follow up on. Thomas, you've got E. Yep. All right.",
+      "confidence": 0.9651346,
+      "sentiment": "positive",
+      "sentiment_confidence": 0.6291119,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 111,
+      "timestamp_formatted": "24:23"
+    },
+    {
+      "start_time": 1507.08,
+      "end_time": 1539.82,
+      "duration": 32.74000000000001,
+      "speaker": "D",
+      "text": "Because I cannot remember and so I'm hoping to crowdsource a little bit of configuration archaeology, so to speak. Is there a reason that we don't use reviewer roulette? If folks can remember? The reason I'm asking is is contained within that thread. But that is a tool that actually is being used to track if we have enough maintainers on any given project. And since we don't use it, we're showing up. And so that's why I was. That's why I'm asking.",
+      "confidence": 0.98464304,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.4896698,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 83,
+      "timestamp_formatted": "25:07"
+    },
+    {
+      "start_time": 1540.06,
+      "end_time": 1540.54,
+      "duration": 0.4800000000000182,
+      "speaker": "B",
+      "text": "Yeah.",
+      "confidence": 0.73616534,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.5491449,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 1,
+      "timestamp_formatted": "25:40"
+    },
+    {
+      "start_time": 1541.34,
+      "end_time": 1545.26,
+      "duration": 3.9200000000000728,
+      "speaker": "G",
+      "text": "When you say reviewer roulette, are you talking about on the individual analyzers.",
+      "confidence": 0.98583984,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.78124535,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 13,
+      "timestamp_formatted": "25:41"
+    },
+    {
+      "start_time": 1545.42,
+      "end_time": 1545.9,
+      "duration": 0.4800000000000182,
+      "speaker": "D",
+      "text": "Yeah.",
+      "confidence": 0.85221356,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.5491449,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 1,
+      "timestamp_formatted": "25:45"
+    },
+    {
+      "start_time": 1549.66,
+      "end_time": 1557.02,
+      "duration": 7.3599999999999,
+      "speaker": "G",
+      "text": "Speaking only for dash, we haven't had a need for it because we have six engineers. That's just going to rule out the same six people.",
+      "confidence": 0.9516069,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.6630411,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 26,
+      "timestamp_formatted": "25:49"
+    },
+    {
+      "start_time": 1557.5,
+      "end_time": 1568.78,
+      "duration": 11.279999999999973,
+      "speaker": "D",
+      "text": "Yeah, roll a six sided die. That's what I kind of think it is. But it's from a larger. Like if the company, like where do we need more maintainers is the question that the organization is asking.",
+      "confidence": 0.97723925,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.70277196,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 38,
+      "timestamp_formatted": "25:57"
+    },
+    {
+      "start_time": 1574.21,
+      "end_time": 1592.13,
+      "duration": 17.920000000000073,
+      "speaker": "B",
+      "text": "I mean I'd suggest they're looking in the wrong place. If they're looking in roulette to see to find out the number of maintainers, that's the wrong place. The engineering projects page should list all the maintainers. If you've set up your team YAML entries correctly. I would have thought that was more the single source of truth.",
+      "confidence": 0.9810104,
+      "sentiment": "negative",
+      "sentiment_confidence": 0.62870574,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 58,
+      "timestamp_formatted": "26:14"
+    },
+    {
+      "start_time": 1596.86,
+      "end_time": 1603.34,
+      "duration": 6.480000000000018,
+      "speaker": "D",
+      "text": "Apparently not. So yeah.",
+      "confidence": 0.9646647,
+      "sentiment": "negative",
+      "sentiment_confidence": 0.60292864,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 4,
+      "timestamp_formatted": "26:36"
+    },
+    {
+      "start_time": 1605.5,
+      "end_time": 1626.07,
+      "duration": 20.569999999999936,
+      "speaker": "G",
+      "text": "Yeah, I'm looking at the chart. I mean I think on some of these projects we just haven't filled it out. I'll give you like we have the API, the Cub fuzz. We have one engineer that works on it. So we haven't gone and added a maintainer there because they know who they are. So if we are trying to maintain that as a single source of truth, we need to just go through and scrub it.",
+      "confidence": 0.982823,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.81663233,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 78,
+      "timestamp_formatted": "26:45"
+    },
+    {
+      "start_time": 1627.83,
+      "end_time": 1642.55,
+      "duration": 14.720000000000027,
+      "speaker": "A",
+      "text": "Sorry Seth. I'm reminded of this man. I'm reminded of the spider man meme with the two spider men pointing at each other. Who's the reviewer? Who's the author? It's the same person. It's been a long day so I'm a little punchy. But yes, that makes sense.",
+      "confidence": 0.9576687,
+      "sentiment": "negative",
+      "sentiment_confidence": 0.4858354,
+      "suspicious_keywords": [],
+      "emotion": "sadness",
+      "word_count": 48,
+      "timestamp_formatted": "27:07"
+    },
+    {
+      "start_time": 1644.55,
+      "end_time": 1649.82,
+      "duration": 5.269999999999982,
+      "speaker": "B",
+      "text": "So Sethi is saying you haven't added it to individual team members YAML files in the handbook.",
+      "confidence": 0.93341905,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.74654657,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 17,
+      "timestamp_formatted": "27:24"
+    },
+    {
+      "start_time": 1651.09,
+      "end_time": 1651.25,
+      "duration": 0.16000000000008185,
+      "speaker": "A",
+      "text": "Right.",
+      "confidence": 0.9550781,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.5664751,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 1,
+      "timestamp_formatted": "27:31"
+    },
+    {
+      "start_time": 1651.25,
+      "end_time": 1655.97,
+      "duration": 4.720000000000027,
+      "speaker": "G",
+      "text": "I believe for that one there's just no entry for it. I mean we could, I think if.",
+      "confidence": 0.95750594,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.5664751,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 18,
+      "timestamp_formatted": "27:31"
+    },
+    {
+      "start_time": 1655.97,
+      "end_time": 1676.05,
+      "duration": 20.079999999999927,
+      "speaker": "B",
+      "text": "You, I think if you do anything good, that should do it. Yeah, well it should. They shouldn't be using just Roulette. They should be using that as a source of truth. And I think if you've listed maintainers that should cover it. A follow up question would be does that, does that cover the senior plus engineers? Must be a maintainer requirement or not.",
+      "confidence": 0.9578864,
+      "sentiment": "positive",
+      "sentiment_confidence": 0.7180647,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 65,
+      "timestamp_formatted": "27:35"
+    },
+    {
+      "start_time": 1680.12,
+      "end_time": 1688.76,
+      "duration": 8.6400000000001,
+      "speaker": "A",
+      "text": "Thomas, you buried the, the, what do you call buried the lead. I, I took the read only off your comment there so you can announce it.",
+      "confidence": 0.9151717,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.64743817,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 27,
+      "timestamp_formatted": "28:00"
+    },
+    {
+      "start_time": 1689.16,
+      "end_time": 1692.92,
+      "duration": 3.759999999999991,
+      "speaker": "D",
+      "text": "Well, we, we're going to end with the best news of the day. That's all.",
+      "confidence": 0.985612,
+      "sentiment": "positive",
+      "sentiment_confidence": 0.97194266,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 15,
+      "timestamp_formatted": "28:09"
+    },
+    {
+      "start_time": 1692.92,
+      "end_time": 1693.48,
+      "duration": 0.5599999999999454,
+      "speaker": "A",
+      "text": "That's.",
+      "confidence": 0.8297526,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.5908354,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 1,
+      "timestamp_formatted": "28:12"
+    },
+    {
+      "start_time": 1694.12,
+      "end_time": 1707.16,
+      "duration": 13.040000000000191,
+      "speaker": "D",
+      "text": "But it's, but the maintainer requirement. Yes it does. I mean because it's required for Senior plus. Going back to that is just maintaining one or more I think is the requirement if I remember correctly.",
+      "confidence": 0.95133126,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.7402116,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 36,
+      "timestamp_formatted": "28:14"
+    },
+    {
+      "start_time": 1709.32,
+      "end_time": 1710.68,
+      "duration": 1.3600000000001273,
+      "speaker": "A",
+      "text": "I was talking about the Olivier news.",
+      "confidence": 0.9946289,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.8780867,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 7,
+      "timestamp_formatted": "28:29"
+    },
+    {
+      "start_time": 1710.84,
+      "end_time": 1725.88,
+      "duration": 15.040000000000191,
+      "speaker": "D",
+      "text": "Yeah, I know. I was just making sure we were finished with the topic above. All right, and we're at time, so I will move on and take that as a prompt. Yeah, Olivier has popped back on slack to announce that the newest addition to their family is here and happened over the weekend.",
+      "confidence": 0.97796744,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.4991396,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 55,
+      "timestamp_formatted": "28:30"
+    },
+    {
+      "start_time": 1726.2,
+      "end_time": 1726.6,
+      "duration": 0.3999999999998636,
+      "speaker": "A",
+      "text": "So.",
+      "confidence": 0.96240234,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.6170275,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 1,
+      "timestamp_formatted": "28:46"
+    },
+    {
+      "start_time": 1727.56,
+      "end_time": 1738.85,
+      "duration": 11.289999999999964,
+      "speaker": "D",
+      "text": "So big, big congrats to his family for that. And we'll be hoping to celebrate him later when he does, when he. When he returns to work.",
+      "confidence": 0.9864427,
+      "sentiment": "positive",
+      "sentiment_confidence": 0.98719156,
+      "suspicious_keywords": [],
+      "emotion": "neutral",
+      "word_count": 27,
+      "timestamp_formatted": "28:47"
+    },
+    {
+      "start_time": 1741.49,
+      "end_time": 1743.41,
+      "duration": 1.9200000000000728,
+      "speaker": "A",
+      "text": "Google. Thanks, everybody. Have a great day.",
+      "confidence": 0.9904669,
+      "sentiment": "neutral",
+      "sentiment_confidence": 0.8596904,
+      "suspicious_keywords": [],
+      "emotion": "joy",
+      "word_count": 7,
+      "timestamp_formatted": "29:01"
+    }
+  ],
+  "suspicious_analysis": {
+    "suspicious_keywords_found": [
+      "threat",
+      "rob",
+      "plan",
+      "help",
+      "security"
+    ],
+    "suspicious_segments": [
+      {
+        "start_time": 88.38,
+        "end_time": 160.28,
+        "speaker": "B",
+        "text": "Hi, welcome Alan to the to the meeting. I've asked Alan to step in as acting full stack Manager for Security Policies while I hire an em. Alan has graciously accepted this this wonderful opportunity. So welcome Alan. Thank you. I've got the next item as well. So Anti Abuse is moving product sections from SEC to Data Science. Data Science is effectively a rename of the Model Ops section. So Data Science will include two stages. The existing Model Ops which has three groups in it which Muln can talk more about, and the Anti Abuse stage which only currently has one group which is called Anti Abuse. I think at some point there are plans to split Anti Abuse into two groups, but that's not in the near term and we're working through all the changes around that. There's lots of workday changes, lots of handbook changes. Mon, did you want to say anything more about Data Science or Model Ops?",
+        "keywords": [
+          "plan",
+          "security"
+        ],
+        "confidence": 0.9585033
+      },
+      {
+        "start_time": 178.99,
+        "end_time": 193.45,
+        "speaker": "A",
+        "text": "So thanks Thomas for continuing to compile and report on across all of my teams that I'm responsible for in the engineering allocation meeting on error budgets and reliability and security incidents. So really do appreciate that.",
+        "keywords": [
+          "security"
+        ],
+        "confidence": 0.93397427
+      },
+      {
+        "start_time": 219.95,
+        "end_time": 252.98,
+        "speaker": "E",
+        "text": "Kind of a thankless role, honestly. And I volunteered because of the exposure I get from it. It's nice to be part of a different collective group of people. I was going to mention I'll type this in here, but Tiago had set up for container security a bot that weekly. I think it's Mondays or like Sunday. We'll ping the team and ask for volunteer to go and resource that data and we just enabled it for threat insights. It's actually pretty sweet and it just. It does all the work for you, Thomas. Right. We don't have to ping people ourselves. So I'll put a note in there for that.",
+        "keywords": [
+          "threat",
+          "security"
+        ],
+        "confidence": 0.96505594
+      },
+      {
+        "start_time": 333.79,
+        "end_time": 369.91,
+        "speaker": "D",
+        "text": "Yeah. Apologies for the late like live addition to the agenda on this one. But one more note on a change. We're rolling out within secure, pretty lightweight and that we're establishing a second team within dynamic analysis. And so issue is there for folks want to play that would like to follow along or ask any questions about it for the plan for right now is I'm going to be serving as A teams acting EM and in addition to normally scheduled SEM duties for lack of a better way of putting it and so happy to answer any questions that folks have about that.",
+        "keywords": [
+          "plan"
+        ],
+        "confidence": 0.9688259
+      },
+      {
+        "start_time": 373.43,
+        "end_time": 382.78,
+        "speaker": "B",
+        "text": "I had a quick question. We've done the same thing in Threat Insights with with Neil and. And Thiago each having teams. What are you going to call your new team or how will you differentiate.",
+        "keywords": [
+          "threat"
+        ],
+        "confidence": 0.96131504
+      },
+      {
+        "start_time": 384.46,
+        "end_time": 406.06,
+        "speaker": "D",
+        "text": "Was not planning to differentiate it. It's just a second team within Dynamic Analysis. We're not creating a new group which I think is the same pattern that's happening within Threat Insights as well. It's just two teams. No. I know that there's Tangerine and there's Navy. I'm not a Tangerine person myself. So we'll have to figure it out.",
+        "keywords": [
+          "threat",
+          "plan"
+        ],
+        "confidence": 0.98430365
+      },
+      {
+        "start_time": 409.8,
+        "end_time": 450.7,
+        "speaker": "D",
+        "text": "That's the theme Tomato. I don't know. We'll figure it out. We'll figure it out. We'll figure it out. The differentiation I think the difference between what's happening in Threat Insights and within Dynamic Analysis is that this is a split or long feature category. Even though we're keeping that we're not putting a new group. It is there's the distinction is along like who's working on specific feature categories themselves. So the. The where the fracture point is happening is a little different. But the. But the approach and effect are the same. I hope.",
+        "keywords": [
+          "threat"
+        ],
+        "confidence": 0.9474021
+      },
+      {
+        "start_time": 540.72,
+        "end_time": 560.05,
+        "speaker": "B",
+        "text": "I mean at a high level. Jay, Neil, Thiago, we've talked about changes. I think Jay, you've already looked at some changes around refinement. That was an area that you were going to look at for anti abuse and report back by the end of the the quarter. Thiago and Neil, I can't remember what where we ended up with for threat insights.",
+        "keywords": [
+          "threat"
+        ],
+        "confidence": 0.9275458
+      },
+      {
+        "start_time": 560.85,
+        "end_time": 593.86,
+        "speaker": "E",
+        "text": "Yeah, I'm hoping that Mr. Raid is kind of an artifact or a byproduct of some other actions. The big thing we're doing is more whole type of work like random miscellaneous, not scheduled, not PM necessarily actions or issues. And that actually is creating some more additional work. Like it's just like free time work. I want to change of pace, move to something else momentarily. And these are generally smaller types of issues too, so they're quicker to knock out. Therefore they create more misters, which has been a cool byproduct. So I think that's helping us succeed there.",
+        "keywords": [
+          "help"
+        ],
+        "confidence": 0.96444005
+      },
+      {
+        "start_time": 642.09,
+        "end_time": 649.73,
+        "speaker": "A",
+        "text": "I was going to say one note on refinement. In static analysis, we're experimenting with the new section in our planning feature.",
+        "keywords": [
+          "plan"
+        ],
+        "confidence": 0.9563765
+      },
+      {
+        "start_time": 795.79,
+        "end_time": 888.73,
+        "speaker": "D",
+        "text": "Okay. All right, after this then. All right. Fedramp and the can't or won't fix security issues that way. Maybe we may be having there's so we've got them the the for security issues that are subject to FedRamp if we if you have a feature category that is FIPS compliant or certified, you're probably going to be part of the Fedramp evaluation and any security issue that has a CVE associated with it, which means dependency or container scanning specifically, has to have a remediation plan, even if they're false positives. And so that's led to a separate discussion on what do we need to do for do we need to do anything related to security findings on the commercial versions of Analyzers specifically that was the catalyst for this particular conversation because on container scanning we get a lot of findings related to Debian based images that that project has not shipped a fix for or won't fix ship a fix for. So there is a separate thread that is going on here about what to do and can we do deviation requests in bulk for this class, for this class of findings. The TLDR is below and there's a couple of options that are being brainstormed within this particular thread. So I wanted, and I know I've said a lot of words and I didn't say it well, but I wanted to bring it here in case there was any questions or commentary.",
+        "keywords": [
+          "rob",
+          "plan",
+          "security"
+        ],
+        "confidence": 0.97469383
+      },
+      {
+        "start_time": 895.93,
+        "end_time": 914.01,
+        "speaker": "B",
+        "text": "Nothing directly related to what you've just talked about, but sort of related. For Fedramp, you're looking at any FIPS related security issues that have been raised. How far are you going in terms of auditing to find anything that hasn't already been identified?",
+        "keywords": [
+          "security"
+        ],
+        "confidence": 0.9828944
+      },
+      {
+        "start_time": 974.29,
+        "end_time": 991.74,
+        "speaker": "D",
+        "text": "Nikhil. Nikhil George is our stable counterpart of Folks don't know, at least in sec. And so he has been quite responsive and keen and he is also helping chase down answers when, when he doesn't have them. So that's a big. He's been, he's been a big help thus far.",
+        "keywords": [
+          "help"
+        ],
+        "confidence": 0.9615526
+      },
+      {
+        "start_time": 1065.07,
+        "end_time": 1160.62,
+        "speaker": "A",
+        "text": "Okay. No news is good news. On this probably unless we're missing unless it's happening and we're not noticing it where it is slowing things down. But just keep an eye on it in case it does everyone please. So good stuff. So with recent changes we've done a couple of different changes with the secure and governed broken out from secure and a data ops team and this net is I just compared the name of my team with my peers. My peers have one word team names Ops, Dev, Create, etc. Mine is Sec Growth and Data Science which is pretty wordy and also makes like when I go into dashboards I have to pull data from multiple places across my teams. So I was thinking about a one word name. I've started to get feedback on it. Naming things is really important at GitLab to name the right kinds of things and give them good names. So I'm going to run it by David Desanto tomorrow as he's a great person to bounce such things off of. I landed on enrichment because what we do makes other things better. We enrich them. It's kind of a very broad term, but it does cover what we do. Not sure we're going to change the name, which I'm not sure it's going to affect anyone but me. That's actually my intent is it only affects my stuff, not everyone else's but. Or at least everyone else's in a small way or others in a small way. But we'll see. Any thoughts on this? Good idea? Bad idea? I'm not wed to this. I'm looking for feedback.",
+        "keywords": [
+          "rob"
+        ],
+        "confidence": 0.9620847
+      },
+      {
+        "start_time": 1288.5,
+        "end_time": 1304.26,
+        "speaker": "A",
+        "text": "Maybe also thanks or praise section. Like thanks for doing this. Great job on that. To remind ourselves to do that. As engineers, we tend to focus on the problems and challenges and not the celebrating the wins.",
+        "keywords": [
+          "rob"
+        ],
+        "confidence": 0.97665673
+      }
+    ],
+    "risk_score": 212,
+    "sentiment_concerns": [
+      {
+        "start_time": 15.919,
+        "end_time": 16.88,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.7244049,
+        "text": "That's a big mouthful."
+      },
+      {
+        "start_time": 46.2,
+        "end_time": 54.44,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.63953876,
+        "text": "I've got a lot of things on the agenda today because of some of this, so apologies for that but I think it's going to go down over time based on feedback."
+      },
+      {
+        "start_time": 219.95,
+        "end_time": 221.99,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.69348276,
+        "text": "Kind of a thankless role, honestly."
+      },
+      {
+        "start_time": 408.02,
+        "end_time": 409.18,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.56962484,
+        "text": "I struggled with that one."
+      },
+      {
+        "start_time": 683.2,
+        "end_time": 684.72,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.76686704,
+        "text": "I should stop talking on mute."
+      },
+      {
+        "start_time": 715.6,
+        "end_time": 724.23,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.71111315,
+        "text": "And I am cautious in saying this because it almost comes across as smug and that is not my intent in that."
+      },
+      {
+        "start_time": 775.49,
+        "end_time": 777.81,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.53433317,
+        "text": "And I have to admit that bias that I have."
+      },
+      {
+        "start_time": 798.67,
+        "end_time": 802.47,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.79858243,
+        "text": "Fedramp and the can't or won't fix security issues that way."
+      },
+      {
+        "start_time": 1049.39,
+        "end_time": 1059.31,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.5264519,
+        "text": "Anecdotally, I've seen a few cases where team members have realized that they need to get an additional approval, but I'm not aware that it's actually slowing things down."
+      },
+      {
+        "start_time": 1067.99,
+        "end_time": 1073.17,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.5626766,
+        "text": "On this probably unless we're missing unless it's happening and we're not noticing it where it is slowing things down."
+      },
+      {
+        "start_time": 1158.7,
+        "end_time": 1159.66,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.52291316,
+        "text": "I'm not wed to this."
+      },
+      {
+        "start_time": 1185.27,
+        "end_time": 1191.03,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.5162295,
+        "text": "I'm not sure we would get approval to introduce a new name or department level."
+      },
+      {
+        "start_time": 1249.12,
+        "end_time": 1250.56,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.6308874,
+        "text": "Don't care much about work anniversaries."
+      },
+      {
+        "start_time": 1252.919,
+        "end_time": 1259.4,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.6654865,
+        "text": "What I'd say is I always seem to miss the bot announcements as they cover the whole company versus a bot just announcing for our team."
+      },
+      {
+        "start_time": 1264.58,
+        "end_time": 1266.5,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.48976314,
+        "text": "Yeah, you don't."
+      },
+      {
+        "start_time": 1278.54,
+        "end_time": 1281.54,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.53758204,
+        "text": "That's not a channel I look at a lot like weekly."
+      },
+      {
+        "start_time": 1323.71,
+        "end_time": 1325.39,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.52967227,
+        "text": "I know it sounds like a bunch of busy work."
+      },
+      {
+        "start_time": 1327.15,
+        "end_time": 1328.67,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.6012975,
+        "text": "I don't want to do things twice."
+      },
+      {
+        "start_time": 1338.03,
+        "end_time": 1339.79,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.4903994,
+        "text": "Don't create busy work for yourself either."
+      },
+      {
+        "start_time": 1352.51,
+        "end_time": 1355.71,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.7919352,
+        "text": "We don't do enough for team cohesion."
+      },
+      {
+        "start_time": 1359.23,
+        "end_time": 1365.71,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.48112574,
+        "text": "And just as a corollary related thing that I haven't communicated well, I was hoping to add this kind of thing to our monthly section."
+      },
+      {
+        "start_time": 1386.57,
+        "end_time": 1390.09,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.82690996,
+        "text": "And we undersell in my opinion."
+      },
+      {
+        "start_time": 1390.97,
+        "end_time": 1391.61,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.66955644,
+        "text": "Oh, sorry."
+      },
+      {
+        "start_time": 1574.21,
+        "end_time": 1576.05,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.62870574,
+        "text": "I mean I'd suggest they're looking in the wrong place."
+      },
+      {
+        "start_time": 1576.05,
+        "end_time": 1581.77,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.67659616,
+        "text": "If they're looking in roulette to see to find out the number of maintainers, that's the wrong place."
+      },
+      {
+        "start_time": 1596.86,
+        "end_time": 1597.74,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.60292864,
+        "text": "Apparently not."
+      },
+      {
+        "start_time": 1606.66,
+        "end_time": 1609.58,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.65014136,
+        "text": "I mean I think on some of these projects we just haven't filled it out."
+      },
+      {
+        "start_time": 1627.83,
+        "end_time": 1628.47,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.4858354,
+        "text": "Sorry Seth."
+      },
+      {
+        "start_time": 1660.01,
+        "end_time": 1661.93,
+        "sentiment": "NEGATIVE",
+        "confidence": 0.75550014,
+        "text": "They shouldn't be using just Roulette."
+      }
+    ],
+    "speaker_analysis": {
+      "A": {
+        "total_utterances": 26,
+        "suspicious_utterances": 4,
+        "negative_sentiment_count": 13,
+        "total_words": 1648
+      },
+      "B": {
+        "total_utterances": 20,
+        "suspicious_utterances": 4,
+        "negative_sentiment_count": 5,
+        "total_words": 772
+      },
+      "C": {
+        "total_utterances": 2,
+        "suspicious_utterances": 0,
+        "negative_sentiment_count": 0,
+        "total_words": 143
+      },
+      "D": {
+        "total_utterances": 19,
+        "suspicious_utterances": 5,
+        "negative_sentiment_count": 7,
+        "total_words": 1337
+      },
+      "E": {
+        "total_utterances": 4,
+        "suspicious_utterances": 2,
+        "negative_sentiment_count": 2,
+        "total_words": 303
+      },
+      "F": {
+        "total_utterances": 2,
+        "suspicious_utterances": 0,
+        "negative_sentiment_count": 1,
+        "total_words": 202
+      },
+      "G": {
+        "total_utterances": 4,
+        "suspicious_utterances": 0,
+        "negative_sentiment_count": 1,
+        "total_words": 135
+      }
+    }
+  },
+  "suspicious_keywords": [
+    "threat",
+    "rob",
+    "plan",
+    "help",
+    "security"
+  ],
+  "risk_score": 212,
+  "overall_sentiment": "neutral",
+  "summary": "Audio Duration: 00:01\nLanguage: English\nTranscription Confidence: 0.97\nSpeakers Detected: 7\nSecurity Risk Score: 212\nSuspicious Keywords: threat, rob, plan, help, security\nSuspicious Segments: 15\nOverall Sentiment Distribution:\n  NEUTRAL: 283 segments (74.3%)\n  NEGATIVE: 29 segments (7.6%)\n  POSITIVE: 69 segments (18.1%)",
+  "full_transcript": "So does the SEC meaning secure and govern growth and Data science meaning applied ML, MLOPs and anti abuse team meeting. That's a big mouthful. We might get a better name over time. And that's our meeting for September 14th or 15th in APAC and hi Alan, glad you're here. Why are you here? When it's midnight we can talk. Glad you're here. Don't make it happen to come to this meeting since it's really late for you, but I'm glad. Thanks for coming at least once. So, news and events. I've got a lot of things on the agenda today because of some of this, so apologies for that but I think it's going to go down over time based on feedback. I'm going to work to do more summarized communications to improve the signal to noise ratio in my communications to groups of people, including this group of people. This was wrote in for this group adding more items to our staff meeting agenda often as re only rather than posting to our Slack channel. And I am going to be assuming that people leaders on the team will attend this meeting or read the notes and not rely on the Slack channel. So keep that in mind. B is a read only item unless anybody wants to discuss it and see Phil has. Hi, welcome Alan to the to the meeting. I've asked Alan to step in as acting full stack Manager for Security Policies while I hire an em. Alan has graciously accepted this this wonderful opportunity. So welcome Alan. Thank you. I've got the next item as well. So Anti Abuse is moving product sections from SEC to Data Science. Data Science is effectively a rename of the Model Ops section. So Data Science will include two stages. The existing Model Ops which has three groups in it which Muln can talk more about, and the Anti Abuse stage which only currently has one group which is called Anti Abuse. I think at some point there are plans to split Anti Abuse into two groups, but that's not in the near term and we're working through all the changes around that. There's lots of workday changes, lots of handbook changes. Mon, did you want to say anything more about Data Science or Model Ops? No, I think for us we just roll up to Data Science. Everything else stays the same. We still have the two main groups applied ML, MLOps and then later data ops as part of it. Yeah. So thanks Thomas for continuing to compile and report on across all of my teams that I'm responsible for in the engineering allocation meeting on error budgets and reliability and security incidents. So really do appreciate that. Gotta give Neil a High five too. He does. He does half of these now and. And apologies for the noise if I keep asking for. What's the story behind what's going on with reliability or secure or. Or error. Budget stuff. Just trying to provide air cover and I. Apologies, Neil. I totally forgot you took half of these since Thomas has been doing it for so long, but appreciate it, Neil. I know you volunteered for it and we discussed and I just forgot. Kind of a thankless role, honestly. And I volunteered because of the exposure I get from it. It's nice to be part of a different collective group of people. I was going to mention I'll type this in here, but Tiago had set up for container security a bot that weekly. I think it's Mondays or like Sunday. We'll ping the team and ask for volunteer to go and resource that data and we just enabled it for threat insights. It's actually pretty sweet and it just. It does all the work for you, Thomas. Right. We don't have to ping people ourselves. So I'll put a note in there for that. Pete, F is read only. And Bill, you've got G. Yeah. Talent assessment. So we had an update from Juliana. The dates haven't been confirmed yet, but it'll be sometime from mid October through till December, I think. Egroup sign off is expected to be mid December before everyone goes on holiday. They've got a draft timeline in there, but the dates. The dates aren't in the handbook yet. The big change is we're moving to do it in workday. That's not available yet. I haven't seen a demo of it. I don't know what questions will be asked, but there's an optional self evaluation which will move into workday and then the work that we do as managers will also happen in workday. At the moment, some people are using the Google Doc, which is listed on the talent assessment page for self evaluations and for the manager work. I'd suggest continuing to use those docs until we get access to Workday and see what the exact differences are. H, I and J are read only unless anybody wants to discuss them. Thomas, you got item K? Yeah. Apologies for the late like live addition to the agenda on this one. But one more note on a change. We're rolling out within secure, pretty lightweight and that we're establishing a second team within dynamic analysis. And so issue is there for folks want to play that would like to follow along or ask any questions about it for the plan for right now is I'm going to be serving as A teams acting EM and in addition to normally scheduled SEM duties for lack of a better way of putting it and so happy to answer any questions that folks have about that. I had a quick question. We've done the same thing in Threat Insights with with Neil and. And Thiago each having teams. What are you going to call your new team or how will you differentiate. Was not planning to differentiate it. It's just a second team within Dynamic Analysis. We're not creating a new group which I think is the same pattern that's happening within Threat Insights as well. It's just two teams. No. I know that there's Tangerine and there's Navy. I'm not a Tangerine person myself. So we'll have to figure it out. Yeah I don't know if there's another T collar Thomas. I struggled with that one. That's the theme Tomato. I don't know. We'll figure it out. We'll figure it out. We'll figure it out. The differentiation I think the difference between what's happening in Threat Insights and within Dynamic Analysis is that this is a split or long feature category. Even though we're keeping that we're not putting a new group. It is there's the distinction is along like who's working on specific feature categories themselves. So the. The where the fracture point is happening is a little different. But the. But the approach and effect are the same. I hope. So. On to big rocks and hot issues section. I know if it's a big rock but kind of belong here perhaps more places. So did that survey where we got an awesome response rate from the team on how to improve the Mr. Rate for the team and then I took a really long time to go through all the results and summarize and make initial recommendations so lost a little bit of momentum. I got caught up in other things like cross functional prioritization and the customer escalation. So since then this is actually used by John Hope to lead a discussion at the development off site last week on just improving engineering. Velocity is one of the things he used to power it so it add value. There's but I've seen no comments I think from anybody in this group which means either no time forgot about it or it doesn't we looked at it and it doesn't have much value and any of those things are okay. I'm just curious where the group landed and if you haven't taken a look yet to see if there's anything you want to take away from it on things you Might want to consider asking me to do so and to consider not to do, but to consider. Anybody got a chance to read it yet and think about it or not just yet. It's not. My guess is perhaps everybody's really busy and they haven't looked yet. I mean at a high level. Jay, Neil, Thiago, we've talked about changes. I think Jay, you've already looked at some changes around refinement. That was an area that you were going to look at for anti abuse and report back by the end of the the quarter. Thiago and Neil, I can't remember what where we ended up with for threat insights. Yeah, I'm hoping that Mr. Raid is kind of an artifact or a byproduct of some other actions. The big thing we're doing is more whole type of work like random miscellaneous, not scheduled, not PM necessarily actions or issues. And that actually is creating some more additional work. Like it's just like free time work. I want to change of pace, move to something else momentarily. And these are generally smaller types of issues too, so they're quicker to knock out. Therefore they create more misters, which has been a cool byproduct. So I think that's helping us succeed there. Yeah, we're also seeing some success with we've implemented like a weekly refinement meeting kind of check in, make sure that stories are broken down to tiny enough. I think with smaller bits of work we're seeing a higher Mr. Rate. It's debatable whether or not that's like just inflated, right? Like you can work on a small piece of code and ship it and you can do that. A lot of times you're going to get a higher Mr. Rate. We're trying to be reasonable with that. I am noticing a nice tick up after implementing the refinement meeting. So let's hope for the best. One note on. Good. Sorry, go ahead. I was going to say one note on refinement. In static analysis, we're experimenting with the new section in our planning feature. It's called Looking Forward. And in there we're using that as like a baseline where we add issues that we think need refinement that will most likely be worked on in the next one to three milestones. So we're using that as kind of a base cover for some engineer to go in and add their issues and. Make sure they get refined within this milestone. Not necessarily any implementation, but just refinement itself. I should stop talking on mute. Thank you. Omar Thomas, you want to verbalize your. Comment yeah, I'll verbalize and then I'll say more and then I'll finish writing what I was going to put down underneath it in just a moment. The this was an agenda item with the EMS and and I can say it now in the secure stage since that is the analyzer teams now. So this was a topic yesterday. So my I would assume that this is more like it had a chance to read but not digest the content and what I was about to write. And I am cautious in saying this because it almost comes across as smug and that is not my intent in that. Looking at the Mr. Rate within SEC compared to company wide, historically it runs 2 to 3 misses per engineer per month higher and I think a good bit of that has to do with the I mean it, I mean we've taken this to be true or at least asserted it to be true in that it's smaller teams that are working closely together in less busy projects than we see within the Rails platform itself, which does have an impact. It's. That's not to say that we cannot do better, but the comparison, the favorable comparison at least to me, and I will admit this at times, will lessen the urgency on this particular topic. And I have to admit that bias that I have. Thanks Thomas. Thanks everyone. So I didn't see any comments in the issue, but that's totally fine. People found some of it useful, some of the analysis useful, and that's great. So I will close the issue accordingly and just link to these notes. It's good stuff. Thomas, you've got item B. Okay. All right, after this then. All right. Fedramp and the can't or won't fix security issues that way. Maybe we may be having there's so we've got them the the for security issues that are subject to FedRamp if we if you have a feature category that is FIPS compliant or certified, you're probably going to be part of the Fedramp evaluation and any security issue that has a CVE associated with it, which means dependency or container scanning specifically, has to have a remediation plan, even if they're false positives. And so that's led to a separate discussion on what do we need to do for do we need to do anything related to security findings on the commercial versions of Analyzers specifically that was the catalyst for this particular conversation because on container scanning we get a lot of findings related to Debian based images that that project has not shipped a fix for or won't fix ship a fix for. So there is a separate thread that is going on here about what to do and can we do deviation requests in bulk for this class, for this class of findings. The TLDR is below and there's a couple of options that are being brainstormed within this particular thread. So I wanted, and I know I've said a lot of words and I didn't say it well, but I wanted to bring it here in case there was any questions or commentary. Nothing directly related to what you've just talked about, but sort of related. For Fedramp, you're looking at any FIPS related security issues that have been raised. How far are you going in terms of auditing to find anything that hasn't already been identified? There is. I'll, I'll link in another issue, a separate issue that is give that has instructions from AppSec on what they would like us to do as far as setting up container scanning. And they have set up a project with a single configuration that they're asking us to use. There is some debate as to, as to how that project has been configured because it uses a combination of three container scanning tools rather than one. And, and so they've asked us to use that as a baseline for the FIPS images specifically, since they're UBI or the UBI specific images. They're. They're equivalent in my mind, even though they're, they're. They're different meanings. So TLDR Talk to AppSec. Got it. Nikhil. Nikhil George is our stable counterpart of Folks don't know, at least in sec. And so he has been quite responsive and keen and he is also helping chase down answers when, when he doesn't have them. So that's a big. He's been, he's been a big help thus far. Yeah. So in. Thanks for bringing this up, Thomas. So in the hallway. So from the development staff meeting. I. Copied and pasted the notes in there but Net is the TLDR is can folks. The request to me and my peers was can folks check with their teams to see if the approvals are affecting them. So this is the new approval rules on segregation of duties. So I asked this group, not that everybody's here, but in the group and they shouldn't be because all meetings are optional. But have. Has this had an impact, these new approval rules? Anecdotally, I've seen a few cases where team members have realized that they need to get an additional approval, but I'm not aware that it's actually slowing things down. Okay. No news is good news. On this probably unless we're missing unless it's happening and we're not noticing it where it is slowing things down. But just keep an eye on it in case it does everyone please. So good stuff. So with recent changes we've done a couple of different changes with the secure and governed broken out from secure and a data ops team and this net is I just compared the name of my team with my peers. My peers have one word team names Ops, Dev, Create, etc. Mine is Sec Growth and Data Science which is pretty wordy and also makes like when I go into dashboards I have to pull data from multiple places across my teams. So I was thinking about a one word name. I've started to get feedback on it. Naming things is really important at GitLab to name the right kinds of things and give them good names. So I'm going to run it by David Desanto tomorrow as he's a great person to bounce such things off of. I landed on enrichment because what we do makes other things better. We enrich them. It's kind of a very broad term, but it does cover what we do. Not sure we're going to change the name, which I'm not sure it's going to affect anyone but me. That's actually my intent is it only affects my stuff, not everyone else's but. Or at least everyone else's in a small way or others in a small way. But we'll see. Any thoughts on this? Good idea? Bad idea? I'm not wed to this. I'm looking for feedback. Yeah, obviously the other examples relate to either sections or stages, whereas enrichment doesn't. So you'd be introducing something new here. This affects me as well. I have a subset of enrichment so it would be kind of enrichment light. I'm not sure. I'm not sure we'll. I think you and I have spoken about this. I'm not sure we would get approval to introduce a new name or department level. We'd certainly have to talk to people ops about introducing that in workday. Okay, so a couple of things. You know, these kinds of things I would sometimes put in Slack, but I'm trying to avoid a number of distinct Slack messages. So putting it in here, making a lot read only when possible. So I've got C though, which is not read only. So I would like to add announcements of work anniversaries and new hires to the meeting template. PM does this. I attended the PM staff meeting. I was a guest speaker there this week. And like the camaraderie we have good camaraderie. The camaraderie there was pretty good. You know Fern, who's shadowing me today, I think he sat in on the PM meeting as well. It was. It's a pretty good feel of just people really knowing each other well and getting along well. So those are just two things I took away from it is anniversaries and new hires. I'll verbalize Tiago's comment. Yeah, great idea for new hires. Don't care much about work anniversaries. We already have a bot for that. What I'd say is I always seem to miss the bot announcements as they cover the whole company versus a bot just announcing for our team. If no interest in that part, I'm happy to exclude. So Neil, you like the idea of adding. Yeah, you don't. So I mean just last week I think it was Phil celebrated his third year and I congratulated him. But then I missed another team member in SEC, you know. Cause there's like 20 people on that list. Plus it's team member updates. That's not a channel I look at a lot like weekly. I just happen to see that the day of. So I do like being able to celebrate together in this group. Maybe also thanks or praise section. Like thanks for doing this. Great job on that. To remind ourselves to do that. As engineers, we tend to focus on the problems and challenges and not the celebrating the wins. Are you suggesting that we add new content into this document for that or that we just link to the Slack announcements that we've already made? I think it's nice to verbalize them. So maybe link to the Slack announcements but also verbalize it. I know it sounds like a bunch of busy work. I don't want to do things twice. Maybe add the sections and people use them as they see fit. Whatever that happens to be. But please don't over. Don't create busy work for yourself either. So. So judgment call by each person. Thomas, looks like you had a Thomas. And Mon, you had some thoughts on this too. Yeah, I like it. We don't celebrate enough. We don't do enough for team cohesion. Team celebration across the board. And just as a corollary related thing that I haven't communicated well, I was hoping to add this kind of thing to our monthly section. Wide retrospectives, new hires, discretionary bonuses, work anniversaries, big feature releases. I mean anything that we want to announce and celebrate, we ought to make sure that it's. I don't want to say shout to the rooftops but. Or shout to the heavens. But. But we, they're big deals and we don't make and. And we undersell in my opinion. Yeah. Oh, sorry. And hey Fernando here. So I'm shadowing Wayne now just to introduce myself from the technical marketing team and I'm. I'll send the document right now which is something that we do for our kind of get together team meetings and it kind of shows, you can, you. Can look through it. I shared it to everyone on the Zoom chat but you can see that we provide updates, the new team members and small little introductions and you can see sections that we have on gratitude and actual spotlights that we show like who we're actually praising, what they've done. That's good. And how we can highlight that because that will motivate employees, kind of really increase that morale. Because what we're seeing is these employees are actually getting recognized for good work that they've done and they're getting shout outs because a lot of times, at least in our team, the case is we don't really. Although we work with each other, we sometimes are kind of siloed busy working on different things. So it's good to know what everyone's working on and what everyone's doing. So somewhat related to what you were just speaking on but just thought I'd share that. Thanks Fernando. In D. So I'm not going to read all of this from Daniel Croft, but summarizing he is looking for feedback on the development vision and mission and direction. We're brainstorming in the development department on mission and vision in particular. The approach is we want everybody open up a little spreadsheet and follow the instructions. Anybody interested? So if you're interested in doing so should take about 10 to 15 minutes, please do it in the next week. Good stuff. There something we covered also at the development off site that Daniel took as an action item to follow up on. Thomas, you've got E. Yep. All right. Because I cannot remember and so I'm hoping to crowdsource a little bit of configuration archaeology, so to speak. Is there a reason that we don't use reviewer roulette? If folks can remember? The reason I'm asking is is contained within that thread. But that is a tool that actually is being used to track if we have enough maintainers on any given project. And since we don't use it, we're showing up. And so that's why I was. That's why I'm asking. Yeah. When you say reviewer roulette, are you talking about on the individual analyzers. Yeah. Speaking only for dash, we haven't had a need for it because we have six engineers. That's just going to rule out the same six people. Yeah, roll a six sided die. That's what I kind of think it is. But it's from a larger. Like if the company, like where do we need more maintainers is the question that the organization is asking. I mean I'd suggest they're looking in the wrong place. If they're looking in roulette to see to find out the number of maintainers, that's the wrong place. The engineering projects page should list all the maintainers. If you've set up your team YAML entries correctly. I would have thought that was more the single source of truth. Apparently not. So yeah. Yeah, I'm looking at the chart. I mean I think on some of these projects we just haven't filled it out. I'll give you like we have the API, the Cub fuzz. We have one engineer that works on it. So we haven't gone and added a maintainer there because they know who they are. So if we are trying to maintain that as a single source of truth, we need to just go through and scrub it. Sorry Seth. I'm reminded of this man. I'm reminded of the spider man meme with the two spider men pointing at each other. Who's the reviewer? Who's the author? It's the same person. It's been a long day so I'm a little punchy. But yes, that makes sense. So Sethi is saying you haven't added it to individual team members YAML files in the handbook. Right. I believe for that one there's just no entry for it. I mean we could, I think if. You, I think if you do anything good, that should do it. Yeah, well it should. They shouldn't be using just Roulette. They should be using that as a source of truth. And I think if you've listed maintainers that should cover it. A follow up question would be does that, does that cover the senior plus engineers? Must be a maintainer requirement or not. Thomas, you buried the, the, what do you call buried the lead. I, I took the read only off your comment there so you can announce it. Well, we, we're going to end with the best news of the day. That's all. That's. But it's, but the maintainer requirement. Yes it does. I mean because it's required for Senior plus. Going back to that is just maintaining one or more I think is the requirement if I remember correctly. I was talking about the Olivier news. Yeah, I know. I was just making sure we were finished with the topic above. All right, and we're at time, so I will move on and take that as a prompt. Yeah, Olivier has popped back on slack to announce that the newest addition to their family is here and happened over the weekend. So. So big, big congrats to his family for that. And we'll be hoping to celebrate him later when he does, when he. When he returns to work. Google. Thanks, everybody. Have a great day."
+}

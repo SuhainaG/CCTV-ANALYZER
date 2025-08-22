@@ -1,13 +1,23 @@
-# Core dependencies with compatible versions
-Flask==2.3.3
-ultralytics==8.0.196
-opencv-python==4.8.1.78
-numpy==1.24.4
-scikit-image==0.20.0
-Pillow==10.0.1
-requests==2.31.0
-Werkzeug==2.3.7
+# Core dependencies compatible with Python 3.13
+Flask==3.0.3
+ultralytics>=8.2.0
+opencv-python>=4.9.0.80
+numpy>=1.26.0
+scikit-image>=0.22.0
+Pillow>=10.2.0
+requests>=2.31.0
+Werkzeug==3.0.1
 
-# Alternative: If you still get errors, try these versions instead:
-# numpy==1.23.5
-# scikit-image==0.19.3
+# Audio processing
+# Note: No elevenlabs package needed - using REST API directly
+
+# Text-to-speech for accessibility
+pyttsx3>=2.90
+
+# Additional dependencies
+python-dotenv>=1.0.0
+gunicorn>=21.2.0
+
+# Machine learning dependencies
+torch>=2.1.0
+torchvision>=0.16.0

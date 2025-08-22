@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enhanced CCTV Footage Analyzer</title>
+    <title>Comprehensive CCTV Analyzer - AI Video Analysis</title>
     <style>
         * {
             margin: 0;
@@ -12,7 +12,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             color: #333;
@@ -25,131 +25,125 @@
         }
 
         .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             text-align: center;
+            margin-bottom: 40px;
+            color: white;
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 2.5em;
             margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .header p {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 20px;
+            font-size: 1.2em;
+            opacity: 0.9;
         }
 
-        .features {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .feature-badge {
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .main-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+        .main-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
             margin-bottom: 30px;
         }
 
-        .upload-section, .status-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .upload-section {
+            text-align: center;
         }
 
         .upload-area {
             border: 3px dashed #667eea;
             border-radius: 15px;
-            padding: 40px;
-            text-align: center;
-            background: rgba(102, 126, 234, 0.05);
-            transition: all 0.3s ease;
+            padding: 60px 20px;
+            margin: 30px 0;
+            background: #f8f9ff;
             cursor: pointer;
-            margin-bottom: 20px;
+            transition: all 0.3s ease;
         }
 
         .upload-area:hover {
             border-color: #764ba2;
-            background: rgba(118, 75, 162, 0.05);
+            background: #f0f2ff;
+            transform: translateY(-2px);
         }
 
         .upload-area.dragover {
-            border-color: #00f2fe;
-            background: rgba(0, 242, 254, 0.1);
-            transform: scale(1.02);
+            border-color: #28a745;
+            background: #f0fff0;
         }
 
         .upload-icon {
-            font-size: 3rem;
+            font-size: 4em;
             color: #667eea;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
-        .local-path-input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1rem;
+        .upload-text {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .upload-subtitle {
+            color: #666;
             margin-bottom: 20px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .local-path-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin: 15px 0;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
             transition: border-color 0.3s ease;
         }
 
-        .local-path-input:focus {
+        .form-group input:focus {
             outline: none;
             border-color: #667eea;
         }
 
         .btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 1rem;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
         }
 
         .btn:disabled {
@@ -158,547 +152,717 @@
             transform: none;
         }
 
-        .btn-secondary {
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #11998e, #38ef7d);
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, #fc466b, #3f5efb);
-        }
-
-        .progress-container {
-            margin-top: 20px;
+        .progress-section {
+            display: none;
+            text-align: center;
+            margin: 30px 0;
         }
 
         .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 4px;
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 20px;
+            margin: 20px 0;
             overflow: hidden;
-            margin-bottom: 10px;
+            position: relative;
         }
 
         .progress-fill {
+            background: linear-gradient(90deg, #28a745, #20c997);
             height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
             width: 0%;
-            transition: width 0.3s ease;
+            transition: width 0.5s ease;
+            border-radius: 10px;
         }
 
         .progress-text {
-            font-size: 0.9rem;
+            margin: 15px 0;
+            font-weight: 600;
             color: #666;
-        }
-
-        .dual-progress {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .progress-item {
-            text-align: center;
-        }
-
-        .progress-item h4 {
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-            color: #333;
-        }
-
-        .status-message {
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-
-        .status-processing {
-            background: rgba(255, 193, 7, 0.1);
-            border: 1px solid #ffc107;
-            color: #856404;
-        }
-
-        .status-success {
-            background: rgba(40, 167, 69, 0.1);
-            border: 1px solid #28a745;
-            color: #155724;
-        }
-
-        .status-error {
-            background: rgba(220, 53, 69, 0.1);
-            border: 1px solid #dc3545;
-            color: #721c24;
         }
 
         .results-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
             display: none;
+            margin-top: 30px;
         }
 
-        .results-tabs {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 20px;
-            background: #f8f9fa;
-            padding: 5px;
-            border-radius: 10px;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            background: transparent;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .tab-btn.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .summary-grid {
+        .results-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-            margin-bottom: 30px;
+            margin: 20px 0;
         }
 
-        .summary-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 249, 250, 0.9));
-            padding: 20px;
+        .result-card {
+            background: white;
             border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            text-align: center;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid #667eea;
         }
 
-        .summary-card h3 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .result-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
         }
 
-        .summary-card p {
+        .result-card p {
+            margin: 8px 0;
             color: #666;
-            font-weight: 500;
         }
 
-        .risk-indicator {
+        .result-card strong {
+            color: #333;
+        }
+
+        .comprehensive-summary {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            border-left: 5px solid #28a745;
+        }
+
+        .summary-section {
+            margin-bottom: 25px;
+        }
+
+        .summary-section h4 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-section p, .summary-section ul {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .summary-section ul {
+            margin-left: 20px;
+        }
+
+        .summary-section li {
+            margin: 8px 0;
+        }
+
+        .story-narrative {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            margin: 15px 0;
+        }
+
+        .timeline-section {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 100%;
+            margin: 20px 0;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #667eea;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: white;
+            border: 4px solid #667eea;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-left {
+            left: 0;
+        }
+
+        .timeline-right {
+            left: 50%;
+        }
+
+        .timeline-right::after {
+            left: -16px;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .timeline-left .timeline-content {
+            margin-right: 30px;
+        }
+
+        .timeline-right .timeline-content {
+            margin-left: 30px;
+        }
+
+        .timeline-time {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .timeline-event-type {
             display: inline-block;
-            padding: 8px 16px;
+            padding: 4px 12px;
             border-radius: 20px;
+            font-size: 0.8em;
             font-weight: 600;
-            font-size: 0.9rem;
+            margin-bottom: 10px;
         }
 
-        .risk-low {
-            background: rgba(40, 167, 69, 0.1);
-            color: #28a745;
-            border: 1px solid #28a745;
+        .event-processing {
+            background: #e3f2fd;
+            color: #1976d2;
         }
 
-        .risk-moderate {
-            background: rgba(255, 193, 7, 0.1);
-            color: #ffc107;
-            border: 1px solid #ffc107;
+        .event-detection {
+            background: #fff3e0;
+            color: #f57c00;
         }
 
-        .risk-high {
-            background: rgba(220, 53, 69, 0.1);
-            color: #dc3545;
-            border: 1px solid #dc3545;
+        .event-risk {
+            background: #ffebee;
+            color: #d32f2f;
         }
 
-        .frames-grid {
+        .event-audio {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .gallery-section {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .gallery-controls {
+            text-align: center;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 20px 0;
         }
 
-        .frame-card {
+        .gallery-item {
             background: white;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
-        .frame-card:hover {
+        .gallery-item:hover {
             transform: translateY(-5px);
         }
 
-        .frame-image {
+        .gallery-item img {
             width: 100%;
-            height: 200px;
+            height: 250px;
             object-fit: cover;
         }
 
-        .frame-content {
+        .gallery-item-content {
             padding: 20px;
         }
 
-        .frame-title {
-            font-weight: 600;
+        .gallery-item h4 {
+            color: #333;
             margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            font-size: 1em;
         }
 
-        .frame-description {
+        .gallery-item p {
+            margin: 5px 0;
             color: #666;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            font-size: 0.9em;
+        }
+
+        .risk-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin: 5px 5px 10px 0;
+        }
+
+        .risk-high {
+            background: #dc3545;
+            color: white;
+        }
+
+        .risk-moderate {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .risk-low {
+            background: #28a745;
+            color: white;
+        }
+
+        .risk-unknown {
+            background: #6c757d;
+            color: white;
+        }
+
+        .sentiment-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin: 5px 5px 10px 0;
+        }
+
+        .sentiment-positive {
+            background: #28a745;
+            color: white;
+        }
+
+        .sentiment-negative {
+            background: #dc3545;
+            color: white;
+        }
+
+        .sentiment-neutral {
+            background: #6c757d;
+            color: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .feature-icon {
+            font-size: 2.5em;
             margin-bottom: 15px;
         }
 
-        .frame-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+        .feature-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.1em;
         }
 
-        .btn-small {
-            padding: 8px 16px;
-            font-size: 0.8rem;
-            border-radius: 6px;
+        .feature-card p {
+            font-size: 0.9em;
+            opacity: 0.9;
         }
 
-        .downloads-section {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #e0e0e0;
-        }
-
-        .transcript-container {
-            max-height: 400px;
-            overflow-y: auto;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 20px;
-            background: #f8f9fa;
-        }
-
-        .transcript-segment {
-            margin-bottom: 15px;
+        .error-message, .success-message {
+            display: none;
             padding: 15px;
-            background: white;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-weight: 600;
         }
 
-        .transcript-header {
-            display: flex;
-            justify-content: between;
-            align-items: center;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-            color: #666;
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
 
-        .transcript-text {
-            line-height: 1.6;
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
         }
 
         .accessibility-controls {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             display: flex;
+            flex-direction: column;
             gap: 10px;
+            z-index: 1000;
         }
 
-        .icon {
-            width: 20px;
-            height: 20px;
-            display: inline-block;
+        .accessibility-btn {
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .accessibility-btn:hover {
+            background: rgba(0,0,0,0.9);
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 30px;
+            border: none;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
         }
 
         @media (max-width: 768px) {
-            .main-grid {
-                grid-template-columns: 1fr;
+            .container {
+                padding: 10px;
+            }
+            
+            .main-card {
+                padding: 20px;
+                margin-bottom: 15px;
             }
             
             .header h1 {
-                font-size: 2rem;
+                font-size: 2em;
             }
             
-            .features {
-                gap: 10px;
+            .results-grid, .gallery-grid {
+                grid-template-columns: 1fr;
             }
-            
-            .feature-badge {
-                font-size: 0.8rem;
-                padding: 6px 12px;
+
+            .timeline::after {
+                left: 31px;
             }
-            
-            .accessibility-controls {
-                position: static;
-                margin-bottom: 20px;
-                justify-content: center;
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
             }
-        }
 
-        .loading-spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #667eea;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            display: inline-block;
-            margin-right: 10px;
-        }
+            .timeline-item::before {
+                left: 60px;
+                border: medium solid white;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent white transparent transparent;
+            }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+            .timeline-left::after, .timeline-right::after {
+                left: 15px;
+            }
 
-        .hidden {
-            display: none !important;
+            .timeline-right {
+                left: 0%;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="accessibility-controls">
+        <button class="accessibility-btn" onclick="toggleAccessibilityMode()" title="Toggle Accessibility Mode (Alt+A)">
+            ♿
+        </button>
+        <button class="accessibility-btn" onclick="speakPageContent()" title="Read Page Content (Alt+R)">
+            🔊
+        </button>
+        <button class="accessibility-btn" onclick="stopSpeaking()" title="Stop Speech (Alt+S)">
+            🔇
+        </button>
+    </div>
+
     <div class="container">
-        <!-- Header Section -->
         <div class="header">
-            <h1>🔍 Enhanced CCTV Footage Analyzer</h1>
-            <p>Advanced AI-powered video analysis with audio-visual correlation</p>
-            <div class="features">
-                <span class="feature-badge">🤖 GPT-4o Analysis</span>
-                <span class="feature-badge">🎯 YOLOv8 Detection</span>
-                <span class="feature-badge">🎤 Audio Processing</span>
-                <span class="feature-badge">🔊 Text-to-Speech</span>
-                <span class="feature-badge">📊 Risk Assessment</span>
-            </div>
+            <h1>🎥 Comprehensive CCTV Analyzer</h1>
+            <p>AI-Powered Video Analysis with Story Intelligence & Timeline</p>
         </div>
 
-        <!-- Accessibility Controls -->
-        <div class="accessibility-controls">
-            <button class="btn btn-small btn-secondary" onclick="toggleSpeech()" id="speechBtn">
-                <span class="icon">🔊</span> Enable Speech
-            </button>
-            <button class="btn btn-small" onclick="stopSpeech()">
-                <span class="icon">⏹️</span> Stop
-            </button>
-        </div>
-
-        <!-- Main Interface -->
-        <div class="main-grid">
-            <!-- Upload Section -->
+        <!-- Upload Section -->
+        <div class="main-card">
             <div class="upload-section">
-                <h2 class="section-title">
-                    <span class="icon">📁</span>
-                    Upload Video
-                </h2>
+                <h2>📤 Upload Video for Comprehensive Analysis</h2>
                 
-                <div class="upload-area" id="uploadArea" onclick="document.getElementById('videoFile').click()">
-                    <div class="upload-icon">🎬</div>
-                    <h3>Drop video file here or click to browse</h3>
-                    <p>Supports MP4, AVI, MOV, MKV, WMV (Max: 1GB)</p>
-                </div>
-                
-                <input type="file" id="videoFile" accept=".mp4,.avi,.mov,.mkv,.wmv" style="display: none;">
-                
-                <div style="text-align: center; margin: 20px 0;">
-                    <strong>OR</strong>
-                </div>
-                
-                <input type="text" class="local-path-input" id="localPath" placeholder="Enter local video file path...">
-                
-                <button class="btn" onclick="uploadVideo()" id="uploadBtn">
-                    <span class="icon">🚀</span>
-                    Start Analysis
-                </button>
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">📁</div>
+                        <div class="upload-text">Drop your video here or click to browse</div>
+                        <div class="upload-subtitle">Supports MP4, AVI, MOV, MKV, WMV, WEBM, M4V (Max: 2GB)</div>
+                        <input type="file" id="videoFile" name="video_file" class="file-input" accept=".mp4,.avi,.mov,.mkv,.wmv,.webm,.m4v">
+                    </div>
+
+                    <!-- Local Path Option -->
+                    <div class="local-path-section">
+                        <h3>🗂️ Or Use Local File Path</h3>
+                        <div class="form-group">
+                            <label for="localPath">Local File Path:</label>
+                            <input type="text" id="localPath" name="local_path" placeholder="C:\path\to\your\video.mp4">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn" id="uploadBtn">
+                        🚀 Start Comprehensive Analysis
+                    </button>
+                </form>
             </div>
 
-            <!-- Status Section -->
-            <div class="status-section">
-                <h2 class="section-title">
-                    <span class="icon">📊</span>
-                    Processing Status
-                </h2>
-                
-                <div id="statusContainer">
-                    <div class="status-message">
-                        <strong>Ready</strong><br>
-                        Upload a video file to begin comprehensive analysis
-                    </div>
+            <!-- Progress Section -->
+            <div class="progress-section" id="progressSection">
+                <h3>🔄 Processing Video...</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
                 </div>
-                
-                <div class="progress-container hidden" id="progressContainer">
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progressFill"></div>
-                    </div>
-                    <div class="progress-text" id="progressText">Initializing...</div>
-                    
-                    <div class="dual-progress">
-                        <div class="progress-item">
-                            <h4>Audio Processing</h4>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="audioProgress"></div>
-                            </div>
-                        </div>
-                        <div class="progress-item">
-                            <h4>Video Analysis</h4>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="videoProgress"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="progress-text" id="progressText">Initializing...</div>
             </div>
+
+            <!-- Error/Success Messages -->
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
         </div>
 
         <!-- Results Section -->
         <div class="results-section" id="resultsSection">
-            <h2 class="section-title">
-                <span class="icon">📈</span>
-                Analysis Results
-            </h2>
-            
-            <div class="results-tabs">
-                <button class="tab-btn active" onclick="switchTab('summary')">📊 Summary</button>
-                <button class="tab-btn" onclick="switchTab('frames')">🖼️ Frames</button>
-                <button class="tab-btn" onclick="switchTab('audio')">🎤 Audio</button>
-                <button class="tab-btn" onclick="switchTab('suspicious')">⚠️ Suspicious</button>
-            </div>
-
-            <!-- Summary Tab -->
-            <div class="tab-content active" id="summaryTab">
-                <div class="summary-grid" id="summaryGrid">
-                    <!-- Summary cards will be populated here -->
+            <div class="main-card">
+                <h2>📊 Comprehensive Analysis Results</h2>
+                
+                <!-- Comprehensive Summary -->
+                <div class="comprehensive-summary" id="comprehensiveSummary">
+                    <!-- Will be populated with summary -->
                 </div>
                 
-                <div class="downloads-section">
-                    <button class="btn btn-success" onclick="downloadSummary()">
-                        <span class="icon">📄</span> Download Summary
+                <div class="results-grid" id="resultsGrid">
+                    <!-- Results will be populated here -->
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn" onclick="viewGallery()">
+                        🖼️ Frame Analysis Gallery
                     </button>
-                    <button class="btn btn-secondary" onclick="downloadAudioSummary()">
-                        <span class="icon">🎵</span> Audio Summary
+                    <button class="btn" onclick="viewTimeline()">
+                        ⏰ Event Timeline
+                    </button>
+                    <button class="btn" onclick="viewSuspiciousTab()">
+                        🚨 Risk Analysis
+                    </button>
+                    <button class="btn" onclick="speakComprehensiveSummary()">
+                        🔊 Hear Complete Summary
                     </button>
                     <button class="btn" onclick="downloadResults()">
-                        <span class="icon">💾</span> Full Results
+                        💾 Download Results
                     </button>
                 </div>
             </div>
+        </div>
 
-            <!-- Frames Tab -->
-            <div class="tab-content" id="framesTab">
-                <div class="frames-grid" id="framesGrid">
-                    <!-- Frame analysis cards will be populated here -->
+        <!-- Timeline Section -->
+        <div class="timeline-section" id="timelineSection">
+            <div class="main-card">
+                <h2>⏰ Event Timeline</h2>
+                <div class="timeline-container">
+                    <div class="timeline" id="timelineContainer">
+                        <!-- Timeline events will be populated here -->
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Audio Tab -->
-            <div class="tab-content" id="audioTab">
-                <div class="transcript-container" id="transcriptContainer">
-                    <!-- Audio transcript will be populated here -->
+        <!-- Gallery Section -->
+        <div class="gallery-section" id="gallerySection">
+            <div class="main-card">
+                <h2>🖼️ Frame-by-Frame Comprehensive Analysis</h2>
+                <div class="gallery-controls">
+                    <button class="btn" onclick="filterFrames('HIGH')">🔴 High Risk</button>
+                    <button class="btn" onclick="filterFrames('MODERATE')">🟡 Moderate Risk</button>
+                    <button class="btn" onclick="filterFrames('LOW')">🟢 Low Risk</button>
+                    <button class="btn" onclick="filterFrames('POSITIVE')">😊 Positive Sentiment</button>
+                    <button class="btn" onclick="filterFrames('NEGATIVE')">😞 Negative Sentiment</button>
+                    <button class="btn" onclick="filterFrames('ALL')">🔍 All Frames</button>
+                </div>
+                <div class="gallery-grid" id="galleryGrid">
+                    <!-- Gallery items will be populated here -->
                 </div>
             </div>
+        </div>
 
-            <!-- Suspicious Activity Tab -->
-            <div class="tab-content" id="suspiciousTab">
+        <!-- Suspicious Activity Tab -->
+        <div class="suspicious-section" id="suspiciousSection" style="display: none;">
+            <div class="main-card">
+                <h2>🚨 Risk & Security Analysis</h2>
                 <div id="suspiciousContent">
-                    <!-- Suspicious activity report will be populated here -->
+                    <!-- Suspicious content will be populated here -->
                 </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI Object Detection</h3>
+                <p>Advanced YOLOv8 model for real-time object detection with high accuracy</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>GPT-4o Story Analysis</h3>
+                <p>Comprehensive scene understanding and narrative generation with risk assessment</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎙️</div>
+                <h3>Audio & Sentiment Processing</h3>
+                <p>Speech-to-text with emotion analysis, sentiment scoring, and threat detection</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⏰</div>
+                <h3>Timeline Intelligence</h3>
+                <p>Event tracking with timestamps and comprehensive story reconstruction</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Frame Detail Modal -->
+    <div id="frameModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeFrameModal()">&times;</span>
+            <div id="frameModalContent">
+                <!-- Frame details will be populated here -->
             </div>
         </div>
     </div>
 
     <script>
         let currentSessionId = null;
-        let processingInterval = null;
-        let speechEnabled = false;
+        let isAccessibilityEnabled = false;
+        let progressInterval = null;
+        let allFrames = [];
+        let currentResults = null;
+        let timelineEvents = [];
 
-        // File upload handling
+        // Drag and drop functionality
         const uploadArea = document.getElementById('uploadArea');
-        const videoFile = document.getElementById('videoFile');
-        
+        const fileInput = document.getElementById('videoFile');
+
         uploadArea.addEventListener('dragover', (e) => {
             e.preventDefault();
             uploadArea.classList.add('dragover');
         });
-        
+
         uploadArea.addEventListener('dragleave', () => {
             uploadArea.classList.remove('dragover');
         });
-        
+
         uploadArea.addEventListener('drop', (e) => {
             e.preventDefault();
             uploadArea.classList.remove('dragover');
             
             const files = e.dataTransfer.files;
             if (files.length > 0) {
-                videoFile.files = files;
-                document.querySelector('.upload-area h3').textContent = `Selected: ${files[0].name}`;
-            }
-        });
-        
-        videoFile.addEventListener('change', () => {
-            if (videoFile.files.length > 0) {
-                document.querySelector('.upload-area h3').textContent = `Selected: ${videoFile.files[0].name}`;
+                fileInput.files = files;
+                document.getElementById('uploadForm').dispatchEvent(new Event('submit'));
             }
         });
 
-        // Upload video function
-        async function uploadVideo() {
-            const file = videoFile.files[0];
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        // Form submission
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData();
+            const fileInput = document.getElementById('videoFile');
             const localPath = document.getElementById('localPath').value;
             
-            if (!file && !localPath) {
-                alert('Please select a video file or enter a local path.');
+            if (fileInput.files.length > 0) {
+                formData.append('video_file', fileInput.files[0]);
+            } else if (localPath.trim()) {
+                formData.append('local_path', localPath.trim());
+            } else {
+                showError('Please select a file or enter a local path');
                 return;
             }
             
-            const formData = new FormData();
-            if (file) {
-                formData.append('video_file', file);
-            }
-            if (localPath) {
-                formData.append('local_path', localPath);
-            }
-            
             try {
-                document.getElementById('uploadBtn').disabled = true;
-                document.getElementById('uploadBtn').innerHTML = '<div class="loading-spinner"></div> Starting...';
-                
+                showProgress();
                 const response = await fetch('/upload', {
                     method: 'POST',
                     body: formData
@@ -708,42 +872,41 @@
                 
                 if (response.ok) {
                     currentSessionId = result.session_id;
-                    startStatusPolling();
-                    speak('Video upload successful. Analysis started.');
+                    showSuccess('Upload successful! Comprehensive processing started...');
+                    startProgressPolling();
+                    
+                    if (isAccessibilityEnabled) {
+                        speakText('Video upload successful. Comprehensive processing started with story analysis, sentiment detection, and timeline generation.');
+                    }
                 } else {
-                    throw new Error(result.error || 'Upload failed');
+                    showError(result.error || 'Upload failed');
                 }
             } catch (error) {
-                alert('Upload failed: ' + error.message);
-                document.getElementById('uploadBtn').disabled = false;
-                document.getElementById('uploadBtn').innerHTML = '<span class="icon">🚀</span> Start Analysis';
+                showError('Network error: ' + error.message);
             }
-        }
+        });
 
-        // Status polling
-        function startStatusPolling() {
-            document.getElementById('progressContainer').classList.remove('hidden');
-            
-            processingInterval = setInterval(async () => {
+        function startProgressPolling() {
+            progressInterval = setInterval(async () => {
                 try {
                     const response = await fetch('/status');
                     const status = await response.json();
                     
-                    updateStatusDisplay(status);
+                    updateProgress(status.progress, status.current_step, status.message);
                     
-                    if (!status.is_processing) {
-                        clearInterval(processingInterval);
+                    if (status.progress >= 100 && status.results) {
+                        clearInterval(progressInterval);
+                        currentResults = status.results;
+                        displayResults(status.results);
+                        loadTimeline();
                         
-                        if (status.results) {
-                            displayResults(status.results);
-                            speak('Analysis complete. Results are now available.');
-                        } else if (status.error) {
-                            displayError(status.error);
-                            speak('Analysis failed. Please check the error message.');
+                        if (isAccessibilityEnabled) {
+                            const summary = currentResults.comprehensive_summary?.executive_summary || 'Video analysis complete';
+                            speakText(`Analysis complete. ${summary}`);
                         }
-                        
-                        document.getElementById('uploadBtn').disabled = false;
-                        document.getElementById('uploadBtn').innerHTML = '<span class="icon">🚀</span> Start Analysis';
+                    } else if (status.error) {
+                        clearInterval(progressInterval);
+                        showError(status.error);
                     }
                 } catch (error) {
                     console.error('Status polling error:', error);
@@ -751,570 +914,627 @@
             }, 2000);
         }
 
-        // Update status display
-        function updateStatusDisplay(status) {
-            const container = document.getElementById('statusContainer');
+        function updateProgress(percentage, step, message) {
             const progressFill = document.getElementById('progressFill');
             const progressText = document.getElementById('progressText');
-            const audioProgress = document.getElementById('audioProgress');
-            const videoProgress = document.getElementById('videoProgress');
             
-            if (status.is_processing) {
-                container.innerHTML = `
-                    <div class="status-message status-processing">
-                        <div class="loading-spinner"></div>
-                        <strong>${status.current_step}</strong><br>
-                        ${status.message}
-                    </div>
-                `;
-                
-                progressFill.style.width = `${status.progress}%`;
-                progressText.textContent = `${status.current_step} - ${status.progress}%`;
-                
-                if (status.audio_progress !== undefined) {
-                    audioProgress.style.width = `${status.audio_progress}%`;
-                }
-                if (status.video_progress !== undefined) {
-                    videoProgress.style.width = `${status.video_progress}%`;
-                }
-            } else if (status.error) {
-                container.innerHTML = `
-                    <div class="status-message status-error">
-                        <strong>Error</strong><br>
-                        ${status.error}
-                    </div>
-                `;
-            } else if (status.results) {
-                container.innerHTML = `
-                    <div class="status-message status-success">
-                        <strong>Analysis Complete!</strong><br>
-                        Processing finished successfully. Check results below.
-                    </div>
-                `;
-                progressFill.style.width = '100%';
-                audioProgress.style.width = '100%';
-                videoProgress.style.width = '100%';
-            }
+            progressFill.style.width = percentage + '%';
+            progressText.textContent = `${step}: ${message} (${percentage}%)`;
         }
 
-        // Display error
-        function displayError(error) {
-            const container = document.getElementById('statusContainer');
-            container.innerHTML = `
-                <div class="status-message status-error">
-                    <strong>Processing Failed</strong><br>
-                    ${error}
-                </div>
-            `;
-        }
-
-        // Display results
         function displayResults(results) {
-            document.getElementById('resultsSection').style.display = 'block';
+            const resultsSection = document.getElementById('resultsSection');
+            const resultsGrid = document.getElementById('resultsGrid');
+            const progressSection = document.getElementById('progressSection');
+            const comprehensiveSummary = document.getElementById('comprehensiveSummary');
             
-            // Populate summary
-            populateSummary(results);
+            progressSection.style.display = 'none';
+            resultsSection.style.display = 'block';
             
-            // Load frames
-            loadFrames();
+            // Display comprehensive summary
+            if (results.comprehensive_summary) {
+                displayComprehensiveSummary(results.comprehensive_summary);
+            }
             
-            // Load audio transcript
-            loadAudioTranscript();
+            // Create result cards
+            const videoInfo = results.video_info;
+            const audioResults = results.audio_results;
+            const overallSentiment = results.overall_sentiment;
             
-            // Load suspicious activity report
-            loadSuspiciousReport();
+            resultsGrid.innerHTML = `
+                <div class="result-card">
+                    <h3>📹 Video Information</h3>
+                    <p><strong>Duration:</strong> ${videoInfo.duration_formatted}</p>
+                    <p><strong>Resolution:</strong> ${videoInfo.resolution}</p>
+                    <p><strong>FPS:</strong> ${videoInfo.fps.toFixed(2)}</p>
+                    <p><strong>Total Frames:</strong> ${videoInfo.total_frames.toLocaleString()}</p>
+                    <p><strong>Analyzed Frames:</strong> ${results.extracted_frames_count}</p>
+                </div>
+                
+                <div class="result-card">
+                    <h3>🧠 AI Story Analysis</h3>
+                    <p><strong>Story Moments:</strong> ${results.comprehensive_summary?.story_analysis?.total_story_moments || 0}</p>
+                    <p><strong>Customer Interactions:</strong> ${results.comprehensive_summary?.story_analysis?.customer_interactions || 0}</p>
+                    <p><strong>Timeline Events:</strong> ${results.comprehensive_summary?.story_analysis?.timeline_events || 0}</p>
+                    <p><strong>Overall Risk:</strong> <span class="risk-badge ${getRiskClass(results.comprehensive_summary?.risk_summary?.overall_risk_level)}">${results.comprehensive_summary?.risk_summary?.overall_risk_level || 'LOW'}</span></p>
+                </div>
+                
+                <div class="result-card">
+                    <h3>😊 Sentiment Analysis</h3>
+                    <p><strong>Overall Sentiment:</strong> <span class="sentiment-badge ${getSentimentClass(overallSentiment?.overall_sentiment)}">${overallSentiment?.overall_sentiment || 'NEUTRAL'}</span></p>
+                    <p><strong>Confidence:</strong> ${((overallSentiment?.confidence || 0) * 100).toFixed(1)}%</p>
+                    <p><strong>Positive Frames:</strong> ${overallSentiment?.distribution?.POSITIVE || 0}</p>
+                    <p><strong>Negative Frames:</strong> ${overallSentiment?.distribution?.NEGATIVE || 0}</p>
+                    <p><strong>Neutral Frames:</strong> ${overallSentiment?.distribution?.NEUTRAL || 0}</p>
+                </div>
+                
+                ${audioResults ? `
+                <div class="result-card">
+                    <h3>🎙️ Audio Analysis</h3>
+                    <p><strong>Language:</strong> ${audioResults.basic_info?.language || 'Unknown'}</p>
+                    <p><strong>Duration:</strong> ${audioResults.basic_info?.duration_formatted || 'Unknown'}</p>
+                    <p><strong>Speakers:</strong> ${audioResults.basic_info?.speaker_count || 0}</p>
+                    <p><strong>Risk Level:</strong> <span class="risk-badge ${getRiskClass(audioResults.security_analysis?.risk_level)}">${audioResults.security_analysis?.risk_level || 'LOW'}</span></p>
+                    <p><strong>Emotional Stability:</strong> ${audioResults.emotional_analysis?.emotional_stability || 'stable'}</p>
+                    ${audioResults.security_analysis?.suspicious_keywords && audioResults.security_analysis.suspicious_keywords.length > 0 ? 
+                        `<p><strong>Suspicious Keywords:</strong> ${audioResults.security_analysis.suspicious_keywords.join(', ')}</p>` : ''}
+                </div>
+                ` : ''}
+            `;
         }
 
-        // Populate summary
-        function populateSummary(results) {
-            const summaryGrid = document.getElementById('summaryGrid');
-            const summary = results.detection_summary;
+        function displayComprehensiveSummary(summary) {
+            const summaryDiv = document.getElementById('comprehensiveSummary');
             
-            const overallRisk = determineOverallRisk(results);
-            
-            summaryGrid.innerHTML = `
-                <div class="summary-card">
-                    <h3>${results.extracted_frames_count}</h3>
-                    <p>Frames Analyzed</p>
+            summaryDiv.innerHTML = `
+                <h3>📋 Comprehensive Video Analysis Summary</h3>
+                
+                <div class="summary-section">
+                    <h4>🎯 Executive Summary</h4>
+                    <p>${summary.executive_summary}</p>
                 </div>
-                <div class="summary-card">
-                    <h3>${summary.frames_with_detections}</h3>
-                    <p>Frames with Objects</p>
+                
+                ${summary.detailed_story ? `
+                <div class="summary-section">
+                    <h4>📖 Detailed Story Narrative</h4>
+                    <div class="story-narrative">
+                        <pre style="white-space: pre-wrap; font-family: inherit;">${summary.detailed_story}</pre>
+                    </div>
                 </div>
-                <div class="summary-card">
-                    <h3>${summary.total_detections}</h3>
-                    <p>Total Detections</p>
+                ` : ''}
+                
+                ${summary.risk_summary?.risk_incidents && summary.risk_summary.risk_incidents.length > 0 ? `
+                <div class="summary-section">
+                    <h4>🚨 Risk Incidents Detected</h4>
+                    <ul>
+                        ${summary.risk_summary.risk_incidents.map(incident => 
+                            `<li><strong>[${Math.floor(incident.timestamp / 60)}:${String(Math.floor(incident.timestamp % 60)).padStart(2, '0')}]</strong> ${incident.description} <span class="risk-badge ${getRiskClass(incident.risk_level)}">${incident.risk_level}</span></li>`
+                        ).join('')}
+                    </ul>
                 </div>
-                <div class="summary-card">
-                    <h3>${summary.high_risk_frames || 0}</h3>
-                    <p>High Risk Incidents</p>
+                ` : ''}
+                
+                ${summary.recommendations && summary.recommendations.length > 0 ? `
+                <div class="summary-section">
+                    <h4>💡 Recommendations</h4>
+                    <ul>
+                        ${summary.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
                 </div>
-                <div class="summary-card">
-                    <h3>${summary.moderate_risk_frames || 0}</h3>
-                    <p>Moderate Risk Incidents</p>
-                </div>
-                <div class="summary-card">
-                    <div class="risk-indicator risk-${overallRisk.toLowerCase()}">${overallRisk} RISK</div>
-                    <p>Overall Assessment</p>
+                ` : ''}
+                
+                <div class="summary-section">
+                    <h4>📊 Analysis Statistics</h4>
+                    <p><strong>Total Story Moments:</strong> ${summary.story_analysis?.total_story_moments || 0}</p>
+                    <p><strong>Customer Interactions:</strong> ${summary.story_analysis?.customer_interactions || 0}</p>
+                    <p><strong>Security Incidents:</strong> ${summary.risk_summary?.total_incidents || 0}</p>
+                    <p><strong>Overall Risk Level:</strong> <span class="risk-badge ${getRiskClass(summary.risk_summary?.overall_risk_level)}">${summary.risk_summary?.overall_risk_level || 'LOW'}</span></p>
                 </div>
             `;
         }
 
-        // Determine overall risk
-        function determineOverallRisk(results) {
-            const summary = results.detection_summary;
-            if (summary.high_risk_frames > 0) return 'HIGH';
-            if (summary.moderate_risk_frames > 0) return 'MODERATE';
-            return 'LOW';
-        }
-
-        // Load frames
-        async function loadFrames() {
+        async function loadTimeline() {
             if (!currentSessionId) return;
             
             try {
-                const response = await fetch(`/annotated_frames/${currentSessionId}`);
+                const response = await fetch(`/timeline/${currentSessionId}`);
                 const data = await response.json();
                 
-                const framesGrid = document.getElementById('framesGrid');
-                framesGrid.innerHTML = '';
-                
-                data.images.forEach((frame, index) => {
-                    const analysis = frame.gpt4o_analysis || {};
-                    const riskLevel = analysis.risk_level || 'LOW';
-                    
-                    const frameCard = document.createElement('div');
-                    frameCard.className = 'frame-card';
-                    frameCard.innerHTML = `
-                        <img src="${frame.url}" alt="Frame ${index + 1}" class="frame-image" loading="lazy">
-                        <div class="frame-content">
-                            <div class="frame-title">
-                                Frame ${index + 1}
-                                <span class="risk-indicator risk-${riskLevel.toLowerCase()}">${riskLevel}</span>
-                            </div>
-                            <div class="frame-description">
-                                ${analysis.scene_summary || 'No analysis available'}
-                            </div>
-                            <div class="frame-actions">
-                                <button class="btn btn-small btn-secondary" onclick="speakFrameAnalysis(${index})">
-                                    <span class="icon">🔊</span> Narrate
-                                </button>
-                                <button class="btn btn-small" onclick="showFrameDetails(${index})">
-                                    <span class="icon">📋</span> Details
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    framesGrid.appendChild(frameCard);
-                });
+                if (response.ok && data.timeline_events) {
+                    timelineEvents = data.timeline_events;
+                    displayTimeline(timelineEvents);
+                }
             } catch (error) {
-                console.error('Error loading frames:', error);
+                console.error('Error loading timeline:', error);
             }
         }
 
-        // Load audio transcript
-        async function loadAudioTranscript() {
-            if (!currentSessionId) return;
+        function displayTimeline(events) {
+            const timelineContainer = document.getElementById('timelineContainer');
             
-            try {
-                const response = await fetch(`/audio_transcript/${currentSessionId}`);
+            timelineContainer.innerHTML = events.map((event, index) => {
+                const isLeft = index % 2 === 0;
+                const eventTypeClass = getEventTypeClass(event.event_type);
                 
-                if (!response.ok) {
-                    document.getElementById('transcriptContainer').innerHTML = '<p>No audio transcript available.</p>';
-                    return;
-                }
-                
-                const data = await response.json();
-                const container = document.getElementById('transcriptContainer');
-                
-                if (!data.transcript_segments || data.transcript_segments.length === 0) {
-                    container.innerHTML = '<p>No audio transcript available.</p>';
-                    return;
-                }
-                
-                container.innerHTML = '';
-                
-                data.transcript_segments.forEach((segment, index) => {
-                    const segmentDiv = document.createElement('div');
-                    segmentDiv.className = 'transcript-segment';
-                    
-                    const suspiciousKeywords = segment.suspicious_keywords || [];
-                    const keywordBadges = suspiciousKeywords.map(keyword => 
-                        `<span class="risk-indicator risk-high">${keyword}</span>`
-                    ).join(' ');
-                    
-                    segmentDiv.innerHTML = `
-                        <div class="transcript-header">
-                            <span><strong>${segment.speaker || 'Unknown'}</strong> - ${segment.timestamp_formatted || '00:00'}</span>
-                            <span class="risk-indicator risk-${segment.sentiment === 'negative' ? 'high' : 'low'}">${segment.sentiment || 'neutral'}</span>
-                        </div>
-                        <div class="transcript-text">${segment.text || 'No text'}</div>
-                        ${keywordBadges ? `<div style="margin-top: 10px;">${keywordBadges}</div>` : ''}
-                    `;
-                    
-                    container.appendChild(segmentDiv);
-                });
-                
-                // Add summary at the top
-                const summaryDiv = document.createElement('div');
-                summaryDiv.className = 'transcript-segment';
-                summaryDiv.style.background = 'linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1))';
-                summaryDiv.innerHTML = `
-                    <div class="transcript-header">
-                        <strong>Audio Analysis Summary</strong>
-                    </div>
-                    <div class="transcript-text">
-                        <strong>Language:</strong> ${data.language || 'Unknown'}<br>
-                        <strong>Speakers:</strong> ${data.speaker_count || 0}<br>
-                        <strong>Overall Sentiment:</strong> ${data.overall_sentiment || 'Neutral'}<br>
-                        <strong>Suspicious Keywords:</strong> ${data.suspicious_keywords ? data.suspicious_keywords.join(', ') : 'None detected'}
-                    </div>
-                `;
-                container.insertBefore(summaryDiv, container.firstChild);
-                
-            } catch (error) {
-                console.error('Error loading audio transcript:', error);
-                document.getElementById('transcriptContainer').innerHTML = '<p>Error loading audio transcript.</p>';
-            }
-        }
-
-        // Load suspicious activity report
-        async function loadSuspiciousReport() {
-            if (!currentSessionId) return;
-            
-            try {
-                const response = await fetch(`/download_suspicious_report/${currentSessionId}`);
-                
-                if (!response.ok) {
-                    document.getElementById('suspiciousContent').innerHTML = '<p>No suspicious activity report available.</p>';
-                    return;
-                }
-                
-                const data = await response.json();
-                const container = document.getElementById('suspiciousContent');
-                
-                container.innerHTML = `
-                    <div class="summary-card" style="margin-bottom: 20px;">
-                        <div class="risk-indicator risk-${data.overall_risk_level.toLowerCase()}">${data.overall_risk_level} RISK LEVEL</div>
-                        <p>Overall Security Assessment</p>
-                    </div>
-                    
-                    <div class="summary-grid" style="margin-bottom: 30px;">
-                        <div class="summary-card">
-                            <h3>${data.summary_statistics.high_risk_count}</h3>
-                            <p>High Risk Incidents</p>
-                        </div>
-                        <div class="summary-card">
-                            <h3>${data.summary_statistics.moderate_risk_count}</h3>
-                            <p>Moderate Risk Incidents</p>
-                        </div>
-                        <div class="summary-card">
-                            <h3>${data.summary_statistics.suspicious_keywords_found}</h3>
-                            <p>Keyword Alerts</p>
-                        </div>
-                        <div class="summary-card">
-                            <h3>${data.summary_statistics.negative_sentiment_segments}</h3>
-                            <p>Negative Audio Segments</p>
+                return `
+                    <div class="timeline-item ${isLeft ? 'timeline-left' : 'timeline-right'}">
+                        <div class="timeline-content">
+                            <div class="timeline-time">${event.formatted_time}</div>
+                            <div class="timeline-event-type ${eventTypeClass}">${event.event_type.replace('_', ' ')}</div>
+                            <p>${event.description}</p>
+                            ${event.risk_level !== 'LOW' ? `<span class="risk-badge ${getRiskClass(event.risk_level)}">${event.risk_level} Risk</span>` : ''}
+                            ${event.sentiment !== 'NEUTRAL' ? `<span class="sentiment-badge ${getSentimentClass(event.sentiment)}">${event.sentiment}</span>` : ''}
                         </div>
                     </div>
                 `;
-                
-                // Add high risk incidents
-                if (data.high_risk_incidents && data.high_risk_incidents.length > 0) {
-                    const highRiskSection = document.createElement('div');
-                    highRiskSection.innerHTML = `
-                        <h3 style="color: #dc3545; margin-bottom: 15px;">🔴 High Risk Incidents</h3>
-                        <div class="frames-grid" style="margin-bottom: 30px;">
-                            ${data.high_risk_incidents.map(incident => `
-                                <div class="frame-card">
-                                    <div class="frame-content">
-                                        <div class="frame-title">
-                                            ${formatTime(incident.timestamp)}
-                                            <span class="risk-indicator risk-high">HIGH RISK</span>
-                                        </div>
-                                        <div class="frame-description">
-                                            <strong>Scene:</strong> ${incident.scene_summary}<br>
-                                            <strong>Assessment:</strong> ${incident.risk_assessment}<br>
-                                            <strong>Objects:</strong> ${incident.detected_objects.join(', ') || 'None'}
-                                        </div>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    `;
-                    container.appendChild(highRiskSection);
-                }
-                
-                // Add keyword alerts
-                if (data.keyword_alerts && data.keyword_alerts.length > 0) {
-                    const keywordSection = document.createElement('div');
-                    keywordSection.innerHTML = `
-                        <h3 style="color: #ffc107; margin-bottom: 15px;">⚠️ Suspicious Audio Keywords</h3>
-                        <div class="transcript-container" style="max-height: 300px;">
-                            ${data.keyword_alerts.map(alert => `
-                                <div class="transcript-segment">
-                                    <div class="transcript-header">
-                                        <strong>${alert.speaker}</strong> - ${formatTime(alert.timestamp)}
-                                        <div>
-                                            ${alert.keywords.map(keyword => 
-                                                `<span class="risk-indicator risk-high">${keyword}</span>`
-                                            ).join(' ')}
-                                        </div>
-                                    </div>
-                                    <div class="transcript-text">${alert.text}</div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    `;
-                    container.appendChild(keywordSection);
-                }
-                
-            } catch (error) {
-                console.error('Error loading suspicious report:', error);
-                document.getElementById('suspiciousContent').innerHTML = '<p>Error loading suspicious activity report.</p>';
+            }).join('');
+        }
+
+        function getEventTypeClass(eventType) {
+            const typeClasses = {
+                'PROCESSING': 'event-processing',
+                'OBJECT_DETECTION': 'event-detection',
+                'RISK_DETECTED': 'event-risk',
+                'AUDIO_SEGMENT': 'event-audio'
+            };
+            return typeClasses[eventType] || 'event-processing';
+        }
+
+        function viewTimeline() {
+            const timelineSection = document.getElementById('timelineSection');
+            timelineSection.style.display = 'block';
+            timelineSection.scrollIntoView({ behavior: 'smooth' });
+            
+            if (isAccessibilityEnabled) {
+                speakText(`Timeline view loaded with ${timelineEvents.length} events. Navigate through the timeline to hear event details.`);
             }
         }
 
-        // Tab switching
-        function switchTab(tabName) {
-            // Update tab buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Update tab content
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.getElementById(tabName + 'Tab').classList.add('active');
-            
-            speak(`Switched to ${tabName} tab`);
-        }
-
-        // Speech functions
-        function toggleSpeech() {
-            speechEnabled = !speechEnabled;
-            const btn = document.getElementById('speechBtn');
-            
-            if (speechEnabled) {
-                btn.innerHTML = '<span class="icon">🔊</span> Speech On';
-                btn.classList.add('btn-success');
-                speak('Speech enabled');
-            } else {
-                btn.innerHTML = '<span class="icon">🔇</span> Speech Off';
-                btn.classList.remove('btn-success');
-            }
-        }
-
-        function speak(text) {
-            if (!speechEnabled || !text) return;
-            
-            // Use Web Speech API if available
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.rate = 0.8;
-                utterance.pitch = 1;
-                utterance.volume = 0.8;
-                speechSynthesis.speak(utterance);
-            } else {
-                // Fallback to server-side TTS
-                fetch('/say_aloud', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ text: text })
-                }).catch(error => console.error('TTS error:', error));
-            }
-        }
-
-        function stopSpeech() {
-            if ('speechSynthesis' in window) {
-                speechSynthesis.cancel();
-            }
-        }
-
-        // Frame analysis speech
-        async function speakFrameAnalysis(frameIndex) {
+        async function viewGallery() {
             if (!currentSessionId) return;
             
             try {
                 const response = await fetch(`/annotated_frames/${currentSessionId}`);
                 const data = await response.json();
                 
-                if (data.images && data.images[frameIndex]) {
-                    const frame = data.images[frameIndex];
-                    const analysis = frame.gpt4o_analysis || {};
+                if (response.ok && data.images) {
+                    allFrames = data.images;
+                    displayGallery(data.images);
                     
-                    const speechText = `
-                        Frame ${frameIndex + 1}. 
-                        Risk level: ${analysis.risk_level || 'unknown'}. 
-                        Scene description: ${analysis.scene_summary || 'No description available'}. 
-                        ${analysis.likely_actions ? 'Likely actions: ' + analysis.likely_actions : ''}
-                        ${frame.audio_context && frame.audio_context.text ? 'Audio context: ' + frame.audio_context.text : ''}
-                    `;
-                    
-                    speak(speechText);
+                    if (isAccessibilityEnabled) {
+                        speakText(`Gallery loaded with ${data.images.length} analyzed frames. ${data.high_risk_count} high risk, ${data.moderate_risk_count} moderate risk, ${data.positive_sentiment_count} positive sentiment, ${data.negative_sentiment_count} negative sentiment frames detected.`);
+                    }
+                } else {
+                    showError('Failed to load gallery');
                 }
             } catch (error) {
-                console.error('Error getting frame analysis:', error);
-                speak('Error loading frame analysis');
+                showError('Error loading gallery: ' + error.message);
             }
         }
 
-        // Show frame details
-        async function showFrameDetails(frameIndex) {
-            if (!currentSessionId) return;
+        function displayGallery(images) {
+            const gallerySection = document.getElementById('gallerySection');
+            const galleryGrid = document.getElementById('galleryGrid');
             
-            try {
-                const response = await fetch(`/annotated_frames/${currentSessionId}`);
-                const data = await response.json();
+            gallerySection.style.display = 'block';
+            
+            galleryGrid.innerHTML = images.map((image, index) => `
+                <div class="gallery-item" onclick="showFrameDetails(${index})">
+                    <img src="${image.url}" alt="Analyzed frame: ${image.filename}" loading="lazy">
+                    <div class="gallery-item-content">
+                        <h4>${image.filename} [${Math.floor(image.timestamp / 60)}:${String(Math.floor(image.timestamp % 60)).padStart(2, '0')}]</h4>
+                        <div class="risk-badge ${getRiskClass(image.analysis.risk_level)}">${image.analysis.risk_level}</div>
+                        <div class="sentiment-badge ${getSentimentClass(image.analysis.sentiment_analysis)}">${image.analysis.sentiment_analysis}</div>
+                        <p><strong>Detections:</strong> ${image.detection_count || 0}</p>
+                        <p><strong>Scene:</strong> ${(image.analysis.scene_summary || '').substring(0, 80)}${(image.analysis.scene_summary || '').length > 80 ? '...' : ''}</p>
+                        ${image.has_audio ? '<p><strong>🎙️ Has Audio Context</strong></p>' : ''}
+                        ${image.analysis.suspicious_indicators && image.analysis.suspicious_indicators !== 'None identified' && image.analysis.suspicious_indicators !== 'Manual review required' ? 
+                            '<p><strong>⚠️ Suspicious Activity Detected</strong></p>' : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterFrames(filterType) {
+            if (!allFrames) return;
+            
+            let filteredFrames;
+            
+            if (filterType === 'ALL') {
+                filteredFrames = allFrames;
+            } else if (['HIGH', 'MODERATE', 'LOW'].includes(filterType)) {
+                filteredFrames = allFrames.filter(frame => frame.analysis.risk_level === filterType);
+            } else if (['POSITIVE', 'NEGATIVE', 'NEUTRAL'].includes(filterType)) {
+                filteredFrames = allFrames.filter(frame => frame.analysis.sentiment_analysis === filterType);
+            }
+            
+            displayGallery(filteredFrames);
+            
+            if (isAccessibilityEnabled) {
+                speakText(`Showing ${filteredFrames.length} ${filterType.toLowerCase()} frames`);
+            }
+        }
+
+        function showFrameDetails(index) {
+            const frame = allFrames[index];
+            if (!frame) return;
+            
+            const analysis = frame.analysis;
+            const modal = document.getElementById('frameModal');
+            const modalContent = document.getElementById('frameModalContent');
+            
+            modalContent.innerHTML = `
+                <h2>${frame.filename}</h2>
+                <p><strong>Timestamp:</strong> ${Math.floor(frame.timestamp / 60)}:${String(Math.floor(frame.timestamp % 60)).padStart(2, '0')}</p>
                 
-                if (data.images && data.images[frameIndex]) {
-                    const frame = data.images[frameIndex];
-                    const analysis = frame.gpt4o_analysis || {};
-                    const audioContext = frame.audio_context || {};
+                <img src="${frame.url}" style="width: 100%; max-height: 300px; object-fit: contain; border-radius: 10px; margin: 20px 0;">
+                
+                <div style="margin: 20px 0;">
+                    <span class="risk-badge ${getRiskClass(analysis.risk_level)}">${analysis.risk_level} RISK</span>
+                    <span class="sentiment-badge ${getSentimentClass(analysis.sentiment_analysis)}">${analysis.sentiment_analysis} SENTIMENT</span>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <h4>📝 Scene Summary:</h4>
+                    <p>${analysis.scene_summary || 'Not available'}</p>
+                </div>
+                
+                ${analysis.story_narrative ? `
+                <div style="margin-bottom: 20px;">
+                    <h4>📖 Story Narrative:</h4>
+                    <p>${analysis.story_narrative}</p>
+                </div>
+                ` : ''}
+                
+                <div style="margin-bottom: 20px;">
+                    <h4>👥 Behavioral Analysis:</h4>
+                    <p>${analysis.behavioral_analysis || 'Not available'}</p>
+                </div>
+                
+                ${analysis.customer_activity_analysis ? `
+                <div style="margin-bottom: 20px;">
+                    <h4>🛒 Customer/Activity Analysis:</h4>
+                    <p>${analysis.customer_activity_analysis}</p>
+                </div>
+                ` : ''}
+                
+                <div style="margin-bottom: 20px;">
+                    <h4>
+                                <div style="margin-bottom: 20px;">
+                    <h4>🔍 Risk Assessment:</h4>
+                    <p>${analysis.risk_assessment || 'Not available'}</p>
+                </div>
+                
+                ${analysis.suspicious_indicators && analysis.suspicious_indicators !== 'None identified' && analysis.suspicious_indicators !== 'Manual review required' ? `
+                <div style="margin-bottom: 20px; background: #fff3cd; padding: 15px; border-radius: 10px;">
+                    <h4 style="color: #856404;">⚠️ Suspicious Indicators:</h4>
+                    <p style="color: #856404;">${analysis.suspicious_indicators}</p>
+                </div>
+                ` : ''}
+                
+                <div style="margin-bottom: 20px;">
+                    <h4>🌍 Environmental Context:</h4>
+                    <p>${analysis.environmental_context || 'Not available'}</p>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <h4>💡 Detailed Insights:</h4>
+                    <p>${analysis.detailed_insights || 'Not available'}</p>
+                </div>
+                
+                ${frame.has_audio ? `
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 20px 0;">
+                    <h4>🎙️ Audio Context:</h4>
+                    <p><strong>Transcription:</strong> ${analysis.audio_context?.transcription || 'Not available'}</p>
+                    <p><strong>Emotion:</strong> ${analysis.audio_context?.dominant_emotion || 'neutral'}</p>
+                    <p><strong>Speakers:</strong> ${analysis.audio_context?.speaker_info?.speaker_count || 0}</p>
+                </div>
+                ` : ''}
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button onclick="speakFrameAnalysis(${index})" class="btn">🔊 Hear Complete Analysis</button>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+            
+            if (isAccessibilityEnabled) {
+                speakFrameAnalysis(index);
+            }
+        }
+
+        function closeFrameModal() {
+            document.getElementById('frameModal').style.display = 'none';
+        }
+
+        function speakFrameAnalysis(index) {
+            const frame = allFrames[index];
+            if (!frame) return;
+            
+            const analysis = frame.analysis;
+            const text = `
+                Frame analysis for ${frame.filename} at timestamp ${Math.floor(frame.timestamp / 60)} minutes ${Math.floor(frame.timestamp % 60)} seconds.
+                Risk level: ${analysis.risk_level}. 
+                Sentiment: ${analysis.sentiment_analysis}.
+                Scene summary: ${analysis.scene_summary}.
+                ${analysis.story_narrative ? `Story: ${analysis.story_narrative}.` : ''}
+                Behavioral analysis: ${analysis.behavioral_analysis}.
+                ${analysis.suspicious_indicators && analysis.suspicious_indicators !== 'None identified' ? `Suspicious indicators: ${analysis.suspicious_indicators}.` : ''}
+            `;
+            speakText(text);
+        }
+
+        function viewSuspiciousTab() {
+            if (!currentResults) return;
+            
+            const suspiciousSection = document.getElementById('suspiciousSection');
+            const suspiciousContent = document.getElementById('suspiciousContent');
+            
+            const riskSummary = currentResults.comprehensive_summary?.risk_summary;
+            const audioResults = currentResults.audio_results;
+            
+            let suspiciousFindings = [];
+            
+            // From risk analysis
+            if (riskSummary?.risk_incidents && riskSummary.risk_incidents.length > 0) {
+                suspiciousFindings.push(`${riskSummary.risk_incidents.length} security incidents detected`);
+                
+                riskSummary.risk_incidents.forEach(incident => {
+                    suspiciousFindings.push(`[${Math.floor(incident.timestamp / 60)}:${String(Math.floor(incident.timestamp % 60)).padStart(2, '0')}] ${incident.description}`);
+                });
+            }
+            
+            // From audio analysis
+            if (audioResults?.security_analysis?.suspicious_keywords && audioResults.security_analysis.suspicious_keywords.length > 0) {
+                suspiciousFindings.push(`Suspicious audio keywords: ${audioResults.security_analysis.suspicious_keywords.join(', ')}`);
+            }
+            
+            if (audioResults?.security_analysis?.risk_level === 'HIGH') {
+                suspiciousFindings.push('High-risk audio content detected');
+            }
+            
+            // Display findings
+            if (suspiciousFindings.length > 0) {
+                suspiciousContent.innerHTML = `
+                    <div class="result-card" style="border-left-color: #dc3545;">
+                        <h3>⚠️ Security Risk Analysis</h3>
+                        <p><strong>Overall Risk Level:</strong> <span class="risk-badge ${getRiskClass(riskSummary?.overall_risk_level)}">${riskSummary?.overall_risk_level || 'LOW'}</span></p>
+                        <h4>🚨 Detected Issues:</h4>
+                        <ul>
+                            ${suspiciousFindings.map(finding => `<li>${finding}</li>`).join('')}
+                        </ul>
+                        
+                        ${riskSummary?.risk_incidents && riskSummary.risk_incidents.length > 0 ? `
+                        <h4>📍 Timeline of Security Incidents:</h4>
+                        <div style="max-height: 400px; overflow-y: auto;">
+                            ${riskSummary.risk_incidents.map(incident => `
+                                <div style="background: #fff3cd; padding: 10px; margin: 10px 0; border-radius: 8px;">
+                                    <strong>[${Math.floor(incident.timestamp / 60)}:${String(Math.floor(incident.timestamp % 60)).padStart(2, '0')}]</strong>
+                                    <span class="risk-badge ${getRiskClass(incident.risk_level)}">${incident.risk_level}</span>
+                                    <p>${incident.description}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                        ` : ''}
+                    </div>
                     
-                    const detailsWindow = window.open('', '_blank', 'width=800,height=600,scrollbars=yes');
-                    detailsWindow.document.write(`
-                        <!DOCTYPE html>
-                        <html>
-                        <head>
-                            <title>Frame ${frameIndex + 1} Details</title>
-                            <style>
-                                body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; }
-                                .section { margin-bottom: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px; }
-                                .risk-high { color: #dc3545; font-weight: bold; }
-                                .risk-moderate { color: #ffc107; font-weight: bold; }
-                                .risk-low { color: #28a745; font-weight: bold; }
-                                img { max-width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px; }
-                            </style>
-                        </head>
-                        <body>
-                            <h1>Frame ${frameIndex + 1} - Detailed Analysis</h1>
-                            
-                            <img src="${frame.url}" alt="Frame ${frameIndex + 1}">
-                            
-                            <div class="section">
-                                <h2>Risk Assessment</h2>
-                                <p class="risk-${(analysis.risk_level || 'unknown').toLowerCase()}">
-                                    Risk Level: ${analysis.risk_level || 'Unknown'}
-                                </p>
-                                <p><strong>Assessment:</strong> ${analysis.risk_assessment || 'Not available'}</p>
-                            </div>
-                            
-                            <div class="section">
-                                <h2>Scene Analysis</h2>
-                                <p><strong>Summary:</strong> ${analysis.scene_summary || 'Not available'}</p>
-                                <p><strong>Object Positions:</strong> ${analysis.object_positions || 'Not available'}</p>
-                                <p><strong>Likely Actions:</strong> ${analysis.likely_actions || 'Not available'}</p>
-                                <p><strong>Detailed Description:</strong> ${analysis.detailed_description || 'Not available'}</p>
-                            </div>
-                            
-                            ${audioContext.text ? `
-                            <div class="section">
-                                <h2>Audio Context</h2>
-                                <p><strong>Speaker:</strong> ${audioContext.speaker || 'Unknown'}</p>
-                                <p><strong>Text:</strong> ${audioContext.text}</p>
-                                <p><strong>Sentiment:</strong> ${audioContext.sentiment || 'Neutral'}</p>
-                                <p><strong>Audio Correlation:</strong> ${analysis.audio_correlation || 'Not available'}</p>
-                                ${audioContext.suspicious_keywords ? `
-                                <p><strong>Suspicious Keywords:</strong> ${audioContext.suspicious_keywords.join(', ')}</p>
-                                ` : ''}
-                            </div>
-                            ` : ''}
-                            
-                            <div class="section">
-                                <h2>Object Detections</h2>
-                                ${frame.detections && frame.detections.length > 0 ? `
-                                    <ul>
-                                        ${frame.detections.map(detection => `
-                                            <li>
-                                                <strong>${detection.class_name}</strong> 
-                                                (Confidence: ${(detection.confidence * 100).toFixed(1)}%)
-                                                - Position: [${detection.bbox.map(coord => coord.toFixed(1)).join(', ')}]
-                                            </li>
-                                        `).join('')}
-                                    </ul>
-                                ` : '<p>No object detections for this frame.</p>'}
-                            </div>
-                        </body>
-                        </html>
-                    `);
-                    detailsWindow.document.close();
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="btn" onclick="speakText('${suspiciousFindings.join('. ')}')" style="background: #dc3545;">
+                            🚨 Hear Security Report
+                        </button>
+                    </div>
+                `;
+            } else {
+                suspiciousContent.innerHTML = `
+                    <div class="result-card" style="border-left-color: #28a745;">
+                        <h3>✅ No Significant Security Risks Detected</h3>
+                        <p>The comprehensive analysis did not identify any major security concerns or suspicious activities in this video.</p>
+                        <p><strong>Overall Assessment:</strong> The video content appears to contain routine activities without significant risk indicators.</p>
+                    </div>
+                `;
+            }
+            
+            suspiciousSection.style.display = 'block';
+            suspiciousSection.scrollIntoView({ behavior: 'smooth' });
+            
+            if (isAccessibilityEnabled) {
+                if (suspiciousFindings.length > 0) {
+                    speakText(`Security analysis report: ${suspiciousFindings.slice(0, 3).join('. ')}`);
+                } else {
+                    speakText('No significant security risks detected in the comprehensive video analysis.');
                 }
-            } catch (error) {
-                console.error('Error showing frame details:', error);
-                alert('Error loading frame details');
             }
         }
 
-        // Download functions
-        function downloadSummary() {
-            if (currentSessionId) {
-                window.open(`/download_summary/${currentSessionId}`, '_blank');
-                speak('Downloading text summary');
+        function speakComprehensiveSummary() {
+            if (!currentResults || !currentResults.comprehensive_summary) return;
+            
+            const summary = currentResults.comprehensive_summary;
+            let summaryText = summary.executive_summary;
+            
+            if (summary.detailed_story) {
+                const storyExcerpt = summary.detailed_story.substring(0, 300);
+                summaryText += ` Story overview: ${storyExcerpt}...`;
             }
-        }
-
-        function downloadAudioSummary() {
-            if (currentSessionId) {
-                window.open(`/download_audio_summary/${currentSessionId}`, '_blank');
-                speak('Downloading audio summary');
+            
+            if (summary.risk_summary?.total_incidents > 0) {
+                summaryText += ` Security analysis identified ${summary.risk_summary.total_incidents} incidents.`;
             }
+            
+            if (summary.recommendations && summary.recommendations.length > 0) {
+                summaryText += ` Key recommendations: ${summary.recommendations.slice(0, 2).join('. ')}.`;
+            }
+            
+            speakText(summaryText);
         }
 
         function downloadResults() {
             if (currentSessionId) {
                 window.open(`/download_results/${currentSessionId}`, '_blank');
-                speak('Downloading full results');
+                
+                if (isAccessibilityEnabled) {
+                    speakText('Comprehensive analysis results download started.');
+                }
             }
         }
 
-        // Utility functions
-        function formatTime(seconds) {
-            const minutes = Math.floor(seconds / 60);
-            const remainingSeconds = Math.floor(seconds % 60);
-            return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+        function getRiskClass(riskLevel) {
+            switch(riskLevel) {
+                case 'HIGH': return 'risk-high';
+                case 'MODERATE': return 'risk-moderate';
+                case 'LOW': return 'risk-low';
+                default: return 'risk-unknown';
+            }
         }
 
-        // Keyboard accessibility
-        document.addEventListener('keydown', (e) => {
-            if (e.altKey) {
-                switch(e.key) {
-                    case '1':
-                        e.preventDefault();
-                        switchTab('summary');
-                        break;
-                    case '2':
-                        e.preventDefault();
-                        switchTab('frames');
-                        break;
-                    case '3':
-                        e.preventDefault();
-                        switchTab('audio');
-                        break;
-                    case '4':
-                        e.preventDefault();
-                        switchTab('suspicious');
-                        break;
-                    case 's':
-                        e.preventDefault();
-                        toggleSpeech();
-                        break;
-                    case 'u':
-                        e.preventDefault();
-                        document.getElementById('videoFile').click();
-                        break;
+        function getSentimentClass(sentiment) {
+            switch(sentiment) {
+                case 'POSITIVE': return 'sentiment-positive';
+                case 'NEGATIVE': return 'sentiment-negative';
+                case 'NEUTRAL': return 'sentiment-neutral';
+                default: return 'sentiment-neutral';
+            }
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 8000);
+            
+            if (isAccessibilityEnabled) {
+                speakText(`Error: ${message}`);
+            }
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function showProgress() {
+            document.getElementById('progressSection').style.display = 'block';
+            document.getElementById('uploadBtn').disabled = true;
+            document.getElementById('uploadBtn').textContent = '🔄 Processing...';
+        }
+
+        // Accessibility Functions
+        function toggleAccessibilityMode() {
+            isAccessibilityEnabled = !isAccessibilityEnabled;
+            
+            const btn = document.querySelector('.accessibility-btn');
+            if (isAccessibilityEnabled) {
+                btn.style.background = 'rgba(40, 167, 69, 0.9)';
+                speakText('Accessibility mode enabled. Enhanced screen reader support with comprehensive video analysis narration activated.');
+            } else {
+                btn.style.background = 'rgba(0,0,0,0.7)';
+                stopSpeaking();
+            }
+        }
+
+        async function speakText(text) {
+            try {
+                const response = await fetch('/accessibility/speak', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success && result.audio_url) {
+                    // Play audio in browser
+                    const audio = new Audio(result.audio_url);
+                    audio.play().catch(error => {
+                        console.error('Audio playback error:', error);
+                    });
                 }
+            } catch (error) {
+                console.error('TTS error:', error);
+            }
+        }
+
+        async function stopSpeaking() {
+            try {
+                await fetch('/accessibility/stop', {
+                    method: 'POST'
+                });
+                
+                // Stop any currently playing audio
+                const audioElements = document.querySelectorAll('audio');
+                audioElements.forEach(audio => {
+                    audio.pause();
+                    audio.currentTime = 0;
+                });
+            } catch (error) {
+                console.error('Stop TTS error:', error);
+            }
+        }
+
+        function speakPageContent() {
+            if (!isAccessibilityEnabled) {
+                toggleAccessibilityMode();
+                return;
+            }
+            
+            const content = `
+                Comprehensive CCTV Analyzer. AI-powered video analysis platform with story intelligence and timeline features.
+                This application provides detailed video analysis including object detection, scene understanding, 
+                comprehensive story narrative generation, sentiment analysis, audio processing, and event timeline tracking.
+                Upload a video file or enter a local path to begin comprehensive analysis with risk assessment and detailed insights.
+                Use Alt+A to toggle accessibility mode, Alt+S to stop speech, Alt+R to read page content.
+            `;
+            
+            speakText(content);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.altKey && e.key === 'a') {
+                e.preventDefault();
+                toggleAccessibilityMode();
+            } else if (e.altKey && e.key === 's') {
+                e.preventDefault();
+                stopSpeaking();
+            } else if (e.altKey && e.key === 'r') {
+                e.preventDefault();
+                speakPageContent();
+            } else if (e.key === 'Escape') {
+                closeFrameModal();
             }
         });
 
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('frameModal');
+            if (event.target == modal) {
+                closeFrameModal();
+            }
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            speak('CCTV Footage Analyzer loaded. Use Alt+S to toggle speech, Alt+U to upload, Alt+1-4 to switch tabs.');
+            console.log('Comprehensive CCTV Analyzer v3.0 initialized');
+            console.log('Features: Story Intelligence, Timeline Analysis, Sentiment Detection, Risk Assessment');
+            
+            // Add keyboard shortcuts info
+            console.log('Keyboard shortcuts:');
+            console.log('Alt+A: Toggle accessibility mode');
+            console.log('Alt+S: Stop speech');
+            console.log('Alt+R: Read page content');
+            console.log('Escape: Close modals');
         });
     </script>
 </body>
 </html>
+

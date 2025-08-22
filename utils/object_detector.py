@@ -28,7 +28,7 @@ class ObjectDetector:
         except Exception as e:
             logger.error(f"Failed to load model {model_path}: {e}")
             raise
-            
+
         # COCO class names (YOLOv8 default)
         self.class_names = [
             'person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck',
@@ -44,18 +44,18 @@ class ObjectDetector:
             'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier',
             'toothbrush'
         ]
-        
+
         # Colors for different classes (BGR format)
         np.random.seed(42)
         self.colors = np.random.randint(0, 255, size=(len(self.class_names), 3), dtype=np.uint8)
-    
+
     def detect_objects(self, image_path: str) -> Dict:
         """
         Detect objects in a single image
         
         Args:
             image_path: Path to input image
-            
+        
         Returns:
             Dictionary containing detection results
         """
@@ -64,10 +64,10 @@ class ObjectDetector:
             image = cv2.imread(image_path)
             if image is None:
                 raise ValueError(f"Cannot read image: {image_path}")
-            
+
             # Run inference
             results = self.model(image, conf=self.confidence_threshold, verbose=False)
-            
+
             # Extract detection information
             detections = []
             for result in results:
@@ -78,10 +78,10 @@ class ObjectDetector:
                         x1, y1, x2, y2 = boxes.xyxy[i].cpu().numpy()
                         confidence = boxes.conf[i].cpu().numpy()
                         class_id = int(boxes.cls[i].cpu().numpy())
-                        
+
                         # Get class name
                         class_name = self.class_names[class_id] if class_id < len(self.class_names) else f"class_{class_id}"
-                        
+
                         detection = {
                             'bbox': [float(x1), float(y1), float(x2), float(y2)],
                             'confidence': float(confidence),
@@ -91,15 +91,16 @@ class ObjectDetector:
                             'center': [float((x1 + x2) / 2), float((y1 + y2) / 2)],
                             'area': float((x2 - x1) * (y2 - y1))
                         }
+
                         detections.append(detection)
-            
+
             return {
                 'image_path': image_path,
                 'image_shape': image.shape,
                 'detections': detections,
                 'detection_count': len(detections)
             }
-            
+
         except Exception as e:
             logger.error(f"Error detecting objects in {image_path}: {e}")
             return {
@@ -108,7 +109,7 @@ class ObjectDetector:
                 'detections': [],
                 'detection_count': 0
             }
-    
+
     def annotate_frame(self, image_path: str, detections: List[Dict]) -> np.ndarray:
         """
         Annotate frame with bounding boxes and labels
@@ -116,36 +117,36 @@ class ObjectDetector:
         Args:
             image_path: Path to input image
             detections: List of detection dictionaries
-            
+        
         Returns:
             Annotated image as numpy array
         """
         image = cv2.imread(image_path)
         if image is None:
             raise ValueError(f"Cannot read image: {image_path}")
-        
+
         annotated_image = image.copy()
-        
+
         for detection in detections:
             x1, y1, x2, y2 = detection['bbox']
             confidence = detection['confidence']
             class_name = detection['class_name']
             class_id = detection['class_id']
-            
+
             # Get color for this class
             color = tuple(map(int, self.colors[class_id % len(self.colors)]))
-            
+
             # Draw bounding box
             cv2.rectangle(annotated_image, (int(x1), int(y1)), (int(x2), int(y2)), color, 2)
-            
+
             # Prepare label text
             label = f"{class_name}: {confidence:.2f}"
-            
+
             # Calculate label background size
             (label_width, label_height), baseline = cv2.getTextSize(
                 label, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 2
             )
-            
+
             # Draw label background
             cv2.rectangle(
                 annotated_image,
@@ -154,7 +155,7 @@ class ObjectDetector:
                 color,
                 -1
             )
-            
+
             # Draw label text
             cv2.putText(
                 annotated_image,
@@ -165,9 +166,9 @@ class ObjectDetector:
                 (255, 255, 255),
                 2
             )
-        
+
         return annotated_image
-    
+
     def process_frame_batch(self, frame_paths: List[str], output_dir: str) -> List[Dict]:
         """
         Process multiple frames and save annotated versions
@@ -175,15 +176,15 @@ class ObjectDetector:
         Args:
             frame_paths: List of paths to frame images
             output_dir: Directory to save annotated frames
-            
+        
         Returns:
             List of detection results for all frames
         """
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
-        
+
         all_results = []
-        
+
         for i, frame_path in enumerate(frame_paths):
             logger.info(f"Processing frame {i+1}/{len(frame_paths)}: {os.path.basename(frame_path)}")
             
@@ -195,16 +196,16 @@ class ObjectDetector:
                     if result['detections']:
                         # Annotate frame only if detections found
                         annotated_image = self.annotate_frame(frame_path, result['detections'])
-                        
+
                         # Save annotated frame
                         frame_filename = os.path.basename(frame_path)
                         name, ext = os.path.splitext(frame_filename)
                         annotated_filename = f"{name}_annotated{ext}"
                         annotated_path = os.path.join(output_dir, annotated_filename)
-                        
+
                         cv2.imwrite(annotated_path, annotated_image)
                         result['annotated_frame_path'] = annotated_path
-                        
+
                         logger.info(f"Found {result['detection_count']} objects in {frame_filename}, saved annotated frame")
                     else:
                         logger.info(f"No objects detected in {os.path.basename(frame_path)}")
@@ -213,7 +214,7 @@ class ObjectDetector:
                 else:
                     logger.error(f"Error processing {os.path.basename(frame_path)}: {result.get('error', 'Unknown error')}")
                     result['annotated_frame_path'] = None
-                
+
             except Exception as e:
                 logger.error(f"Exception processing frame {frame_path}: {e}")
                 result = {
@@ -223,40 +224,40 @@ class ObjectDetector:
                     'detection_count': 0,
                     'annotated_frame_path': None
                 }
-            
+
             all_results.append(result)
-        
+
         return all_results
-    
+
     def generate_detection_summary(self, results: List[Dict]) -> Dict:
         """
         Generate summary statistics from detection results
         
         Args:
             results: List of detection results
-            
+        
         Returns:
             Summary dictionary
         """
         total_frames = len(results)
         frames_with_detections = sum(1 for r in results if r.get('detection_count', 0) > 0)
         total_detections = sum(r.get('detection_count', 0) for r in results)
-        
+
         # Count detections by class
         class_counts = {}
         confidence_scores = []
-        
+
         for result in results:
             for detection in result.get('detections', []):
                 class_name = detection['class_name']
                 class_counts[class_name] = class_counts.get(class_name, 0) + 1
                 confidence_scores.append(detection['confidence'])
-        
+
         # Calculate confidence statistics
         avg_confidence = np.mean(confidence_scores) if confidence_scores else 0
         min_confidence = np.min(confidence_scores) if confidence_scores else 0
         max_confidence = np.max(confidence_scores) if confidence_scores else 0
-        
+
         summary = {
             'total_frames': total_frames,
             'frames_with_detections': frames_with_detections,
@@ -271,9 +272,9 @@ class ObjectDetector:
             },
             'most_detected_classes': sorted(class_counts.items(), key=lambda x: x[1], reverse=True)[:5]
         }
-        
+
         return summary
-    
+
     def save_results_json(self, results: List[Dict], summary: Dict, output_path: str):
         """
         Save detection results and summary to JSON file
@@ -288,12 +289,12 @@ class ObjectDetector:
                 'summary': summary,
                 'detailed_results': results
             }
-            
-            with open(output_path, 'w') as f:
-                json.dump(output_data, f, indent=2, default=str)
-            
+
+            with open(output_path, 'w', encoding='utf-8') as f:
+                json.dump(output_data, f, indent=2, default=str, ensure_ascii=False)
+
             logger.info(f"Results saved to {output_path}")
-            
+
         except Exception as e:
             logger.error(f"Error saving results to {output_path}: {e}")
             raise
